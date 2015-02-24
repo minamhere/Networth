@@ -10,6 +10,10 @@ block scripts
 block content
     h1 Paycheck Calculator
     p People in the database:
-    each person in database
-        p Name: #{person.full_name} - Email Address: #{person.email_address} - Birthdate: #{person.birthdate}
+    each user in users
+        p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
         
+	p Tax Brackets:
+	each bracket in taxBrackets
+		p Jurisdiction ID: #{bracket.jurisdiction_id} - Tax Year: #{bracket.TaxYear} - Filing Status: #{bracket.Filing_Status} - Min AGI: #{bracket.MinAGI} - Max AGI: #{bracket.MaxAGI} - Tax Rate: #{bracket.TaxRate}
+		

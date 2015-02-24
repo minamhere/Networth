@@ -9,13 +9,27 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
+	var users = {};
+	var taxBrackets = {};
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM personal_data', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       {   response.render('home', {database: result.rows}); }
+       {   users = result.rows; 
+	   }
+	   
+	client.query('SELECT * FROM Tax_Brackets', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       {   taxBrackets = result.rows; 
+	   }
+	
+	response.render('home', {users,taxBrackets})
+	
     });
   });
 
