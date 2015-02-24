@@ -18,7 +18,7 @@ app.get('/', function(request, response) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       {   users = result.rows; 
+       {   users = result.rows; response.send(users);
 	   }
 	   
 	});
