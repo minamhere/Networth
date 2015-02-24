@@ -9,5 +9,5 @@ block scripts
 
 block content
   ul
-    each val, index in database
-        li= index+ ':' + val
+    for data in database
+        li #{data.name}
