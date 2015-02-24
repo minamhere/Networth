@@ -11,6 +11,7 @@ block content
   p
     each person in database
         p
-        | Name: #{person.full_name}
-        each property, key in person
-            | #{key}: #{property}, 
+        p Name: #{person.full_name}
+        p Email Address: #{person.email_address}
+        p Birthdate: #{person.birthdate}
+        
