@@ -8,4 +8,6 @@ block scripts
   script(src="/index.js")
 
 block content
-  p Hello #{sayHelloTo}.
+  ul
+    each val, index in #{database}
+        li= index+ ':' + val
