@@ -28,7 +28,7 @@ app.get('/', function(request, response) {
        {   taxBrackets = result.rows; 
 	   }
 	
-	response.render('home', {data: users})
+	response.render('home', {data: users});
 	
     });
   });
