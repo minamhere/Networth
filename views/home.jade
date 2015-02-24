@@ -9,7 +9,5 @@ block scripts
 
 block content
   p
-    each val, key in database
-        p #{key}: #{val}
-        for(var prop in ob)
-        p #{prop}: #{ob[prop]}
+    for(var prop in database)
+        p #{prop}: #{database[prop]}
