@@ -15,9 +15,7 @@ CREATE TABLE Jurisdiction (
    id serial NOT NULL  PRIMARY KEY,
    Name varchar(50) NOT NULL,
    Abbreviation varchar(2) NOT NULL,
-   Type varchar(50) NOT NULL,
-   Standard_deduction integer NOT NULL,
-   Personal_exemption integer NOT NULL
+   Type varchar(50) NOT NULL
 );
 
 CREATE TABLE Applicable_Tax_Jurisdictions (
