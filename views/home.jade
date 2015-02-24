@@ -11,6 +11,9 @@ block content
 	h1 Paycheck Calculator
 	p People in the database:
 	
+	each val, key in data
+		p Key: #{val}
+//		
 	each user in data.users
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
 	
