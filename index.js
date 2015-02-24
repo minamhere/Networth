@@ -18,16 +18,11 @@ app.get('/', function(request, response) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-		{   
-			users = result.rows; 
-			//response.send(users);
-		}
+       {   response.render('home', {database: result.rows}); }
+    });
 	   
 	});
 	
-	response.render('home', {data: users});
-
-
 });
 
 /*
