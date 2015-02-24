@@ -9,7 +9,6 @@
   "dependencies": {
 	"pg": "4.x",
     "express": "~4.9.x",
-	"cool-ascii-faces": "~1.3.x",
       "jade": "*"
   },
   "engines": {
