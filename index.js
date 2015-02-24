@@ -3,12 +3,14 @@ var app = express();
 var cool = require('cool-ascii-faces');
 var pg = require('pg');
 
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
-  response.send(cool());
+  response.render('home', {sayHelloTo: 'world'});
 });
 
 app.get('/db', function (request, response) {
