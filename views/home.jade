@@ -9,5 +9,5 @@ block scripts
 
 block content
   p
-    for(var prop in database)
+    each prop in database
         p #{prop}: #{database[prop]}
