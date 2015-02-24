@@ -41,8 +41,6 @@ app.get('/', function(request, response) {
 */
 
 
-	
-})
 
 
 
