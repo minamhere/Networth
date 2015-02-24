@@ -1,5 +1,16 @@
 -- Database creation:
 
+CREATE TABLE personal_data
+(
+  id serial NOT NULL PRIMARY KEY,
+  full_name VARCHAR(30) NOT NULL,
+  email_address VARCHAR (255) NOT NULL,
+  birthdate date,
+  filing_status_id integer,
+  FOREIGN KEY (filing_status_id) REFERENCES filing_status (id)
+);
+
+
 CREATE TABLE Jurisdiction (
    id serial NOT NULL  PRIMARY KEY,
    Name varchar(50) NOT NULL,
