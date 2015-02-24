@@ -18,11 +18,19 @@ app.get('/', function(request, response) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       {   users = result.rows; response.send(users);
-	   }
+		{   
+			users = result.rows; 
+			//response.send(users);
+		}
 	   
 	});
-  
+	
+	response.render('home', {data: users});
+
+
+});
+
+/*
   	client.query('SELECT * FROM Tax_Brackets', function(err, result) {
       done();
       if (err)
@@ -34,11 +42,10 @@ app.get('/', function(request, response) {
 	});
 		
 		
-	response.render('home', {data: users});
 	
+*/
 
 
-	});
 	
 })
 
