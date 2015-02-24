@@ -9,5 +9,6 @@ block scripts
 
 block content
   p
-    each prop in database
-        p #{prop}: #{database[prop]}
+    each person in database
+        each property in person
+            p #{property}: #{person[prop]}
