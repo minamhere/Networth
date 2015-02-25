@@ -8,7 +8,6 @@ app.set('views', __dirname + '/views');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-/*
 app.get('/', function(request, response) {
 	var users = {};
 	var taxBrackets = {};
@@ -25,11 +24,11 @@ app.get('/', function(request, response) {
 	});
 	
 });
-*/
 
+/*
 app.get('/TaxBrackets', function(request, response) {
-	/*var users = {};
-	var taxBrackets = {};*/
+	var users = {};
+	var taxBrackets = {};
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
     client.query('
@@ -50,7 +49,7 @@ app.get('/TaxBrackets', function(request, response) {
 	});
 	
 });
-
+*/
 
 /*
   	client.query('SELECT * FROM Tax_Brackets', function(err, result) {
