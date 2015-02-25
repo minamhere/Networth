@@ -14,6 +14,9 @@ block content
 	each user in database
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
 	
+	h2 Add User to Database
+	
+	p Enter Name:
 	input.addTxtBox(type='text')
 		#rows
 //   
