@@ -32,7 +32,7 @@ app.get('/TaxBrackets', function(request, response) {
 	var taxBrackets = {};
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
-    client.query('SELECT * FROM tax_brackets WHERE filing_status_id =1', function(err, result) {
+    client.query('select jurisdiction.name, tax_brackets.minagi, tax_brackets.maxagi from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 AND taxyear = 2015', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
