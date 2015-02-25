@@ -8,7 +8,7 @@ app.set('views', __dirname + '/views');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-/*
+
 app.get('/', function(request, response) {
 	var users = {};
 	var taxBrackets = {};
@@ -25,7 +25,7 @@ app.get('/', function(request, response) {
 	});
 	
 });
-*/
+
 
 app.get('/TaxBrackets', function(request, response) {
 	var users = {};
