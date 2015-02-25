@@ -10,8 +10,8 @@ block content
 	h1 Paycheck Calculator
 	p Tax Brackets:
 	
-	each id in database
-		p Jurisdiction ID: #{tax_brackets.jurisdiction_id}
+	each bracket in tax_brackets
+		p Jurisdiction ID: #{bracket.jurisdiction_id}
 	
 //   
 	p Tax Brackets:
