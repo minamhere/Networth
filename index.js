@@ -27,8 +27,8 @@ app.get('/', function(request, response) {
 
 
 app.get('/TaxBrackets', function(request, response) {
-	var users = {};
-	var taxBrackets = {};
+	/*var users = {};
+	var taxBrackets = {};*/
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
     client.query('
