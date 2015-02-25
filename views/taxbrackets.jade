@@ -15,9 +15,4 @@ block content
 	each taxBracket in database
 		p Jurisdiction: #{taxBracket.name} - Min AGI: #{taxBracket.minagi} - Max AGI: #{taxBracket.maxagi}
 	
-//   
-	p Tax Brackets:
-	each bracket in taxBrackets
-		p Jurisdiction ID: #{bracket.jurisdiction_id} - Tax Year: #{bracket.TaxYear} - Filing Status: #{bracket.Filing_Status} - Min AGI: #{bracket.MinAGI} - Max AGI: #{bracket.MaxAGI} - Tax Rate: #{bracket.TaxRate}
-		
-	
+	input.addTxtBox(type='text')
