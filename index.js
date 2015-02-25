@@ -25,20 +25,18 @@ app.get('/', function(request, response) {
 	
 });
 
-/*
+
 app.get('/TaxBrackets', function(request, response) {
 	var users = {};
 	var taxBrackets = {};
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
     client.query('
-    	SELECT jurisdiction.name, 
-		tax_brackets.minagi, 
-		tax_brackets.maxagi 
+    	SELECT id, 
+		minagi, 
+		maxagi 
 	FROM tax_brackets 
-	INNER JOIN jurisdiction 
-	ON tax_brackets.jurisdiction_id=jurisdiction.id
-	WHERE tax_brackets.filing_status_id = 1
+	WHERE filing_status_id = 1
 	AND taxyear = 2015', function(err, result) {
       done();
       if (err)
@@ -51,7 +49,7 @@ app.get('/TaxBrackets', function(request, response) {
 	});
 	
 });
-*/
+
 
 /*
   	client.query('SELECT * FROM Tax_Brackets', function(err, result) {
