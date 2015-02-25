@@ -14,9 +14,9 @@ app.get('/', function(request, response) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
     client.query(
-    	'select jurisdiction.name AS "Jurisdiction", 
-	tax_brackets.minagi AS "min AGI", 
-	tax_brackets.maxagi AS "Max AGI" 
+    	'select jurisdiction.name, 
+		tax_brackets.minagi, 
+		tax_brackets.maxagi 
 	from tax_brackets 
 	inner join jurisdiction 
 	on tax_brackets.jurisdiction_id=jurisdiction.id
