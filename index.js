@@ -31,13 +31,13 @@ app.get('/TaxBrackets', function(request, response) {
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
-    client.query('SELECT * FROM tax_brackets', function(err, rows, fields) {
+    client.query('SELECT * FROM tax_brackets', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
        {   
-       	response.render('taxbrackets', {database: rows, fields}); }
+       	response.render('taxbrackets', {database: result.rows}); }
 	});
 	   
 	});
