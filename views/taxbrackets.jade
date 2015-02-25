@@ -11,7 +11,7 @@ block content
 	p Tax Brackets:
 	
 	each taxBracket in database
-		p Jurisdiction ID: #{taxBracket.jurisdiction_id}
+		p Jurisdiction: #{taxBracket.jurisdiction_id} - Min AGI: #{taxBracket.minagi} - Max AGI: {taxBracket.maxagi}
 	
 //   
 	p Tax Brackets:
