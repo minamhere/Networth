@@ -18,6 +18,15 @@ block content
 	
 	p Enter Name:
 	input.addTxtBox(type='text', placeholder='Your Name')
+	
+	form(name="input", action="html_form_action.asp", method="get")
+  		| Username:
+  		input(type="text", name="user")
+
+  		| Password:
+  		input(type="text", name="pswd")
+
+		input(type="submit", value="Submit")
 //   
 	p Tax Brackets:
 	each bracket in taxBrackets
