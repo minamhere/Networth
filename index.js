@@ -46,7 +46,7 @@ app.get('/TaxBrackets', function(request, response) {
 });
 
 app.get('/newuser', function (request, response) {
-  res.render('newuser');
+  response.render('newuser');
 })
 
 app.listen(app.get('port'), function() {
