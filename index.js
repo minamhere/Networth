@@ -25,6 +25,7 @@ app.get('/', function(request, response) {
 	
 });
 
+/*
 app.get('/TaxBrackets', function(request, response) {
 	var users = {};
 	var taxBrackets = {};
@@ -50,6 +51,7 @@ app.get('/TaxBrackets', function(request, response) {
 	});
 	
 });
+*/
 
 /*
   	client.query('SELECT * FROM Tax_Brackets', function(err, result) {
