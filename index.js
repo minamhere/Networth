@@ -34,12 +34,12 @@ app.get('/TaxBrackets', function(request, response) {
     client.query('
     	SELECT * FROM tax_brackets 
 	WHERE filing_status_id = 1
-	AND taxyear = 2015', function(err, result) {
+	AND taxyear = 2015', function(err, rows, fields) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       {   response.render('taxbrackets', {database: result.rows}); }
+       {   response.render('taxbrackets', {database: rows}); }
 	
 	});
 	   
