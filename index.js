@@ -25,6 +25,24 @@ app.get('/', function(request, response) {
 	
 });
 
+app.get('/test', function(request, response) {
+	var users = {};
+	var taxBrackets = {};
+    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+   
+    client.query('SELECT * FROM Tax_Brackets', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       {   response.render('TaxBrackets', {database: result.rows}); }
+	
+	});
+	   
+	});
+	
+});
+
 /*
   	client.query('SELECT * FROM Tax_Brackets', function(err, result) {
       done();
