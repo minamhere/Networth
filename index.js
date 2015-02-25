@@ -32,17 +32,14 @@ app.get('/TaxBrackets', function(request, response) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
     client.query('
-    	SELECT id, 
-		minagi, 
-		maxagi 
-	FROM tax_brackets 
+    	SELECT * FROM tax_brackets 
 	WHERE filing_status_id = 1
 	AND taxyear = 2015', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       {   response.render('taxbrackets', {database: result}); }
+       {   response.render('taxbrackets', {database: result.rows}); }
 	
 	});
 	   
