@@ -10,8 +10,8 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', function(request, response) {
-	var users = {}
-	var taxBrackets = {}
+	var users = "";
+	var taxBrackets = {};
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 			done();
