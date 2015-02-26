@@ -1,8 +1,8 @@
 extends layout
-
+ 
 block title
 	title Networth Example
-
+ 
 block scripts
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")
 	script(src="/index.js")
@@ -10,20 +10,18 @@ block scripts
 block content
 	h1 Paycheck Calculator
 	p People in the database:
-    
-    database
-
-
-//
+	
 	each user in database
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
-
+	
 	h2 Add User to Database
-
+	
 	p Enter Name:
 	input.addTxtBox(type='text', name='fullName', placeholder='Your Name')
 
-//
+//   
 	p Tax Brackets:
 	each bracket in taxBrackets
 		p Jurisdiction ID: #{bracket.jurisdiction_id} - Tax Year: #{bracket.TaxYear} - Filing Status: #{bracket.Filing_Status} - Min AGI: #{bracket.MinAGI} - Max AGI: #{bracket.MaxAGI} - Tax Rate: #{bracket.TaxRate}
+		
+	
