@@ -18,12 +18,12 @@ app.get('/', function(request, response) {
     client.query('SELECT * FROM personal_data', function(err, result) {
       if (err)
        { console.error(err); response.send("Error " + err); }
-			users = result.rows;
+        users = result.rows;
     });
 
 	});
 
-	response.render('home', {database: users});
+	response.render('test', {database: users});
 
 });
 
