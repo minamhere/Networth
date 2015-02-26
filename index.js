@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', function(request, response) {
-	var users = "";
+	var users;
 	var taxBrackets = {};
 
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -18,8 +18,7 @@ app.get('/', function(request, response) {
     client.query('SELECT * FROM personal_data', function(err, result) {
       if (err)
        { console.error(err); response.send("Error " + err); }
-      else
-       {  users = result.rows  }
+			users = result.rows;
     });
 
 	});
