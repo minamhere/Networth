@@ -8,21 +8,27 @@ app.set('views', __dirname + '/views');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
+getUserList(){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+   
+    client.query('SELECT * FROM personal_data', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       {   return result.rows; }
+    });
+	   
+	});
+}
+
 
 app.get('/', function(request, response) {
 	var users;
 	var taxBrackets = {};
 
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-			done();
-    client.query('SELECT * FROM personal_data', function(err, result) {
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-        users = result.rows;
-    });
-
-	});
-
+	users = getUserList();
+    
 	response.render('test', {database: users});
 
 });
