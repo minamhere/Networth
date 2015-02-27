@@ -28,7 +28,7 @@ app.get('/', function(request, response) {
 	var taxBrackets = {};
 
 	users = getUserList();
-    
+    	console.log(users);
 	response.render('test', {database: users});
 
 });
