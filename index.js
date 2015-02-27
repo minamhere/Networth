@@ -16,7 +16,9 @@ function getUserList(){
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       {   return result.rows; }
+       {
+       	console.log("inFunc:"+result.rows);
+       	return result.rows; }
     });
 	   
 	});
@@ -28,7 +30,7 @@ app.get('/', function(request, response) {
 	var taxBrackets = {};
 
 	users = getUserList();
-    	console.log(users);
+    	console.log("callingFunc:"+users);
 	response.render('test', {database: users});
 
 });
