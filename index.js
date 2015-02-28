@@ -33,18 +33,11 @@ function getUserList(callback){
 }
 
 function getTaxBrackets(callback){
-	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-
-    client.query('select jurisdiction.name, tax_brackets.minagi, tax_brackets.maxagi from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 AND taxyear = 2015', function(err, result) {
-      done();
-      if (err)
-       { console.error(err); callback( err); }
-      else
-       { callback(null, result.rows); }
+	queryDatabase('select jurisdiction.name, tax_brackets.minagi, tax_brackets.maxagi from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 AND taxyear = 2015',function(err,data){
+		if (err){ console.error(err); callback(err);}
+		callback(null,data);
 	});
-
-	});
-
+	
 }
 
 
