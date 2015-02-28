@@ -29,7 +29,7 @@ function getUserList(callback){
 	queryDatabase('SELECT * FROM personal_data',function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);
-	}
+	});
 }
 
 function getTaxBrackets(callback){
