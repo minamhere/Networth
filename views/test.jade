@@ -10,6 +10,5 @@ block scripts
 block content
 	h1 Paycheck Calculator
 	p People in the database:
-
-	each user in #{locals.users}
-		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
+	
+	#{locals.users}
