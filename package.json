@@ -9,7 +9,8 @@
   "dependencies": {
 	"pg": "4.x",
     "express": "~4.9.x",
-      "jade": "*"
+    "jade": "*",
+	"body-parser":"*",
   },
   "engines": {
     "node": "0.10.x"

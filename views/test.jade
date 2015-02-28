@@ -23,9 +23,9 @@ block content
 
 	p Create New Tax Bracket
 	
-	div
-		form(method='POST', action='/api/createNewBracket')
-			p Enter Jurisdiction Name:
+	div.createBracket
+		form(name='createBracket', method='POST', action='/api/createNewBracket')
+			p Enter Jurisdiction Name: 
 			input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
 			p Enter Tax Year:
 			input(type='number', name='taxYear', placeholder='taxYear')

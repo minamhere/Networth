@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var pg = require('pg');
+var bodyParser = require('body-parser');
 
 var users;
 var taxBrackets;
@@ -10,6 +11,9 @@ app.set('views', __dirname + '/views');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 function queryDatabase(queryText,callback){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -42,6 +46,7 @@ function getTaxBrackets(callback){
 
 app.post('/api/createNewBracket', function(request, response){
 	console.log(request.body);
+	response.render('test');
 });
 
 
