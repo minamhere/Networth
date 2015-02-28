@@ -16,6 +16,10 @@ block content
 	
 	!{JSON.stringify(pageInfo.users)}
 	
+	each user in pageInfo.users
+		each value, attr in user
+			p Value: #{value} - Attr: #{attr}
+	
 	p Brackets:
 	
 	!{JSON.stringify(pageInfo.taxBrackets)}
