@@ -25,7 +25,7 @@ block content
 	
 	div.createBracket
 		form(name='createBracket', method='POST', action='/api/createNewBracket')
-			p Enter Jurisdiction Name: 
+			p Enter Jurisdiction Name(1): 
 			input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
 			p Enter Tax Year:
 			input(type='number', name='taxYear', placeholder='taxYear')
@@ -35,7 +35,7 @@ block content
 			input(type='number', name='maxAGI', placeholder='maxAGI')
 			p Enter Tax Rate:
 			input(type='number', name='taxRate', placeholder='taxRate')
-			p Enter Filing Status:
+			p Enter Filing Status(1):
 			input(type='text', name='filingStatus', placeholder='filingStatus')
 
 			input(type='submit',value='Create Bracket')
