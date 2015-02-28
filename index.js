@@ -52,7 +52,11 @@ app.get('/', function(request, response) {
 		taxBrackets = data;	
 	});
 
+<<<<<<< HEAD
 	response.render('test', {locals: {users:users,taxBrackets:taxBrackets}});
+=======
+	response.render('test', {pageInfo: {users,taxBrackets}});
+>>>>>>> parent of 8cd5c72... fix json?
 
 });
 
