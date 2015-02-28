@@ -15,7 +15,6 @@ block content
 	!{JSON.stringify(locals.locals)}
 	
 	#{locals.locals}.users[0]
-	each user in #{locals.locals.users}
-		p user.name
+	#{locals.locals.users}[0]
 	
 
