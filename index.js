@@ -57,6 +57,10 @@ app.post('/api/createNewBracket', function(request, response){
 	
 	console.log('insertString'+insertBracket);
 
+	queryDatabase(insertBracket,function(err,data){
+		if (err){ console.error(err); callback(err);}
+		callback(null,data);
+	});
 	
 	response.render('test');
 });
