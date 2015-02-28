@@ -12,6 +12,6 @@ block content
 	p People in the database:
 	
 
-	each user in #{locals}.users
+	each user in locals[0]
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
 
