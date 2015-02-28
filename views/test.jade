@@ -11,6 +11,13 @@ block content
 	h1 Paycheck Calculator
 	p People in the database:
 
-	each user in users
+	each user in pageInfo.users
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
 
+
+	p Tax Brackets:
+	
+	p Federal 2015 Single Tax Bracket:
+	
+	each taxBracket in pageInfo.taxBrackets
+		p Jurisdiction: #{taxBracket.name} - Min AGI: #{taxBracket.minagi} - Max AGI: #{taxBracket.maxagi}
