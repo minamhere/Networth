@@ -14,12 +14,13 @@ block content
 
 	p Users:
 	
-	!{JSON.stringify(pageInfo.users)}
-	
 	each user in pageInfo.users
-			p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
+			p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate} - Filing Status: #{user.filing_status_id}
 	
 	p Brackets:
 	
 	!{JSON.stringify(pageInfo.taxBrackets)}
 	
+
+	each taxBracket in pageInfo.taxBrackets
+		p Jurisdiction: #{taxBracket.name} - Min AGI: #{taxBracket.minagi} - Max AGI: #{taxBracket.maxagi}
