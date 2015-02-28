@@ -12,9 +12,8 @@ block content
 	p People in the database:
 	
 
-	!{JSON.stringify(pageInfo)}
-
-
-	#{pageInfo.users}[0].name
-	
-
+	Users:
+	!{JSON.stringify(pageInfo.users)}
+	p
+	Brackets:
+	!{JSON.stringify(pageInfo.taxBrackets)}
