@@ -14,6 +14,9 @@ block content
 
 	
 
-	#{locals.locals.users}[0].name
+	var users = #{locals.locals.users}
+	
+	each user in users
+		p user.name
 	
 
