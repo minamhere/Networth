@@ -52,7 +52,7 @@ app.get('/', function(request, response) {
 		taxBrackets = data;	
 	});
 
-	response.render('test', {pageInfo: {users,taxBrackets}});
+	response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets}});
 
 });
 
