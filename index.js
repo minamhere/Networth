@@ -3,7 +3,7 @@ var app = express();
 var pg = require('pg');
 
 var users;
-var taxBrackets = {};
+var taxBrackets;
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
@@ -17,14 +17,27 @@ function getUserList(callback){
     client.query('SELECT * FROM personal_data', function(err, result) {
       done();
       if (err)
-       { console.error(err); response.send("Error " + err); }
+       { console.error(err); callback(err); }
       else
-       {
-       	console.log("inFunc:"+result.rows);
-       	callback(null, result.rows); }
+       { callback(null, result.rows); }
     });
 	   
 	});
+}
+
+function getTaxBrackets(callback){
+	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+
+    client.query('select jurisdiction.name, tax_brackets.minagi, tax_brackets.maxagi from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 AND taxyear = 2015', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); callback( err); }
+      else
+       { callback(null, result.rows); }
+	});
+
+	});
+
 }
 
 
@@ -34,8 +47,12 @@ app.get('/', function(request, response) {
 	getUserList(function(err,data){
 		users = data;
 	});
-    console.log("callingFunc:"+users);
-	response.render('test', {database: users});
+	
+	getTaxBrackets(function(err,data){
+		taxBrackets = data;	
+	});
+
+	response.render('test', {pageInfo: {users,taxBrackets}});
 
 });
 
