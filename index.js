@@ -42,7 +42,7 @@ function getTaxBrackets(callback){
 
 app.get('/api/createNewBracket', function(request, response){
 	
-}
+});
 
 
 app.get('/', function(request, response) {
