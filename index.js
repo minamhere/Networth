@@ -45,7 +45,19 @@ function getTaxBrackets(callback){
 }
 
 app.post('/api/createNewBracket', function(request, response){
-	console.log(request.body);
+	console.log('request'+request.body);
+	var jurisdiction = request.body.jurisdiction;
+	var taxYear = request.body.taxYear;
+	var minAGI = request.body.minAGI;
+	var maxAGI = request.body.maxAGI;
+	var taxRate = request.body.taxRate;
+	var filingStatus = request.body.filingStatus;
+	
+	var insertBracket = 'INSERT INTO Tax_Brackets (Jurisdiction_id,TaxYear,Filing_Status,MinAGI,MaxAGI,TaxRate) VALUES ('+jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+')';
+	
+	console.log('insertString'+insertBracket);
+
+	
 	response.render('test');
 });
 
