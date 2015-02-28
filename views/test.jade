@@ -17,8 +17,7 @@ block content
 	!{JSON.stringify(pageInfo.users)}
 	
 	each user in pageInfo.users
-		each value, attr in user
-			p Value: #{value} - Attr: #{attr}
+			p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate}
 	
 	p Brackets:
 	
