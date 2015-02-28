@@ -11,7 +11,6 @@ block content
 	h1 Paycheck Calculator
 	p People in the database:
 	
-
 	p Users:
 	
 	each user in pageInfo.users
@@ -19,8 +18,5 @@ block content
 	
 	p Brackets:
 	
-	!{JSON.stringify(pageInfo.taxBrackets)}
-	
-
 	each taxBracket in pageInfo.taxBrackets
 		p Jurisdiction: #{taxBracket.name} - Min AGI: #{taxBracket.minagi} - Max AGI: #{taxBracket.maxagi}

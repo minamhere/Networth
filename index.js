@@ -11,10 +11,10 @@ app.set('views', __dirname + '/views');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-function getUserList(callback){
+function queryDatabase(queryText,callback){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
-    client.query('SELECT * FROM personal_data', function(err, result) {
+    client.query(queryText, function(err, result) {
       done();
       if (err)
        { console.error(err); callback(err); }
@@ -23,6 +23,13 @@ function getUserList(callback){
     });
 	   
 	});
+}
+
+function getUserList(callback){
+	queryDatabase('SELECT * FROM personal_data',function(err,data){
+		if (err){ console.error(err); callback(err);}
+		callback(null,data);
+	}
 }
 
 function getTaxBrackets(callback){
