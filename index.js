@@ -59,7 +59,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 	queryDatabase(insertBracket,function(err,data){
 		if (err){ console.error(err); callback(err);}
-		callback(null,data);
+		console.log('row inserted with id: ' + data.rows[0].id);
 	});
 	
 	response.render('test');
