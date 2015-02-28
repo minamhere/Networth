@@ -2,13 +2,16 @@ var express = require('express');
 var app = express();
 var pg = require('pg');
 
+var users;
+var taxBrackets = {};
+
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-function getUserList(){
+function getUserList(callback){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
    
     client.query('SELECT * FROM personal_data', function(err, result) {
@@ -18,7 +21,7 @@ function getUserList(){
       else
        {
        	console.log("inFunc:"+result.rows);
-       	return result.rows; }
+       	callback(null, result.rows); }
     });
 	   
 	});
@@ -26,11 +29,12 @@ function getUserList(){
 
 
 app.get('/', function(request, response) {
-	var users;
-	var taxBrackets = {};
 
-	users = getUserList();
-    	console.log("callingFunc:"+users);
+
+	getUserList(function(err,data){
+		users = data;
+	});
+    console.log("callingFunc:"+users);
 	response.render('test', {database: users});
 
 });
