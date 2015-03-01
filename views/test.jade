@@ -19,36 +19,36 @@ block content
 	
 	p Brackets:
 	
-	div.taxBrackets(class=table)
+	div.tabletable
 
-		div(class=tableRow)
-			div(class=tableCell) Jurisdiction
-			div(class=tableCell) Tax Year
-			div(class=tableCell) Min AGI
-			div(class=tableCell) Max AGI
-			div(class=tableCell) Tax Rate
-			div(class=tableCell) Filing Status
-		div(class=tableRow)
-			div(class=tableCell) 
+		div.tableRow
+			div.tableCell Jurisdiction
+			div.tableCell Tax Year
+			div.tableCell Min AGI
+			div.tableCell Max AGI
+			div.tableCell Tax Rate
+			div.tableCell Filing Status
+		div.tableRow
+			div.tableCell 
 				form(name='createBracket', method='POST', action='/api/createNewBracket')
-			div(class=tableCell) 
+			div.tableCell 
 				input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
-			div(class=tableCell) 
+			div.tableCell 
 				input(type='number', name='taxYear', placeholder='taxYear')
-			div(class=tableCell)  
+			div.tableCell  
 				input(type='number', name='minAGI', placeholder='minAGI')
-			div(class=tableCell)  
+			div.tableCell  
 				input(type='number', name='maxAGI', placeholder='maxAGI')
-			div(class=tableCell)  
+			div.tableCell  
 				input(type='number', name='taxRate', placeholder='taxRate')
-			div(class=tableCell) 
+			div.tableCell 
 				input(type='text', name='filingStatus', placeholder='filingStatus')
-			div(class=tableCell) 
+			div.tableCell 
 				input(type='submit',value='Create Bracket')
-		div(class=tableRow)
+		div.tableRow
 			each taxBracket in pageInfo.taxBrackets
-				div(class=tableCell) #{taxBracket.name} 
-				div(class=tableCell) #{taxBracket.taxyear}
-				div(class=tableCell) #{taxBracket.minagi}
-				div(class=tableCell)  #{taxBracket.maxagi}
-				div(class=tableCell) #{taxBracket.taxrate}
+				div.tableCell #{taxBracket.name} 
+				div.tableCell #{taxBracket.taxyear}
+				div.tableCell #{taxBracket.minagi}
+				div.tableCell  #{taxBracket.maxagi}
+				div.tableCell #{taxBracket.taxrate}
