@@ -5,6 +5,8 @@ block title
  
 block scripts
 	script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+block stylesheets
+	include style.css
 block content
 	h1 Paycheck Calculator
 	p People in the database:
@@ -16,40 +18,36 @@ block content
 	
 	p Brackets:
 	
-	div.taxBrackets
+	div.taxBrackets(class=table)
 
-		table(style="border: 1px")
-			thead
-				tr 
-					th Jurisdiction
-					th Tax Year
-					th Min AGI
-					th Max AGI
-					th Tax Rate
-					th Filing Status
-			tbody
-				tr
-					form(name='createBracket', method='POST', action='/api/createNewBracket')
-
-					td 
-						input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
-					td 
-						input(type='number', name='taxYear', placeholder='taxYear')
-					td 
-						input(type='number', name='minAGI', placeholder='minAGI')
-					td 
-						input(type='number', name='maxAGI', placeholder='maxAGI')
-					td 
-						input(type='number', name='taxRate', placeholder='taxRate')
-					td 
-						input(type='text', name='filingStatus', placeholder='filingStatus')
-					td
-						input(type='submit',value='Create Bracket')
-
-				each taxBracket in pageInfo.taxBrackets
-					tr 
-						td #{taxBracket.name} 
-						td #{taxBracket.taxyear}
-						td #{taxBracket.minagi}
-						td #{taxBracket.maxagi}
-						td #{taxBracket.taxrate}
+		div(class=tableRow)
+			div(class=tableCell) Jurisdiction
+			div(class=tableCell) Tax Year
+			div(class=tableCell) Min AGI
+			div(class=tableCell) Max AGI
+			div(class=tableCell) Tax Rate
+			div(class=tableCell) Filing Status
+		div(class=tableRow)
+			div(class=tableCell) 
+				form(name='createBracket', method='POST', action='/api/createNewBracket')
+			div(class=tableCell) 
+				input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
+			div(class=tableCell) 
+				input(type='number', name='taxYear', placeholder='taxYear')
+			div(class=tableCell)  
+				input(type='number', name='minAGI', placeholder='minAGI')
+			div(class=tableCell)  
+				input(type='number', name='maxAGI', placeholder='maxAGI')
+			div(class=tableCell)  
+				input(type='number', name='taxRate', placeholder='taxRate')
+			div(class=tableCell) 
+				input(type='text', name='filingStatus', placeholder='filingStatus')
+			div(class=tableCell) 
+				input(type='submit',value='Create Bracket')
+		div(class=tableRow)
+			each taxBracket in pageInfo.taxBrackets
+				div(class=tableCell) #{taxBracket.name} 
+				div(class=tableCell) #{taxBracket.taxyear}
+				div(class=tableCell) #{taxBracket.minagi}
+				div(class=tableCell)  #{taxBracket.maxagi}
+				div(class=tableCell) #{taxBracket.taxrate}
