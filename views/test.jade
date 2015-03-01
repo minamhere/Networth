@@ -27,8 +27,8 @@ block content
 			div.tableCell Max AGI
 			div.tableCell Tax Rate
 			div.tableCell Filing Status
-		form(name='createBracket', method='POST', action='/api/createNewBracket')
-			div.tableRow	
+		div.tableRow
+			form(name='createBracket', method='POST', action='/api/createNewBracket')
 				div.tableCell 
 					input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
 				div.tableCell 
