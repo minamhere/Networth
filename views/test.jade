@@ -16,8 +16,19 @@ block content
 	
 	p Brackets:
 	
-	each taxBracket in pageInfo.taxBrackets
-		p Jurisdiction: #{taxBracket.name} #{taxBracket.taxyear} - Min AGI: #{taxBracket.minagi} - Max AGI: #{taxBracket.maxagi}
+	table
+		tr 
+			td Jurisdiction
+			td Tax Year
+			td Min AGI
+			td Max AGI
+			td Tax Rate
+		each taxBracket in pageInfo.taxBrackets
+			tr 
+				td #{taxBracket.name} 
+				td #{taxBracket.taxyear}
+				td #{taxBracket.minagi}
+				td #{taxBracket.maxagi}
 
 	p Create New Tax Bracket
 	
