@@ -4,7 +4,8 @@ block title
 	title Networth Example
  
 block scripts
-	//script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+	script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+	script(src='../public/javascripts/main.js')
 block stylesheets
 	style
 		include style.css
@@ -18,6 +19,9 @@ block content
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate} - Filing Status: #{user.filing_status_id}
 	
 	p Brackets:
+
+	div#results
+		p We should see this change to a response!
 	
 	
 	div.table
@@ -41,7 +45,7 @@ block content
 			div.tableCell  
 				input(type='number', name='taxRate', placeholder='taxRate')
 			div.tableCell 
-				input(type='text', name='filingStatus', placeholder='filingStatus')
+				input#createBracket(type='text', name='filingStatus', placeholder='filingStatus')
 			div.tableCell 
 				input(type='submit',value='Create Bracket')
 		each taxBracket in pageInfo.taxBrackets
