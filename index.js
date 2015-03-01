@@ -48,13 +48,13 @@ function getFilingStatusFromID(filing_status_id, callback){
 	queryDatabase('SELECT statusname FROM Filing_Status WHERE id = '+filing_status_id,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);
-	}
+	});
 
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
 	res.send("WHEEE");
-})
+});
 
 app.post('/api/createNewBracket', function(request, response){
 	console.log('request'+request.body);
