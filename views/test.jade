@@ -4,7 +4,7 @@ block title
 	title Networth Example
  
 block scripts
-	script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+	//script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
 block stylesheets
 	style
 		include style.css
@@ -19,6 +19,7 @@ block content
 	
 	p Brackets:
 	
+	
 	div.table
 		div.tableRow
 			div.tableCell Jurisdiction
@@ -28,21 +29,21 @@ block content
 			div.tableCell Tax Rate
 			div.tableCell Filing Status
 		div.tableRow
-			form(name='createBracket', method='POST', action='/api/createNewBracket')
-				div.tableCell 
-					input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
-				div.tableCell 
-					input(type='number', name='taxYear', placeholder='taxYear')
-				div.tableCell  
-					input(type='number', name='minAGI', placeholder='minAGI')
-				div.tableCell  
-					input(type='number', name='maxAGI', placeholder='maxAGI')
-				div.tableCell  
-					input(type='number', name='taxRate', placeholder='taxRate')
-				div.tableCell 
-					input(type='text', name='filingStatus', placeholder='filingStatus')
-				div.tableCell 
-					input(type='submit',value='Create Bracket')
+			//form(name='createBracket', method='POST', action='/api/createNewBracket')
+			div.tableCell 
+				input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
+			div.tableCell 
+				input(type='number', name='taxYear', placeholder='taxYear')
+			div.tableCell  
+				input(type='number', name='minAGI', placeholder='minAGI')
+			div.tableCell  
+				input(type='number', name='maxAGI', placeholder='maxAGI')
+			div.tableCell  
+				input(type='number', name='taxRate', placeholder='taxRate')
+			div.tableCell 
+				input(type='text', name='filingStatus', placeholder='filingStatus')
+			div.tableCell 
+				input(type='submit',value='Create Bracket')
 		each taxBracket in pageInfo.taxBrackets
 			div.tableRow
 				div.tableCell #{taxBracket.name} 
