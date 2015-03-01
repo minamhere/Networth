@@ -16,13 +16,23 @@ block content
 	
 	p Brackets:
 	
-	table
+	table(style='border: 1px').
 		tr 
 			td Jurisdiction
 			td Tax Year
 			td Min AGI
 			td Max AGI
 			td Tax Rate
+			td Filing Status
+		tr
+			form(name='createBracket', method='POST', action='/api/createNewBracket')
+			td input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
+			td input(type='number', name='taxYear', placeholder='taxYear')
+			td input(type='number', name='minAGI', placeholder='minAGI')
+			td input(type='number', name='maxAGI', placeholder='maxAGI')
+			td input(type='number', name='taxRate', placeholder='taxRate')
+			td input(type='text', name='filingStatus', placeholder='filingStatus')
+
 		each taxBracket in pageInfo.taxBrackets
 			tr 
 				td #{taxBracket.name} 
@@ -33,18 +43,5 @@ block content
 	p Create New Tax Bracket
 	
 	div.createBracket
-		form(name='createBracket', method='POST', action='/api/createNewBracket')
-			p Enter Jurisdiction Name(1): 
-			input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
-			p Enter Tax Year:
-			input(type='number', name='taxYear', placeholder='taxYear')
-			p Enter Minimum AGI:
-			input(type='number', name='minAGI', placeholder='minAGI')
-			p Enter Maximum AGI:
-			input(type='number', name='maxAGI', placeholder='maxAGI')
-			p Enter Tax Rate:
-			input(type='number', name='taxRate', placeholder='taxRate')
-			p Enter Filing Status(1):
-			input(type='text', name='filingStatus', placeholder='filingStatus')
-
+	
 			input(type='submit',value='Create Bracket')
