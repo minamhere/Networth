@@ -17,7 +17,6 @@ block content
 	p Brackets:
 	
 	div.taxBrackets
-		form(name='createBracket', method='POST', action='/api/createNewBracket')
 
 		table(style="border: 1px")
 			thead
@@ -30,6 +29,8 @@ block content
 					th Filing Status
 			tbody
 				tr
+					form(name='createBracket', method='POST', action='/api/createNewBracket')
+
 					td 
 						input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
 					td 
