@@ -28,8 +28,7 @@ block content
 			div.tableCell Tax Rate
 			div.tableCell Filing Status
 		div.tableRow
-			div.tableCell 
-				form(name='createBracket', method='POST', action='/api/createNewBracket')
+			form(name='createBracket', method='POST', action='/api/createNewBracket')
 			div.tableCell 
 				input(type='text', name='jurisdiction', placeholder='Jurisdiction Name')
 			div.tableCell 
@@ -46,8 +45,9 @@ block content
 				input(type='submit',value='Create Bracket')
 		div.tableRow
 			each taxBracket in pageInfo.taxBrackets
-				div.tableCell #{taxBracket.name} 
-				div.tableCell #{taxBracket.taxyear}
-				div.tableCell #{taxBracket.minagi}
-				div.tableCell  #{taxBracket.maxagi}
-				div.tableCell #{taxBracket.taxrate}
+				div.tableRow
+					div.tableCell #{taxBracket.name} 
+					div.tableCell #{taxBracket.taxyear}
+					div.tableCell #{taxBracket.minagi}
+					div.tableCell  #{taxBracket.maxagi}
+					div.tableCell #{taxBracket.taxrate}
