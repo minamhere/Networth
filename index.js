@@ -58,7 +58,7 @@ app.get('/getFilingStatusFromID',function(req,res){
 		callback(null, data);
 	});
 */
-	res.send(request.body);
+	res.send(req.body);
 });
 
 app.post('/api/createNewBracket', function(request, response){
