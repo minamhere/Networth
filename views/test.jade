@@ -43,11 +43,10 @@ block content
 				input(type='text', name='filingStatus', placeholder='filingStatus')
 			div.tableCell 
 				input(type='submit',value='Create Bracket')
-		div.tableRow
-			each taxBracket in pageInfo.taxBrackets
-				div.tableRow
-					div.tableCell #{taxBracket.name} 
-					div.tableCell #{taxBracket.taxyear}
-					div.tableCell #{taxBracket.minagi}
-					div.tableCell  #{taxBracket.maxagi}
-					div.tableCell #{taxBracket.taxrate}
+		each taxBracket in pageInfo.taxBrackets
+			div.tableRow
+				div.tableCell #{taxBracket.name} 
+				div.tableCell #{taxBracket.taxyear}
+				div.tableCell #{taxBracket.minagi}
+				div.tableCell  #{taxBracket.maxagi}
+				div.tableCell #{taxBracket.taxrate}
