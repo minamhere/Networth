@@ -57,10 +57,12 @@ app.get('/getFilingStatusFromID',function(req,res){
 		if (err) { console.error(err); callback(err);}
 		callback(null, data);
 	});
-*/
+
 	console.log("request: "+req.body);
 	console.log("query: "+req.body.filingStatus);
 	res.send(req.body.filingStatus);
+*/
+	res.send("LOOK AT HOW THIS CHANGED!");
 });
 
 app.post('/api/createNewBracket', function(request, response){
