@@ -11,10 +11,11 @@ $(function(){
 
 $(function(){
  $('#AGI').on('keyup', function(e){
-     var parameters = { agi: $(this).val() };
-       $.get( '/calcFederal',parameters, function(data) {
-       $('#results').html(data);
-     });
+ 	console.log('agi: '+$(this).val();
+    var parameters = { agi: $(this).val() };
+	$.get( '/calcFederal',parameters, function(data) {
+		$('#results').html(data);
+	});
  });
 });
 
