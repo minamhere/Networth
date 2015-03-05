@@ -11,7 +11,7 @@ $(function(){
 
 $(function(){
  $('#AGI').on('keyup', function(e){
- 	console.log('agi: '+$(this).val();
+ 	console.log('agi: '+$(this).val());
     var parameters = { agi: $(this).val() };
 	$.get( '/calcFederal',parameters, function(data) {
 		$('#results').html(data);
