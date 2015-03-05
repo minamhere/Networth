@@ -52,6 +52,13 @@ function getFilingStatusFromID(filing_status_id, callback){
 
 }
 
+function getTaxBracket(agi, callback){
+	queryDatabase('SELECT taxrate,baseTax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi,function(err,data){
+		if (err){ console.error(err); callback(err);}
+		callback(null,data);	
+	});
+}
+
 app.get('/getFilingStatusFromID',function(req,res){
 	/*getFilingStatusFromID(req.body.filingStatus, function(err, data){
 		if (err) { console.error(err); callback(err);}
@@ -79,10 +86,7 @@ app.post('/api/createNewBracket', function(request, response){
 	
 	console.log('insertString'+insertBracket);
 
-	queryDatabase(insertBracket,function(err,data){
-		if (err){ console.error(err); callback(err);}
-		console.log('row inserted with id: ' + data.rows);
-	});
+	
 	
 	response.render('test');
 });
@@ -94,15 +98,13 @@ app.get('/calcFederal', function(request,response){
 	var minAGI = 0;
 	var taxDue = 0;
 
-	var getTaxBracket = 'SELECT taxrate,baseTax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi;
-
-	queryDatabase(getTaxBracket, function(err, data){
+	getTaxBracket(function(err,data){
 		if (err) { console.error(err); callback(err);}
 		taxrate = data.rows[0].taxrate;
 		baseTax = data.rows[0].baseTax;
 		minAGI = data.rows[0].minagi;
+	})
 
-	});
 
 	taxDue = baseTax + taxrate*(agi-minAGI)/100;
 
