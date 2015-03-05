@@ -86,6 +86,19 @@ app.post('/api/createNewBracket', function(request, response){
 	response.render('test');
 });
 
+app.get('calcFederal', function(request,response){
+	var agi = request.body.agi;
+
+	res.send(agi);
+});
+
+app.get('/calc', function(request, response){
+
+
+
+	response.render('calc');
+
+});
 
 app.get('/', function(request, response) {
 

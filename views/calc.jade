@@ -1,0 +1,19 @@
+extends layout
+ 
+block title
+	title Networth Example
+ 
+block scripts
+	script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+	script(src='javascript/main.js')
+
+block stylesheets
+	style
+		include style.css
+
+block content
+	h1 Paycheck Calculator
+
+	input(type='number', name='AGI', placeholder='AGI')
+	p Federal Witholding: 
+	div.results Test
