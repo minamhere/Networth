@@ -87,7 +87,7 @@ app.post('/api/createNewBracket', function(request, response){
 });
 
 app.get('/calcFederal', function(request,response){
-	var agi = request.body.agi;
+	var agi = request.query.agi;
 
 	console.log('printing agi from request: '+agi);
 	response.send(agi);
