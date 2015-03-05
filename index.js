@@ -53,6 +53,7 @@ function getFilingStatusFromID(filing_status_id, callback){
 }
 
 function getTaxBracket(agi, callback){
+	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi);
 	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
@@ -99,9 +100,9 @@ app.get('/calcFederal', function(request,response){
 	var taxDue = 0;
 
 	getTaxBracket(function(err,data){
-		//if (err) { console.error(err); callback(err);}
+		if (err) { console.error(err); callback(err);}
 		taxrate = data.rows[0].taxrate;
-		baseTax = data.rows[0].baseTax;
+		baseTax = data.rows[0].base_tax;
 		minAGI = data.rows[0].minagi;
 	})
 
