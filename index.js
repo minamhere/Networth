@@ -73,6 +73,7 @@ app.post('/api/createNewBracket', function(request, response){
 	var maxAGI = request.body.maxAGI;
 	var taxRate = request.body.taxRate;
 	var filingStatus = request.body.filingStatus;
+	var baseTax = request.body.baseTax;
 	
 	var insertBracket = 'INSERT INTO Tax_Brackets (Jurisdiction_id,TaxYear,Filing_Status_id,MinAGI,MaxAGI,TaxRate) VALUES ('+jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+')';
 	
@@ -88,9 +89,24 @@ app.post('/api/createNewBracket', function(request, response){
 
 app.get('/calcFederal', function(request,response){
 	var agi = request.query.agi;
+	var taxrate = 0;
+	var baseTax = 0;
+	var minAGI = 0;
+	var taxDue = 0;
 
-	console.log('printing agi from request: '+agi);
-	response.send(agi);
+	var getTaxBracket = 'SELECT taxrate,baseTax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi;
+
+	queryDatabase(getTaxBracket, function(err, data){
+		if (err) { console.error(err); callback(err);}
+		taxrate = data.rows[0].taxrate;
+		baseTax = data.rows[0].baseTax;
+		minAGI = data.rows[0].minagi;
+
+	});
+
+	taxDue = baseTax + taxrate*(agi-minAGI)/100;
+
+	response.send(taxDue);
 });
 
 app.get('/calc', function(request, response){
