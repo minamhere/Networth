@@ -99,7 +99,7 @@ app.get('/calcFederal', function(request,response){
 	var minAGI = 0;
 	var taxDue = 0;
 
-	getTaxBracket(function(err,data){
+	getTaxBracket(agi,function(err,data){
 		if (err) { console.error(err); callback(err);}
 		taxrate = data.rows[0].taxrate;
 		baseTax = data.rows[0].base_tax;
