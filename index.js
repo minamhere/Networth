@@ -53,7 +53,7 @@ function getFilingStatusFromID(filing_status_id, callback){
 }
 
 function getTaxBracket(agi, callback){
-	queryDatabase('SELECT taxrate,baseTax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi,function(err,data){
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
 	});
