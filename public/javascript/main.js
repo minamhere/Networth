@@ -11,7 +11,7 @@ $(function(){
 
 $(function(){
  $('#AGI').on('keyup', function(e){
- 	if($(this).val() > 0){
+	if(e.keyCode === 13) {
 	    var parameters = { agi: $(this).val() };
 		$.get( '/calcFederal',parameters, function(data) {
 			$('#results').html(data);
