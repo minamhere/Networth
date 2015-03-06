@@ -61,16 +61,18 @@ function getTaxBracket(agi, callback){
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
-	/*getFilingStatusFromID(req.body.filingStatus, function(err, data){
+	
+
+	getFilingStatusFromID(req.body.filingStatus, function(err, data){
 		if (err) { console.error(err); callback(err);}
-		callback(null, data);
+		res.send(data[0].statusname);
 	});
 
-	console.log("request: "+req.body);
+/*	console.log("request: "+req.body);
 	console.log("query: "+req.body.filingStatus);
-	res.send(req.body.filingStatus);
-*/
-	res.send("LOOK AT HOW THIS CHANGED!");
+	res.send(req.body.filingStatus);*/
+
+	//res.send("LOOK AT HOW THIS CHANGED!");
 });
 
 app.post('/api/createNewBracket', function(request, response){
