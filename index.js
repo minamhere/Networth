@@ -45,7 +45,7 @@ function getTaxBrackets(callback){
 }
 
 function getFilingStatusFromID(filing_status_id, callback){
-	queryDatabase('SELECT statusname FROM Filing_Status WHERE id = '+filing_status_id,function(err,data){
+	queryDatabase('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);
 	});
@@ -65,7 +65,7 @@ app.get('/getFilingStatusFromID',function(req,res){
 
 	getFilingStatusFromID(req.body.filingStatus, function(err, data){
 		if (err) { console.error(err);}
-		res.send(data[0].statusname);
+		res.send(data[0].StatusName);
 	});
 
 /*	console.log("request: "+req.body);
