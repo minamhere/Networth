@@ -99,6 +99,7 @@ app.get('/calcFederal', function(request,response){
 	var minAGI = 0;
 	var taxDue = 0;
 	var marginalIncome = 0;
+	var marginalTax = 0;
 	console.log('agi from user: '+agi);
 
 	getTaxBracket(agi,function(err,data){
@@ -108,7 +109,10 @@ app.get('/calcFederal', function(request,response){
 			baseTax = data[0].base_tax;
 			minAGI = data[0].MinAGI;
 			marginalIncome = agi-minAGI;
-			taxDue = (taxrate*marginalIncome) + parseInt(baseTax);
+			console.log('marginalIncome: '+marginalIncome);
+			marginalTax = taxrate*marginalIncome;
+			console.log('marginalTax: '+marginalTax);
+			taxDue = +marginalTax + +baseTax;
 			var responseText = '<p>Federal Tax Due: '+taxDue+'</p>AGI: '+agi;
 
 			response.send(responseText);
