@@ -3,8 +3,7 @@ var app = express();
 var pg = require('pg');
 var bodyParser = require('body-parser');
 
-var users;
-var taxBrackets;
+
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
@@ -61,16 +60,26 @@ function getTaxBracket(agi, callback){
 	});
 }
 
+function getJurisdictions(callback){
+	console.log('SELECT * FROM Jurisdiction')
+	queryDatabase('SELECT * FROM Jurisdiction',function(err,data){
+		if (err){ console.error(err); callback(err);}
+		callback(null, data);
+	});
+}
+
+function getFilingStatuses(callback){
+	queryDatabase('SELECT * from Filing_Status',function(err,data){
+		if (err){ console.error(err); callback(err);}
+		callback(null,data);
+	});
+}
+
 app.get('/getFilingStatusFromID',function(req,res){
 	
 
 	getFilingStatusFromID(req.query.filingStatus, function(err, data){
 		if (err) { console.error(err);}
-		console.log('data: '+JSON.stringify(data));
-		console.log('data[0]: '+JSON.stringify(data[0]));
-		console.log('data[1]: '+JSON.stringify(data[1]));
-
-
 		res.send('<p>Filing Status Name: '+data[0].statusname+'</p>');
 	});
 
@@ -137,14 +146,23 @@ app.get('/calc', function(request, response){
 
 });
 
-app.get('/', function(request, response) {
-
+app.get('/admin', function(request, response) {
+	var users;
+	var taxBrackets;
+	var jurisdictions;
+	var filingStatuses;
 
 	getUserList(function(err,data){
 		users = data;
 		getTaxBrackets(function(err,data){
 			taxBrackets = data;	
-			response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets}});
+			getJurisdictions(function(err,data){
+				jurisdictions = data;
+				getFilingStatuses(function(err,data){
+					filingStatuses = data;
+				});
+			});
+			response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
 		});
 	});
 	
