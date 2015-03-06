@@ -108,15 +108,12 @@ app.get('/calcFederal', function(request,response){
 			taxrate = data[0].taxrate/100;
 			baseTax = data[0].base_tax;
 			minAGI = data[0].minagi;
-			console.log('taxrate: '+taxrate);
-			console.log('baseTax: '+baseTax);
-			console.log('minAGI: '+minAGI);
-			/*marginalIncome = agi-minAGI;
+			marginalIncome = agi-minAGI;
 			console.log('marginalIncome: '+marginalIncome);
 			marginalTax = taxrate*marginalIncome;
 			console.log('marginalTax: '+marginalTax);
 			taxDue = +marginalTax + +baseTax;
-			*/
+			
 			var responseText = '<p>Federal Tax Due: '+taxDue+'</p>AGI: '+agi;
 
 			response.send(responseText);
