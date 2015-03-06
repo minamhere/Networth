@@ -104,9 +104,13 @@ app.get('/calcFederal', function(request,response){
 		getTaxBracket(agi,function(err,data){
 			if (err) { console.error(err); callback(err);}
 			if (data){
-				taxrate = data.rows[0].TaxRate;
-				baseTax = data.rows[0].base_tax;
-				minAGI = data.rows[0].MinAGI;
+				//taxrate = data.rows[0].TaxRate;
+				//baseTax = data.rows[0].base_tax;
+				//minAGI = data.rows[0].MinAGI;
+				var x;
+				for (x in data) {
+					console.log('x:'+x+' - '+data[x]);
+				}
 			}
 			else{console.log('SOMETHING WEIRD HAPPENED HERE!');}
 		});
