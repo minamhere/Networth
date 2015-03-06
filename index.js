@@ -104,9 +104,9 @@ app.get('/calcFederal', function(request,response){
 		if (err) { console.error(err); callback(err);}
 		if (data){
 			taxrate = data[0].TaxRate;
-			baseTax = data[0].base_tax;
-			minAGI = data[0].MinAGI;
-			taxDue = baseTax + taxrate*(parseInt(agi)-minAGI)/100;
+			baseTax = parseInt(data[0].base_tax;
+			minAGI = parseInt(data[0].MinAGI;
+			taxDue = baseTax + +taxrate*(parseInt(agi)-minAGI)/100;
 			var responseText = '<p>Federal Tax Due: '+taxDue+'</p>AGI: '+agi;
 
 			response.send(responseText);
