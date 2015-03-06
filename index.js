@@ -66,7 +66,7 @@ app.get('/getFilingStatusFromID',function(req,res){
 
 	getFilingStatusFromID(req.query.filingStatus, function(err, data){
 		if (err) { console.error(err);}
-		res.send(data[0].StatusName);
+		res.send('<p>Filing Status Name: '+data[0].StatusName+'</p>');
 	});
 
 /*	console.log("request: "+req.body);
