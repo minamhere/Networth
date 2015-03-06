@@ -95,7 +95,7 @@ app.post('/api/createNewBracket', function(request, response){
 app.get('/calcFederal', function(request,response){
 	var agi = request.query.agi;
 	var taxrate = 0;
-	var baseTax = 0;
+	var baseTax = 1;
 	var minAGI = 0;
 	var taxDue = 0;
 	console.log('agi from user: '+agi);
@@ -103,9 +103,12 @@ app.get('/calcFederal', function(request,response){
 	if(agi) {
 		getTaxBracket(agi,function(err,data){
 			if (err) { console.error(err); callback(err);}
-			taxrate = data.rows[0].taxrate;
-			baseTax = data.rows[0].base_tax;
-			minAGI = data.rows[0].minagi;
+			if (data.rows){
+				taxrate = data.rows[0].TaxRate;
+				baseTax = data.rows[0].base_tax;
+				minAGI = data.rows[0].MinAGI;
+			}
+			else{console.log('SOMETHING WEIRD HAPPENED HERE!');}
 		});
 	}
 
