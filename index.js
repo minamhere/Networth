@@ -134,13 +134,15 @@ app.get('/', function(request, response) {
 
 	getUserList(function(err,data){
 		users = data;
+		getTaxBrackets(function(err,data){
+			taxBrackets = data;	
+			response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets}});
+		});
 	});
 	
-	getTaxBrackets(function(err,data){
-		taxBrackets = data;	
-	});
+	
 
-	response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets}});
+
 
 });
 
