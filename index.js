@@ -103,7 +103,7 @@ app.get('/calcFederal', function(request,response){
 	if(agi) {
 		getTaxBracket(agi,function(err,data){
 			if (err) { console.error(err); callback(err);}
-			if (data.rows){
+			if (data){
 				taxrate = data.rows[0].TaxRate;
 				baseTax = data.rows[0].base_tax;
 				minAGI = data.rows[0].MinAGI;
@@ -118,7 +118,7 @@ app.get('/calcFederal', function(request,response){
 	var responseText = '<p>Federal Tax Due: '+taxDue+'</p>';
 
 	response.send(responseText);
-	response.end(200);
+	//response.end(200);
 });
 
 app.get('/calc', function(request, response){
