@@ -100,25 +100,18 @@ app.get('/calcFederal', function(request,response){
 	var taxDue = 0;
 	console.log('agi from user: '+agi);
 
-	if(agi) {
-		getTaxBracket(agi,function(err,data){
-			if (err) { console.error(err); callback(err);}
-			if (data){
-				taxrate = data[0].TaxRate;
-				baseTax = data[0].base_tax;
-				minAGI = data[0].MinAGI;
-			}
-			else{console.log('SOMETHING WEIRD HAPPENED HERE!');}
-		});
-	}
+	getTaxBracket(agi,function(err,data){
+		if (err) { console.error(err); callback(err);}
+		if (data){
+			taxrate = data[0].TaxRate;
+			baseTax = data[0].base_tax;
+			minAGI = data[0].MinAGI;
+			taxDue = baseTax + taxrate*(agi-minAGI)/100;
+			var responseText = '<p>Federal Tax Due: '+taxDue+'</p>';
 
-
-	taxDue = baseTax + taxrate*(agi-minAGI)/100;
-
-	var responseText = '<p>Federal Tax Due: '+taxDue+'</p>';
-
-	response.send(responseText);
-	//response.end(200);
+			response.send(responseText);
+		}
+	});
 });
 
 app.get('/calc', function(request, response){
