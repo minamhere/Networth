@@ -2,12 +2,10 @@
 
 Networth Calculator. A default name.
 
-Built on a barebones Node.js app using [Express 4](http://expressjs.com/).
+We are building this project as a way to learn Node.js web development and also to convert our "10 Year Plan" Networth Calculator spreadsheet to a more robust platform.
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+First, this project will start by building a standard "Takehome Paycheck Calculator". This will include Federal and State Income Taxes, Medicare and Social Security Taxes, 401k deductions, and medical and disability premium payments. Single, Virginia taxpayer will be built first. Additional filing statuses and states will be added after that. 
 
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+After the paycheck calculator is complete, we will add functionality for the remaining 10 year plan features. 
+
+Once all existing features have been incorporated, we'd like to build fancy graphs and other visualizations.
