@@ -64,7 +64,7 @@ function getTaxBracket(agi, callback){
 app.get('/getFilingStatusFromID',function(req,res){
 	
 
-	getFilingStatusFromID(req.body.filingStatus, function(err, data){
+	getFilingStatusFromID(req.query.filingStatus, function(err, data){
 		if (err) { console.error(err);}
 		res.send(data[0].StatusName);
 	});
