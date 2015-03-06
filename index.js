@@ -111,7 +111,9 @@ app.get('/calcFederal', function(request,response){
 
 	taxDue = baseTax + taxrate*(agi-minAGI)/100;
 
-	response.send('Federal Tax Due: '+taxDue);
+	var responseText = '<p>Federal Tax Due: '+taxDue+'</p>';
+
+	response.send(responseText);
 });
 
 app.get('/calc', function(request, response){
