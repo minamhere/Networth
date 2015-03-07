@@ -37,7 +37,7 @@ block content
 			div.tableCell 
 				select
 					each jurisdiction in pageInfo.jurisdictions
-						option(value=#{jurisdiction.id}) #{jurisdiction.name}
+						option(value='#{jurisdiction.id}') #{jurisdiction.name}
 			div.tableCell 
 				input(type='number', name='taxYear', placeholder='taxYear')
 			div.tableCell  
@@ -49,7 +49,7 @@ block content
 			div.tableCell 
 				select
 					each filingStatus in pageInfo.filingStatuses
-						option(value=#{filingStatus.id}) #{filingStatus.StatusName}
+						option(value='#{filingStatus.id}') #{filingStatus.StatusName}
 				//input#createBracket(type='text', name='filingStatus', placeholder='filingStatus')
 			div.tableCell 
 				input(type='submit',value='Create Bracket')
