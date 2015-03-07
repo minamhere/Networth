@@ -142,21 +142,34 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[0][0].taxrate/100;
 		baseTax = results[0][0].base_tax;
 		minAGI = results[0][0].minagi;
-		console.log('results: '+JSON.stringify(results));
-		console.log('results[0]: '+JSON.stringify(results[0]));
 		marginalIncome = agi-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
-		responseText += '<p>Federal Tax Due: '+taxDue+'</p>AGI: '+agi+'\n';
-
-		
+		responseText += '<p>Federal Tax Due: '+taxDue+'\n';
 
 		// calculate ss tax
-		console.log('SS: '+results[1]);
+		console.log('SS: '+results[1][0]);
+		taxrate = results[1][0].taxrate/100;
+		baseTax = results[1][0].base_tax;
+		minAGI = results[1][0].minagi;
+		marginalIncome = agi-minAGI;
+		marginalTax = taxrate*marginalIncome;
+		taxDue = +marginalTax + +baseTax;
+		responseText += '<p>Social Security Tax Due: '+taxDue+'\n';
+
 		// calculate medicare tax
-		console.log('Medicare: '+results[2]);
+		console.log('Medicare: '+results[2][0]);
+		taxrate = results[2][0].taxrate/100;
+		baseTax = results[2][0].base_tax;
+		minAGI = results[2][0].minagi;
+		marginalIncome = agi-minAGI;
+		marginalTax = taxrate*marginalIncome;
+		taxDue = +marginalTax + +baseTax;
+		responseText += '<p>Medicare Tax Due: '+taxDue+'\n';
+
+
 		// return taxes
-		console.log('Fed: '+taxDue);
+		
 		response.send(responseText);
 	});
 
