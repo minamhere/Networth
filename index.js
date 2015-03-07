@@ -160,16 +160,11 @@ app.get('/admin', function(request, response) {
 				jurisdictions = data;
 				getFilingStatuses(function(err,data){
 					filingStatuses = data;
+					response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
 				});
 			});
-			response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
 		});
 	});
-	
-	
-
-
-
 });
 
 
