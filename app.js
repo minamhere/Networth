@@ -1,7 +1,10 @@
-var express = require('express');
-var app = express();
-var pg = require('pg');
-var db = require('./models');
+var express = require('express')
+	, app = express()
+	, http = require('http')
+	, path = require('path')
+	, db = require('./models');
+//var pg = require('pg');
+
 var bodyParser = require('body-parser');
 
 var devMode = true;
@@ -14,6 +17,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.use(express.logger('dev'));
+app.use(app.router);
 
 // development only
 if (devMode) {
@@ -194,7 +198,7 @@ app.get('/newuser', function (request, response) {
 })
 
 db.sequelize.sync().then(function(){
-		app.listen(app.get('port'), function() {
+	http.createServer(app).listen(app.get('port'), function() {
 		console.log("Node app is running at localhost:" + app.get('port'));
 	});	
 });
