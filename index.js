@@ -98,7 +98,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 	queryDatabase(insertBracket, function(err,data){
 		if(err){console.error(err); }
-		response.send(data);
+		response.send(request.body);
 	})
 
 });
