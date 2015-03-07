@@ -139,9 +139,9 @@ app.get('/api/calcPaycheck', function(request,response){
 	function(err,results){
 		var responseText = '';
 		// calculate fed tax
-		taxrate = results[0].taxrate/100;
-		baseTax = results[0].base_tax;
-		minAGI = results[0].minagi;
+		taxrate = results[0][0].taxrate/100;
+		baseTax = results[0][0].base_tax;
+		minAGI = results[0][0].minagi;
 		console.log('results: '+JSON.stringify(results));
 		console.log('results[0]: '+JSON.stringify(results[0]));
 		marginalIncome = agi-minAGI;
