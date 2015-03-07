@@ -149,16 +149,28 @@ app.get('/admin', function(request, response) {
 
 	async.parallel([
 		function(callback){
-			getUserList(function(err,data){});
+			getUserList(function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
 		}
 		function(callback){
-			getTaxBrackets(function(err,data){});
+			getTaxBrackets(function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
 		},
 		function(callback){
-			getJurisdictions(function(err,data){});
+			getJurisdictions(function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
 		},
 		function(callback){
-			getFilingStatuses(function(err,data){});
+			getFilingStatuses(function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
 		}
 	],
 	function(err,results){
