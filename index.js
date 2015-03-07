@@ -181,8 +181,8 @@ app.get('/api/calcPaycheck', function(request,response){
 	});
 });
 
-app.get('/calc', function(request, response){
-	response.render('calc');
+app.get('/paycheck', function(request, response){
+	response.render('paycheck');
 });
 
 app.get('/admin', function(request, response) {
