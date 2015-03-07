@@ -16,7 +16,7 @@ app.set('views', __dirname + '/views');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-app.use(express.logger('dev'));
+//app.use(express.logger('dev'));
 app.use(app.router);
 
 // development only
