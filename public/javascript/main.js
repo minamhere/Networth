@@ -1,9 +1,6 @@
 $(function(){
  $('#createBracket').on('click', function(e){
- 		var parameters = { 
- 			jurisdiction: $(#jurisdiction).val(), taxYear: $(#taxYear).val(), 
- 			filingStatus: $(#filingStatus).val(), minAGI: $(#minAGI).val(), 
- 			maxAGI: $(#maxAGI).val(), taxRate: $(#taxRate).val(), baseTax: $(#baseTax).val() }
+ 		var parameters = { jurisdiction: $(#jurisdiction).val(), taxYear: $(#taxYear).val(), filingStatus: $(#filingStatus).val(), minAGI: $(#minAGI).val(), maxAGI: $(#maxAGI).val(), taxRate: $(#taxRate).val(), baseTax: $(#baseTax).val() };
 		$.post( '/api/createNewBracket',parameters, function(data) {
 			$('#results').html(data);
      });
