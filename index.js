@@ -101,7 +101,7 @@ app.post('/api/createNewBracket', function(request, response){
 	queryDatabase(insertBracket, function(err,data){
 		if(err){console.error(err); }
 		//response.send(request.body);
-		response.location('/admin').status(200).send('Bracket Created');
+		response.status(200).send('Bracket Created');
 	})
 
 });

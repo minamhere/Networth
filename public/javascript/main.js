@@ -5,7 +5,8 @@ $(function(){
  			filingStatus: $('#filingStatus').val(), minAGI: $('#minAGI').val(), maxAGI: $('#maxAGI').val(), 
  			taxRate: $('#taxRate').val(), baseTax: $('#baseTax').val() };
 		$.post( '/api/createNewBracket',parameters, function(data) {
-			$('#results').html(data);
+			location.reload(true);
+
      });
  });
 });
