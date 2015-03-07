@@ -1,11 +1,8 @@
-var express = require('express')
-	, app = express()
-	, db = require('./models');
+var express = require('express');
+var app = express();
 var pg = require('pg');
-
 var bodyParser = require('body-parser');
 
-var devMode = true;
 
 
 app.set('view engine', 'jade');
@@ -13,15 +10,6 @@ app.set('views', __dirname + '/views');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
-
-//app.use(express.logger('dev'));
-//app.use(app.router);
-
-// development only
-/*if (devMode) {
-  app.use(express.errorHandler());
-}
-*/
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -64,9 +52,9 @@ function getFilingStatusFromID(filing_status_id, callback){
 
 }
 
-function getTaxBracket(agi, jurisdiction_id, filing_status_id, callback){
-	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi+'and jurisdiction_id = '+jurisdiction_id+' and filing_status_id='+filing_status_id);
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi+'and jurisdiction_id = '+jurisdiction_id+' and filing_status_id='+filing_status_id,function(err,data){
+function getTaxBracket(agi, callback){
+	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi);
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
 	});
@@ -115,7 +103,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 });
 
-app.get('/calcPaycheck', function(request,response){
+app.get('/calcFederal', function(request,response){
 	var agi = request.query.agi;
 	var taxrate = 0;
 	var baseTax = 1;
@@ -125,7 +113,7 @@ app.get('/calcPaycheck', function(request,response){
 	var marginalTax = 0;
 	console.log('agi from user: '+agi);
 
-	getaxBracket(agi, jurisdiction, filingStatus, function(err,data){
+	getTaxBracket(agi,function(err,data){
 		if (err) { console.error(err); callback(err);}
 		if (data){
 			taxrate = data[0].taxrate/100;
@@ -166,7 +154,7 @@ app.get('/admin', function(request, response) {
 				jurisdictions = data;
 				getFilingStatuses(function(err,data){
 					filingStatuses = data;
-					response.render('createTaxBrackets', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
+					response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
 				});
 			});
 		});
@@ -196,9 +184,6 @@ app.get('/newuser', function (request, response) {
   response.render('newuser');
 })
 
-db.sequelize.sync().then(function(){
-	app.listen(app.get('port'), function() {
-		console.log("Node app is running at localhost:" + app.get('port'));
-	});	
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'));
 });
-
