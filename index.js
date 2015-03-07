@@ -37,7 +37,7 @@ function getUserList(callback){
 }
 
 function getTaxBrackets(callback){
-	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate,  filingStatus_id, base_tax from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1',function(err,data){
+	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate,  filing_status_id, base_tax from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1',function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);
 	});
