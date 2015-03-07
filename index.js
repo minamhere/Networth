@@ -148,13 +148,14 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxDue = +marginalTax + +baseTax;
 		responseText += '<p>Federal Tax Due: '+taxDue+'</p>AGI: '+agi+'\n';
 
-		console.log('Fed: '+taxDue);
+		
 
 		// calculate ss tax
 		console.log('SS: '+results[1]);
 		// calculate medicare tax
 		console.log('Medicare: '+results[2]);
 		// return taxes
+		console.log('Fed: '+taxDue);
 		response.send(responseText);
 	});
 
