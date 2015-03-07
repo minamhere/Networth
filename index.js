@@ -55,10 +55,8 @@ function getFilingStatusFromID(filing_status_id, callback){
 
 function getTaxBracket(jurisdiction, taxyear, agi, callback){
 
-	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = '
-		+jurisdiction+' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi);
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = '
-		+jurisdiction+' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi,function(err,data){
+	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = '+jurisdiction+' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi);
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = '+jurisdiction+' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
 	});
@@ -150,6 +148,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		response.send("Finished Calculating");
 	});
 
+	/*
 	getTaxBracket(agi,function(err,data){
 		if (err) { console.error(err); callback(err);}
 		if (data){
@@ -167,6 +166,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			response.send(responseText);
 		}
 	});
+	*/
 });
 
 app.get('/calc', function(request, response){
