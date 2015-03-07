@@ -92,12 +92,12 @@ app.post('/api/createNewBracket', function(request, response){
 	var filingStatus = request.body.filingStatus;
 	var baseTax = request.body.baseTax;
 	
-	var insertBracket = 'INSERT INTO Tax_Brackets (Jurisdiction_id,TaxYear,Filing_Status_id,MinAGI,MaxAGI,TaxRate,baseTax) VALUES ('+jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+','+baseTax+')';
+	var insertBracket = 'INSERT INTO Tax_Brackets (Jurisdiction_id,TaxYear,Filing_Status_id,MinAGI,MaxAGI,TaxRate,base_tax) VALUES ('+jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+','+baseTax+')';
 	
 	console.log('insertString'+insertBracket);
 
 	queryDatabase(insertBracket, function(err,data){
-		if(err){console.error(err); callback(err);}
+		if(err){console.error(err); }
 		response.send(data);
 	})
 
