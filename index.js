@@ -151,7 +151,6 @@ app.get('/api/calcPaycheck', function(request,response){
 		responseText += '<p>Federal Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
 
 		// calculate ss tax
-		console.log('SS: '+results[1][0]);
 		taxrate = results[1][0].taxrate/100;
 		baseTax = results[1][0].base_tax;
 		minAGI = results[1][0].minagi;
@@ -162,7 +161,6 @@ app.get('/api/calcPaycheck', function(request,response){
 		responseText += '<p>Social Security Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
 
 		// calculate medicare tax
-		console.log('Medicare: '+results[2][0]);
 		taxrate = results[2][0].taxrate/100;
 		baseTax = results[2][0].base_tax;
 		minAGI = results[2][0].minagi;
@@ -181,34 +179,10 @@ app.get('/api/calcPaycheck', function(request,response){
 		
 		response.send(responseText);
 	});
-
-	/*
-	getTaxBracket(agi,function(err,data){
-		if (err) { console.error(err); callback(err);}
-		if (data){
-			taxrate = data[0].taxrate/100;
-			baseTax = data[0].base_tax;
-			minAGI = data[0].minagi;
-			marginalIncome = agi-minAGI;
-			console.log('marginalIncome: '+marginalIncome);
-			marginalTax = taxrate*marginalIncome;
-			console.log('marginalTax: '+marginalTax);
-			taxDue = +marginalTax + +baseTax;
-			
-			var responseText = '<p>Federal Tax Due: '+taxDue+'</p>AGI: '+agi;
-
-			response.send(responseText);
-		}
-	});
-	*/
 });
 
 app.get('/calc', function(request, response){
-
-
-
 	response.render('calc');
-
 });
 
 app.get('/admin', function(request, response) {
@@ -244,11 +218,7 @@ app.get('/admin', function(request, response) {
 		}
 	],
 	function(err,results){
-		users = results[0];
-		taxBrackets = results[1];
-		jurisdictions = results[2];
-		filingStatuses = results[3];
-		response.render('createTaxBrackets', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
+		response.render('createTaxBrackets', {pageInfo: {users:results[0],taxBrackets:results[1],jurisdictions:results[2],filingStatuses:results[3]}});
 	});
 
 
