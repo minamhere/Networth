@@ -37,7 +37,7 @@ function getUserList(callback){
 }
 
 function getTaxBrackets(callback){
-	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate,  filing_status_id, base_tax from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1',function(err,data){
+	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate,  filing_status_id, base_tax from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 ORDER BY taxyear, jurisdiction_id',function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);
 	});
@@ -56,14 +56,13 @@ function getFilingStatusFromID(filing_status_id, callback){
 function getTaxBracket(jurisdiction, taxyear, agi, callback){
 
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi);
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi+'ORDER BY taxyear, jurisdiction_id',function(err,data){
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
 	});
 }
 
 function getJurisdictions(callback){
-	console.log('SELECT * FROM Jurisdiction')
 	queryDatabase('SELECT * FROM Jurisdiction',function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null, data);
