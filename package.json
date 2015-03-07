@@ -7,10 +7,11 @@
     "start": "node index.js"
   },
   "dependencies": {
-	"pg": "4.x",
+    "body-parser": "*",
     "express": "~4.9.x",
     "jade": "*",
-	"body-parser":"*"
+    "pg": "^4.3.0",
+    "sequelize": "^2.0.4"
   },
   "engines": {
     "node": "0.10.x"
