@@ -21,8 +21,3 @@ $(function(){
  });
 });
 
-
-Jurisdiction_id,TaxYear,Filing_Status_id,MinAGI,MaxAGI,TaxRate,baseTax
-
-jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+','baseTax+')';
-	
