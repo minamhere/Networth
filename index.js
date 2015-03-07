@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var pg = require('pg');
+var async = require('async');
 var bodyParser = require('body-parser');
 
 
@@ -146,6 +147,30 @@ app.get('/admin', function(request, response) {
 	var jurisdictions;
 	var filingStatuses;
 
+	async.parallel([
+		function(callback){
+			getUserList(function(err,data){});
+		}
+		function(callback){
+			getTaxBrackets(function(err,data){});
+		},
+		function(callback){
+			getJurisdictions(function(err,data){});
+		},
+		function(callback){
+			getFilingStatuses(function(err,data){});
+		}
+	],
+	function(err,results){
+		users = results[0];
+		taxBrackets = results[1];
+		jurisdictions = results[2];
+		filingStatuses = results[3];
+		response.render('createTaxBrackets', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
+	});
+
+
+	/*
 	getUserList(function(err,data){
 		users = data;
 		getTaxBrackets(function(err,data){
@@ -159,8 +184,8 @@ app.get('/admin', function(request, response) {
 			});
 		});
 	});
+	*/
 });
-
 
 app.get('/TaxBrackets', function(request, response) {
 	var users = {};
