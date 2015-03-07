@@ -53,9 +53,12 @@ function getFilingStatusFromID(filing_status_id, callback){
 
 }
 
-function getTaxBracket(agi, callback){
-	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi);
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE taxyear = 2015 and minagi < '+agi+' and maxagi > '+agi,function(err,data){
+function getTaxBracket(jurisdiction, taxyear, agi, callback){
+
+	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = '
+		+jurisdiction+' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi);
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = '
+		+jurisdiction+' and taxyear = '+taxyear+' and minagi < '+agi+' and maxagi > '+agi,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
 	});
@@ -112,7 +115,40 @@ app.get('/api/calcPaycheck', function(request,response){
 	var taxDue = 0;
 	var marginalIncome = 0;
 	var marginalTax = 0;
+	var taxyear = 2015;
 	console.log('agi from user: '+agi);
+
+	async.parallel([
+		function(callback){
+			getTaxBracket('Federal',taxyear, agi,function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
+		},
+		function(callback){
+			getTaxBracket('Social Security', taxyear, agi,function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
+		},
+		function(callback){
+			getTaxBracket('Medicare', taxyear, agi,function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
+		}
+
+	],
+	function(err,results){
+		// calculate fed tax
+		console.log('Fed: '+results[0]);
+		// calculate ss tax
+		console.log('SS: '+results[1]);
+		// calculate medicare tax
+		console.log('Medicare: '+results[2]);
+		// return taxes
+		response.send("Finished Calculating");
+	});
 
 	getTaxBracket(agi,function(err,data){
 		if (err) { console.error(err); callback(err);}
