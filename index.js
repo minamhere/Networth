@@ -139,7 +139,14 @@ app.get('/api/calcPaycheck', function(request,response){
 	],
 	function(err,results){
 		// calculate fed tax
-		console.log('Fed: '+results[0]);
+		taxrate = results[0].taxrate/100;
+		baseTax = results[0].base_tax;
+		minAGI = results[0].minagi;
+		marginalIncome = agi-minAGI;
+		marginalTax = taxrate*marginalIncome;
+		taxDue = +marginalTax + +baseTax;
+		console.log('Fed: '+taxDue);
+
 		// calculate ss tax
 		console.log('SS: '+results[1]);
 		// calculate medicare tax
