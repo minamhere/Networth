@@ -145,7 +145,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalIncome = agi-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
-		responseText += '<p>Federal Tax Due: '+taxDue+'\n';
+		responseText += '<p>Federal Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
 
 		// calculate ss tax
 		console.log('SS: '+results[1][0]);
@@ -155,7 +155,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalIncome = agi-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
-		responseText += '<p>Social Security Tax Due: '+taxDue+'\n';
+		responseText += '<p>Social Security Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
 
 		// calculate medicare tax
 		console.log('Medicare: '+results[2][0]);
@@ -165,7 +165,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalIncome = agi-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
-		responseText += '<p>Medicare Tax Due: '+taxDue+'\n';
+		responseText += '<p>Medicare Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
 
 
 		// return taxes
