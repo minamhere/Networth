@@ -103,7 +103,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 });
 
-app.get('/calcFederal', function(request,response){
+app.get('/api/calcPaycheck', function(request,response){
 	var agi = request.query.agi;
 	var taxrate = 0;
 	var baseTax = 1;
@@ -154,7 +154,7 @@ app.get('/admin', function(request, response) {
 				jurisdictions = data;
 				getFilingStatuses(function(err,data){
 					filingStatuses = data;
-					response.render('test', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
+					response.render('createTaxBrackets', {pageInfo: {users:users,taxBrackets:taxBrackets,jurisdictions:jurisdictions,filingStatuses:filingStatuses}});
 				});
 			});
 		});

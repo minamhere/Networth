@@ -14,7 +14,7 @@ $(function(){
  $('#AGI').on('keyup', function(e){
 	if(e.keyCode === 13) {
 	    var parameters = { agi: $(this).val() };
-		$.get( '/calcFederal',parameters, function(data) {
+		$.get( '/api/calcPaycheck',parameters, function(data) {
 			$('#results').html(data);
 		});
 	};
