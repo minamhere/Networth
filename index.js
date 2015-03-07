@@ -142,7 +142,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[0].taxrate/100;
 		baseTax = results[0].base_tax;
 		minAGI = results[0].minagi;
-		console.log('results: '+JSON.stringify(results);
+		console.log('results: '+JSON.stringify(results));
 		console.log('results[0]: '+JSON.stringify(results[0]));
 		marginalIncome = agi-minAGI;
 		marginalTax = taxrate*marginalIncome;
