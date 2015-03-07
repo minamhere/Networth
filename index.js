@@ -17,15 +17,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 function queryDatabase(queryText,callback){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-   
-    client.query(queryText, function(err, result) {
-      done();
-      if (err)
-       { console.error(err); callback(err); }
-      else
-       { callback(null, result.rows); }
-    });
-	   
+	    client.query(queryText, function(err, result) {
+	    	done();
+			if (err){ console.error(err); callback(err); }
+			callback(null, result.rows);
+		});
+		   
 	});
 }
 
