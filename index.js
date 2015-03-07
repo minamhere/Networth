@@ -153,7 +153,7 @@ app.get('/admin', function(request, response) {
 				if (err) return callback(err);
       			callback(null, data);
 			});
-		}
+		},
 		function(callback){
 			getTaxBrackets(function(err,data){
 				if (err) return callback(err);
