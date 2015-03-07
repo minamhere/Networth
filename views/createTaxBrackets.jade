@@ -19,10 +19,6 @@ block content
 		p Name: #{user.full_name} - Email Address: #{user.email_address} - Birthdate: #{user.birthdate} - Filing Status: #{user.filing_status_id}
 	
 	p Brackets:
-
-	div#results
-		p We should see this change to a response!
-	
 	
 	div.table
 		div.tableRow
@@ -34,7 +30,6 @@ block content
 			div.tableCell Filing Status
 			div.tableCell Base Tax
 		div.tableRow
-			//form(name='createBracket', method='POST', action='/api/createNewBracket')
 			div.tableCell 
 				select#jurisdiction
 					each jurisdiction in pageInfo.jurisdictions
@@ -51,7 +46,6 @@ block content
 				select#filingStatus
 					each filingStatus in pageInfo.filingStatuses
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
-				//input#createBracket(type='text', name='filingStatus', placeholder='filingStatus')
 			div.tableCell
 				input#baseTax(type='number', name='baseTax', placeholder='baseTax')
 			div.tableCell 
