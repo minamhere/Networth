@@ -36,7 +36,7 @@ function getUserList(callback){
 }
 
 function getTaxBrackets(callback){
-	queryDatabase('select jurisdiction.name, minagi, maxagi, taxyear, taxrate from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1',function(err,data){
+	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1',function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);
 	});
@@ -92,11 +92,15 @@ app.post('/api/createNewBracket', function(request, response){
 	var filingStatus = request.body.filingStatus;
 	var baseTax = request.body.baseTax;
 	
-	var insertBracket = 'INSERT INTO Tax_Brackets (Jurisdiction_id,TaxYear,Filing_Status_id,MinAGI,MaxAGI,TaxRate) VALUES ('+jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+')';
+	var insertBracket = 'INSERT INTO Tax_Brackets (Jurisdiction_id,TaxYear,Filing_Status_id,MinAGI,MaxAGI,TaxRate,baseTax) VALUES ('+jurisdiction+','+taxYear+','+filingStatus+','+minAGI+','+maxAGI+','+taxRate+','baseTax+')';
 	
 	console.log('insertString'+insertBracket);
 
-	response.render('test');
+	queryDatabase(insertBracket, function(err,data){
+		if(err){console.error(err); callback(err);}
+		response.send(data);
+	})
+
 });
 
 app.get('/calcFederal', function(request,response){
