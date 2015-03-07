@@ -76,18 +76,10 @@ function getFilingStatuses(callback){
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
-	
-
 	getFilingStatusFromID(req.query.filingStatus, function(err, data){
 		if (err) { console.error(err);}
 		res.send('<p>Filing Status Name: '+data[0].statusname+'</p>');
 	});
-
-/*	console.log("request: "+req.body);
-	console.log("query: "+req.body.filingStatus);
-	res.send(req.body.filingStatus);*/
-
-	//res.send("LOOK AT HOW THIS CHANGED!");
 });
 
 app.post('/api/createNewBracket', function(request, response){
@@ -104,8 +96,6 @@ app.post('/api/createNewBracket', function(request, response){
 	
 	console.log('insertString'+insertBracket);
 
-	
-	
 	response.render('test');
 });
 
