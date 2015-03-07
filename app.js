@@ -3,7 +3,7 @@ var express = require('express')
 	, http = require('http')
 	, path = require('path')
 	, db = require('./models');
-//var pg = require('pg');
+var pg = require('pg');
 
 var bodyParser = require('body-parser');
 
@@ -20,9 +20,10 @@ app.use(express.logger('dev'));
 app.use(app.router);
 
 // development only
-if (devMode) {
+/*if (devMode) {
   app.use(express.errorHandler());
 }
+*/
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
