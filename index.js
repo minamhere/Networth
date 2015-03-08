@@ -64,8 +64,8 @@ function getTaxBracket(jurisdiction, taxyear, agi, callback){
 
 function getJurisdictions(jurisdictionType, callback){
 	var queryString = '';
-	if (jurisdictionType == 'All') queryString = 'SELECT * FROM Jurisdiction';
-	else queryString = 'SELECT * FROM Jurisdiction where type=\''+jurisdictionType+'\'';
+	if (jurisdictionType == 'All') queryString = 'SELECT * FROM Jurisdiction order by name';
+	else queryString = 'SELECT * FROM Jurisdiction where type=\''+jurisdictionType+'\' order by name';
 	queryDatabase(queryString,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null, data);
