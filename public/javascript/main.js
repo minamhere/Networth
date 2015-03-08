@@ -1,9 +1,13 @@
 $(function(){
  $('#createBracket').on('click', function(e){
  		var parameters = { 
- 			jurisdiction: $('#jurisdiction').val(), taxYear: $('#taxYear').val(), 
- 			filingStatus: $('#filingStatus').val(), minAGI: $('#minAGI').val(), maxAGI: $('#maxAGI').val(), 
- 			taxRate: $('#taxRate').val(), baseTax: $('#baseTax').val() };
+ 			jurisdiction: $('#jurisdiction').val(), 
+ 			taxYear: $('#taxYear').val(), 
+ 			filingStatus: $('#filingStatus').val(), 
+ 			minAGI: $('#minAGI').val(), 
+ 			maxAGI: $('#maxAGI').val(), 
+ 			taxRate: $('#taxRate').val(), 
+ 			baseTax: $('#baseTax').val() };
 		$.post( '/api/createNewBracket',parameters, function(data) {
 			location.reload(true);
 
@@ -12,7 +16,7 @@ $(function(){
 });
 
 $(function(){
- $('#AGI').on('keyup', function(e){
+ $('#income').on('keyup', function(e){
 	if(e.keyCode === 13) {
 	    $('#calculate').click();
 	};
@@ -21,7 +25,11 @@ $(function(){
 
 $(function(){
 	$('#calculate').click(function(){
-	var parameters = { agi: $('#AGI').val(), state: $('#stateSelect').val() };
+		var parameters = { 
+			income: $('#income').val(), 
+			state: $('#stateSelect').val(),
+			retirement: $('#retirement').val(),
+			filingStatus: $('#filingStatusSelect').val() };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			$('#results').html(data);
 		});

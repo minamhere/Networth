@@ -109,7 +109,10 @@ app.post('/api/createNewBracket', function(request, response){
 });
 
 app.get('/api/calcPaycheck', function(request,response){
-	var agi = request.query.agi;
+	var income = request.query.income;
+	var retirement = request.query.retirement;
+	var filingStatus = request.query.filingStatus;
+	var agi = income-retirement;
 	var state = request.query.state;
 	var taxrate = 0;
 	var baseTax = 1;
@@ -118,7 +121,6 @@ app.get('/api/calcPaycheck', function(request,response){
 	var marginalIncome = 0;
 	var marginalTax = 0;
 	var taxyear = 2015;
-	console.log('agi from user: '+agi);
 
 	async.parallel([
 		function(callback){
