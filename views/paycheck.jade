@@ -17,8 +17,11 @@ block content
 	div#paycheckCalculator
 		div#agi AGI: 
 			input#AGI(type='number', name='AGI', placeholder='AGI')
-		div filing Status: 
+		div Filing Status: 
 			select#filingStatusSelect
 				each filingStatus in pageInfo.filingStatuses
-						option(value='#{filingStatus.id}') #{filingStatus.name}
+						option(value='#{filingStatus.id}') #{filingStatus.statusname}
+		div#calc 				
+			input#calculate(type='submit',value='Calculate Takehome Paycheck')
+
 		div#results 

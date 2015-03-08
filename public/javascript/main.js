@@ -14,11 +14,17 @@ $(function(){
 $(function(){
  $('#AGI').on('keyup', function(e){
 	if(e.keyCode === 13) {
-	    var parameters = { agi: $(this).val() };
+	    $('#calculate').click();
+	};
+ });
+});
+
+$(function(){
+	$('#calculate').click(function(){
+	var parameters = { agi: $(this).val() };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			$('#results').html(data);
 		});
-	};
- });
+	});
 });
 
