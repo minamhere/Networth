@@ -171,7 +171,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[1][0].taxrate/100;
 		baseTax = results[1][0].base_tax;
 		minAGI = results[1][0].minagi;
-		marginalIncome = agi-minAGI;
+		marginalIncome = income-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
@@ -181,7 +181,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[2][0].taxrate/100;
 		baseTax = results[2][0].base_tax;
 		minAGI = results[2][0].minagi;
-		marginalIncome = agi-minAGI;
+		marginalIncome = income-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
