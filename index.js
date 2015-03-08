@@ -147,7 +147,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
-		responseText += '<p>Federal Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
+		responseText += '<div id=\'FederalTax\'>Federal Tax Due: $'+parseFloat(taxDue).toFixed(2)+'</div>\n';
 
 		// calculate ss tax
 		taxrate = results[1][0].taxrate/100;
@@ -157,7 +157,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
-		responseText += '<p>Social Security Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
+		responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: $'+parseFloat(taxDue).toFixed(2)+'</div>\n';
 
 		// calculate medicare tax
 		taxrate = results[2][0].taxrate/100;
@@ -167,13 +167,13 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
-		responseText += '<p>Medicare Tax Due: $'+parseFloat(taxDue).toFixed(2)+'\n';
+		responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: $'+parseFloat(taxDue).toFixed(2)+'</div>\n';
 
 		// Calculate Total Taxes and Takehome
 
 		takehomePay = agi-totalTaxes;
-		responseText += '<p>Total Tax Due: $'+parseFloat(totalTaxes).toFixed(2)+'\n';
-		responseText += '<p>Actual Takehome: $'+parseFloat(takehomePay).toFixed(2)+'\n';
+		responseText += '<div id=\'TotalTax\'>Total Tax Due: $'+parseFloat(totalTaxes).toFixed(2)+'</div>\n';
+		responseText += '<div id=\'ActualTakehome\'>Actual Takehome: $'+parseFloat(takehomePay).toFixed(2)+'</div>\n';
 
 		
 		response.send(responseText);
