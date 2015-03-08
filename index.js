@@ -62,8 +62,11 @@ function getTaxBracket(jurisdiction, taxyear, agi, callback){
 	});
 }
 
-function getJurisdictions(callback){
-	queryDatabase('SELECT * FROM Jurisdiction',function(err,data){
+function getJurisdictions(jurisdictionType, callback){
+	var queryString = '';
+	if (jurisdictionType = 'All') queryString = 'SELECT * FROM Jurisdiction';
+	else queryString = 'SELECT * FROM Jurisdiction where type=\''+jurisdictionType+'\'';
+	queryDatabase(queryString,function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null, data);
 	});
@@ -107,6 +110,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 app.get('/api/calcPaycheck', function(request,response){
 	var agi = request.query.agi;
+	var state = require.query.state;
 	var taxrate = 0;
 	var baseTax = 1;
 	var minAGI = 0;
@@ -131,6 +135,12 @@ app.get('/api/calcPaycheck', function(request,response){
 		},
 		function(callback){
 			getTaxBracket('Medicare', taxyear, agi,function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
+		},
+		function(callback){
+			getTaxBracket(state, taxyear, agi,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
@@ -171,6 +181,16 @@ app.get('/api/calcPaycheck', function(request,response){
 		totalTaxes += taxDue;
 		responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
 
+		// calculate state tax
+		taxrate = results[3][0].taxrate/100;
+		baseTax = results[3][0].base_tax;
+		minAGI = results[3][0].minagi;
+		marginalIncome = agi-minAGI;
+		marginalTax = taxrate*marginalIncome;
+		taxDue = +marginalTax + +baseTax;
+		totalTaxes += taxDue;
+		responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+
 		// Calculate Total Taxes and Takehome
 
 		takehomePay = agi-totalTaxes;
@@ -190,11 +210,17 @@ app.get('/paycheck', function(request, response){
 				if (err) return callback(err);
       			callback(null, data);
 			});
+		},
+		function(callback){
+			getJurisdictions('State',function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
 		}
 
 		],
 		function(err,results){
-			response.render('paycheck', {pageInfo: {filingStatuses:results[0]}});
+			response.render('paycheck', {pageInfo: {filingStatuses:results[0],states:results[1]}});
 
 		});
 });
@@ -214,7 +240,7 @@ app.get('/admin', function(request, response) {
 			});
 		},
 		function(callback){
-			getJurisdictions(function(err,data){
+			getJurisdictions('All',function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});

@@ -15,8 +15,12 @@ block content
 	h1 Paycheck Calculator
 
 	div#paycheckCalculator
-		div#agi AGI: 
+		div AGI: 
 			input#AGI(type='number', name='AGI', placeholder='AGI')
+		div State:
+			select#stateSelect
+				each state in pageInfo.states
+					option(value='#{state.id}') #{state.name}
 		div Filing Status: 
 			select#filingStatusSelect
 				each filingStatus in pageInfo.filingStatuses
