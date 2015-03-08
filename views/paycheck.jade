@@ -20,7 +20,7 @@ block content
 		div State:
 			select#stateSelect
 				each state in pageInfo.states
-					option(value='#{state.id}') #{state.name}
+					option(value='#{state.name}') #{state.name}
 		div Filing Status: 
 			select#filingStatusSelect
 				each filingStatus in pageInfo.filingStatuses
