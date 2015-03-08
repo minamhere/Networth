@@ -4,3 +4,6 @@
 .tableRow { display: table-row; }
 .tableCell { display: table-cell; }
 
+h1 {text-align: center;}
+
+div#paycheckCalculator{text-align: center;}
