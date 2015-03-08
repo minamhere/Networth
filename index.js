@@ -112,15 +112,17 @@ app.get('/api/calcPaycheck', function(request,response){
 	var income = request.query.income;
 	var retirement = request.query.retirement;
 	var filingStatus = request.query.filingStatus;
-	var agi = income-retirement;
 	var state = request.query.state;
+	var taxyear = 2015;
+
+	var agi = income-retirement;
 	var taxrate = 0;
-	var baseTax = 1;
+	var baseTax = 0;
 	var minAGI = 0;
 	var taxDue = 0;
 	var marginalIncome = 0;
 	var marginalTax = 0;
-	var taxyear = 2015;
+	
 
 	async.parallel([
 		function(callback){
@@ -130,13 +132,15 @@ app.get('/api/calcPaycheck', function(request,response){
 			});
 		},
 		function(callback){
-			getTaxBracket('Social Security', taxyear, agi,function(err,data){
+			// Use income for SS tax, not AGI
+			getTaxBracket('Social Security', taxyear, income,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
 		},
 		function(callback){
-			getTaxBracket('Medicare', taxyear, agi,function(err,data){
+			// Use income for Medicare tax, not AGI
+			getTaxBracket('Medicare', taxyear, income,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
@@ -150,7 +154,7 @@ app.get('/api/calcPaycheck', function(request,response){
 	],
 	function(err,results){
 		if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-		var responseText = '';
+		var responseText = '<div id=\'AGI\'>Actual AGI: '+accounting.formatMoney(agi)+'</div>\n';
 		var totalTaxes = 0;
 		var takehomePay = 0;
 		// calculate fed tax
