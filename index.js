@@ -110,7 +110,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 app.get('/api/calcPaycheck', function(request,response){
 	var agi = request.query.agi;
-	var state = require.query.state;
+	var state = request.query.state;
 	var taxrate = 0;
 	var baseTax = 1;
 	var minAGI = 0;
