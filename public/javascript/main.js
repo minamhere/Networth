@@ -21,7 +21,7 @@ $(function(){
 
 $(function(){
 	$('#calculate').click(function(){
-	var parameters = { agi: $(this).val() };
+	var parameters = { agi: $('#AGI').val() };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			$('#results').html(data);
 		});
