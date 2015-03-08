@@ -25,7 +25,7 @@ $(function(){
 
 $(function(){
 	$('#calculate').click(function(){
-		if ($('#income').val() > 0){return false;}
+		//if ($('#income').val() > 0){return false;}
 		var parameters = { 
 			income: $('#income').val(), 
 			state: $('#stateSelect').val(),
