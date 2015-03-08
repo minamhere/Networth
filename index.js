@@ -52,6 +52,7 @@ function getFilingStatusFromID(filing_status_id, callback){
 
 function getTaxBracket(jurisdiction, taxyear, agi, callback){
 
+	
 	if (agi>999999) agi = 999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi');
 	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',function(err,data){
