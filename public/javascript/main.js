@@ -27,7 +27,7 @@ $(function(){
 	$('#calculate').click(function(){
 		//if ($('#income').val() > 0){return false;}
 		// Check for valid inputs
-		if ($('#income').val() < $('#retirement').val()) {
+		if (parseInt($('#income').val()) < parseInt($('#retirement').val())) {
 			$('#results').html('Retirement savings must be less than Gross Income');
 			return false;
 		}
