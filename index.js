@@ -3,6 +3,7 @@ var app = express();
 var pg = require('pg');
 var async = require('async');
 var bodyParser = require('body-parser');
+var accounting = require('accounting');
 
 
 
@@ -52,7 +53,7 @@ function getFilingStatusFromID(filing_status_id, callback){
 
 function getTaxBracket(jurisdiction, taxyear, agi, callback){
 
-	
+
 	if (agi>999999) agi = 999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi');
 	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',function(err,data){
@@ -148,7 +149,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
-		responseText += '<div id=\'FederalTax\'>Federal Tax Due: $'+parseFloat(taxDue).toFixed(2)+'</div>\n';
+		responseText += '<div id=\'FederalTax\'>Federal Tax Due: $'+accounting.formatMoney(taxDue)+'</div>\n';
 
 		// calculate ss tax
 		taxrate = results[1][0].taxrate/100;
@@ -158,7 +159,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
-		responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: $'+parseFloat(taxDue).toFixed(2)+'</div>\n';
+		responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: $'+accounting.formatMoney(taxDue)+'</div>\n';
 
 		// calculate medicare tax
 		taxrate = results[2][0].taxrate/100;
@@ -168,13 +169,13 @@ app.get('/api/calcPaycheck', function(request,response){
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
-		responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: $'+parseFloat(taxDue).toFixed(2)+'</div>\n';
+		responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: $'+accounting.formatMoney(taxDue)+'</div>\n';
 
 		// Calculate Total Taxes and Takehome
 
 		takehomePay = agi-totalTaxes;
-		responseText += '<div id=\'TotalTax\'>Total Tax Due: $'+parseFloat(totalTaxes).toFixed(2)+'</div>\n';
-		responseText += '<div id=\'ActualTakehome\'>Actual Takehome: $'+parseFloat(takehomePay).toFixed(2)+'</div>\n';
+		responseText += '<div id=\'TotalTax\'>Total Tax Due: $'+accounting.formatMoney(totalTaxes)+'</div>\n';
+		responseText += '<div id=\'ActualTakehome\'>Actual Takehome: $'+accounting.formatMoney(takehomePay)+'</div>\n';
 
 		
 		response.send(responseText);
