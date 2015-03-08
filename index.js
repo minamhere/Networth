@@ -181,7 +181,20 @@ app.get('/api/calcPaycheck', function(request,response){
 });
 
 app.get('/paycheck', function(request, response){
-	response.render('paycheck');
+
+	async.parallel([
+		function(callback){
+			getFilingStatuses(function(err,data){
+				if (err) return callback(err);
+      			callback(null, data);
+			});
+		}
+
+		],
+		function(err,results){
+			response.render('paycheck', {pageInfo: {filingStatuses:results[0]}});
+
+		});
 });
 
 app.get('/admin', function(request, response) {
