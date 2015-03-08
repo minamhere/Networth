@@ -135,6 +135,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		}
 	],
 	function(err,results){
+		if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
 		var responseText = '';
 		var totalTaxes = 0;
 		var takehomePay = 0;
