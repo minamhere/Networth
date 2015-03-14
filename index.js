@@ -79,6 +79,13 @@ function getFilingStatuses(callback){
 	});
 }
 
+function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
+	queryDatabase('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id){
+		if (err){console.error(err); callback(err);}
+		callback(null,data);
+	}
+}
+
 app.get('/getFilingStatusFromID',function(req,res){
 	getFilingStatusFromID(req.query.filingStatus, function(err, data){
 		if (err) { console.error(err);}
@@ -115,8 +122,20 @@ app.get('/api/calcPaycheck', function(request,response){
 	var state = request.query.state;
 	var taxyear = 2015;
 
+	async.waterfall([
+		function(callback){
+			getDeductionsExemptions(state,taxyear,filingStatus, function(err,data){
+				if (err) return callback(err);
+				callback(null, data);
+			});
+		}
+		],
+		function(err, results){
+			console.log(JSON.stringify(results,null,'/t'));
+		});
+
 	var fedStandardDeduction = 6300;
-	var fedPersonalExemption = 3300;
+	var fedPersonalExemption = 4000;
 	var stateStandardDeduction = 3000;
 	var statePersonalExemption = 900;
 	var fedDeductionsExemptions = 0;
