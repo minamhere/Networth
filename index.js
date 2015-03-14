@@ -134,8 +134,8 @@ app.get('/api/calcPaycheck', function(request,response){
 		function(err, results){
 
 			if (err){ console.error(err);}
-			console.log(JSON.stringify(results[0]));
-			console.log(JSON.stringify(results[0][0]));
+			console.log('results[0]: '+JSON.stringify(results[0]));
+			console.log('results[0][0]: '+JSON.stringify(results[0][0]));
 
 			/*for (var deduction in results[0][0]){
 				console.log(JSON.stringify(deduction));
@@ -152,8 +152,8 @@ app.get('/api/calcPaycheck', function(request,response){
 								break;
 						};
 						break;
-				};*/
-			};
+				};
+			};*/
 			console.log("Fed Standard: "+fedStandardDeduction);
 			console.log("Fed Personal: "+fedPersonalExemption);
 		});
