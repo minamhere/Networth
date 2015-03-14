@@ -244,7 +244,7 @@ app.get('/api/calcPaycheck', function(request,response){
 
 		// Calculate Total Taxes and Takehome
 
-		takehomePay = agi-totalTaxes;
+		takehomePay = income-retirement-totalTaxes;
 		responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
 		responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
 
