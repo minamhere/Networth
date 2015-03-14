@@ -125,22 +125,32 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	async.waterfall([
 		function(callback){
-			getDeductionsExemptions(state,taxyear,filingStatus, function(err,data){
-				if (err) return callback(err);
-				callback(null, data);
-			});
+			getDeductionsExemptions(state,taxyear,filingStatus, callback);
 		}
 		],
 		function(err, results){
 			if (err){ console.error(err);}
-			console.log(JSON.stringify(results,null,'/t'));
+			console.log(JSON.stringify(results));
+			for each (deduction in results[0]){
+				switch(deduction.jurisdiction_id){
+					case 1:
+						switch(deduction.name){
+							case 'Federal Standard Deduction':
+								fedStandardDeduction = deduction.value;
+								break;
+							case 'Federal Personal Exemption':
+								fedPersonalExemption = deduction.value;
+								break;
+						};
+						break;
+				};
+			};
+			console.log("Fed Standard: "+fedStandardDeduction);
+			console.log("Fed Personal: "+fedPersonalExemption);
 		});
 
-	var fedStandardDeduction = 6300;
-	var fedPersonalExemption = 4000;
 	var stateStandardDeduction = 3000;
 	var statePersonalExemption = 900;
-	var fedDeductionsExemptions = 0;
 	var stateDeductionsExemptions = 0;
 
 	switch(filingStatus){
