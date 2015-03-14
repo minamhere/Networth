@@ -199,7 +199,7 @@ app.get('/api/calcPaycheck', function(request,response){
 	],
 	function(err,results){
 		if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-		var responseText = '<div id=\'AGI\'>Actual AGI: '+accounting.formatMoney(agi)+'</div>\n';
+		var responseText = '<div id=\'AGI\'>Actual AGI: '+accounting.formatMoney(fedAGI)+'</div>\n';
 		var totalTaxes = 0;
 		var takehomePay = 0;
 		// calculate fed tax
