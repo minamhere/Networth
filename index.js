@@ -55,8 +55,8 @@ function getTaxBracket(jurisdiction, taxyear, agi, callback){
 
 
 	if (agi>999999) agi = 999999;
-	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi');
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets b INNER JOIN jurisdiction j on j.id = b.jurisdiction_id WHERE j.name = \''+jurisdiction+'\' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',function(err,data){
+	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi');
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',function(err,data){
 		if (err){ console.error(err); callback(err);}
 		callback(null,data);	
 	});
@@ -168,21 +168,24 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	async.parallel([
 		function(callback){
-			getTaxBracket('Federal',taxyear, fedAGI,function(err,data){
+			// Jurisdiction 1 = Federal
+			getTaxBracket(1,taxyear, fedAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
 		},
 		function(callback){
 			// Use income for SS tax, not AGI
-			getTaxBracket('Social Security', taxyear, ssAGI,function(err,data){
+			// Jurisdiction 4 = Social Security
+			getTaxBracket(4, taxyear, ssAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
 		},
 		function(callback){
 			// Use income for Medicare tax, not AGI
-			getTaxBracket('Medicare', taxyear, medicareAGI,function(err,data){
+			// Jurisdiction 5 = Medicare
+			getTaxBracket(5, taxyear, medicareAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
