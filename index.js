@@ -130,9 +130,11 @@ app.get('/api/calcPaycheck', function(request,response){
 		],
 		function(err, results){
 			if (err){ console.error(err);}
-			console.log(JSON.stringify(results));
 			for (var deduction in results[0]){
-				switch(deduction.jurisdiction_id){
+				console.log(JSON.stringify(deduction));
+				console.log(JSON.stringify(deduction.jurisdiction_id));
+				console.log(JSON.stringify(deduction.name));
+				/*switch(deduction.jurisdiction_id){
 					case 1:
 						switch(deduction.name){
 							case 'Federal Standard Deduction':
@@ -143,7 +145,7 @@ app.get('/api/calcPaycheck', function(request,response){
 								break;
 						};
 						break;
-				};
+				};*/
 			};
 			console.log("Fed Standard: "+fedStandardDeduction);
 			console.log("Fed Personal: "+fedPersonalExemption);
