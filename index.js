@@ -80,7 +80,7 @@ function getFilingStatuses(callback){
 }
 
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
-	queryDatabase('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id){
+	queryDatabase('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,function(err,data){
 		if (err){console.error(err); callback(err);}
 		callback(null,data);
 	}
@@ -131,6 +131,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		}
 		],
 		function(err, results){
+			if (err){ console.error(err);}
 			console.log(JSON.stringify(results,null,'/t'));
 		});
 
