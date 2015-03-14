@@ -115,7 +115,28 @@ app.get('/api/calcPaycheck', function(request,response){
 	var state = request.query.state;
 	var taxyear = 2015;
 
-	var agi = income-retirement;
+	var fedStandardDeduction = 6300;
+	var fedPersonalExemption = 3300;
+	var stateStandardDeduction = 3000;
+	var statePersonalExemption = 900;
+	var fedDeductionsExemptions = 0;
+	var stateDeductionsExemptions = 0;
+
+	switch(filingStatus){
+		case 1:
+			fedDeductionsExemptions = fedStandardDeduction+fedPersonalExemption;
+			stateDeductionsExemptions = stateStandardDeduction+statePersonalExemption;
+			break;
+		case 2:
+			fedDeductionsExemptions = 2*(fedStandardDeduction+fedPersonalExemption);
+			stateDeductionsExemptions = 2*(stateStandardDeduction+statePersonalExemption);
+			break;
+	}
+
+	var fedAGI = income-retirement-fedDeductionsExemptions;
+	var medicareAGI = income;
+	var ssAGI = income;
+	var stateAGI = income-retirement-stateDeductionsExemptions;
 	var taxrate = 0;
 	var baseTax = 0;
 	var minAGI = 0;
@@ -126,27 +147,27 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	async.parallel([
 		function(callback){
-			getTaxBracket('Federal',taxyear, agi,function(err,data){
+			getTaxBracket('Federal',taxyear, fedAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
 		},
 		function(callback){
 			// Use income for SS tax, not AGI
-			getTaxBracket('Social Security', taxyear, income,function(err,data){
+			getTaxBracket('Social Security', taxyear, ssAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
 		},
 		function(callback){
 			// Use income for Medicare tax, not AGI
-			getTaxBracket('Medicare', taxyear, income,function(err,data){
+			getTaxBracket('Medicare', taxyear, medicareAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
 		},
 		function(callback){
-			getTaxBracket(state, taxyear, agi,function(err,data){
+			getTaxBracket(state, taxyear, stateAGI,function(err,data){
 				if (err) return callback(err);
       			callback(null, data);
 			});
@@ -161,7 +182,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[0][0].taxrate/100;
 		baseTax = results[0][0].base_tax;
 		minAGI = results[0][0].minagi;
-		marginalIncome = agi-minAGI;
+		marginalIncome = fedAGI-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
@@ -171,7 +192,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[1][0].taxrate/100;
 		baseTax = results[1][0].base_tax;
 		minAGI = results[1][0].minagi;
-		marginalIncome = income-minAGI;
+		marginalIncome = ssAGI-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
@@ -181,7 +202,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[2][0].taxrate/100;
 		baseTax = results[2][0].base_tax;
 		minAGI = results[2][0].minagi;
-		marginalIncome = income-minAGI;
+		marginalIncome = medicareAGI-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
@@ -191,7 +212,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		taxrate = results[3][0].taxrate/100;
 		baseTax = results[3][0].base_tax;
 		minAGI = results[3][0].minagi;
-		marginalIncome = agi-minAGI;
+		marginalIncome = stateAGI-minAGI;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +baseTax;
 		totalTaxes += taxDue;
