@@ -135,9 +135,8 @@ app.get('/api/calcPaycheck', function(request,response){
 
 			if (err){ console.error(err);}
 			console.log('results[0]: '+JSON.stringify(results[0]));
-			console.log('results[0][0]: '+JSON.stringify(results[0][0]));
-
-			/*for (var deduction in results[0][0]){
+			console.log('results[0].jurisdiction_id: '+JSON.stringify(results[0]));
+			/*for (var deduction in results[0]){
 				console.log(JSON.stringify(deduction));
 				console.log(JSON.stringify(deduction.jurisdiction_id));
 				console.log(JSON.stringify(deduction.name));
