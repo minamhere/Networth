@@ -131,7 +131,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		function(err, results){
 			if (err){ console.error(err);}
 			console.log(JSON.stringify(results));
-			for each (deduction in results[0]){
+			for (var deduction in results[0]){
 				switch(deduction.jurisdiction_id){
 					case 1:
 						switch(deduction.name){
