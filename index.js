@@ -169,37 +169,23 @@ app.get('/api/calcPaycheck', function(request,response){
 	async.parallel([
 		function(callback){
 			// Jurisdiction 1 = Federal
-			getTaxBracket(1,taxyear, fedAGI,function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getTaxBracket(1,taxyear, fedAGI, callback);
 		},
 		function(callback){
-			// Use income for SS tax, not AGI
 			// Jurisdiction 4 = Social Security
-			getTaxBracket(4, taxyear, ssAGI,function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getTaxBracket(4, taxyear, ssAGI, callback);
 		},
 		function(callback){
-			// Use income for Medicare tax, not AGI
 			// Jurisdiction 5 = Medicare
-			getTaxBracket(5, taxyear, medicareAGI,function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getTaxBracket(5, taxyear, medicareAGI, callback);
 		},
 		function(callback){
-			getTaxBracket(state, taxyear, stateAGI,function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getTaxBracket(state, taxyear, stateAGI, callback);
 		}
 	],
 	function(err,results){
 		if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-		var responseText = '<div id=\'AGI\'>Actual AGI: '+accounting.formatMoney(fedAGI)+'</div>\n';
+		var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(fedAGI)+'</div>\n';
 		var totalTaxes = 0;
 		var takehomePay = 0;
 		// calculate fed tax
