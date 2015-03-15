@@ -72,6 +72,12 @@ function getStateNameFromID(stateID, callback){
 	});
 }
 
+function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
+	queryDatabase('SELECT pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function(err, results){
+		callback(null, results[0].pay_periods_per_year);
+	})
+}
+
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
 	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
 	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
@@ -106,7 +112,7 @@ app.post('/api/createNewBracket', function(request, response){
 
 app.get('/api/calcPaycheck', function(request,response){
 	var income = request.query.income;
-	var payFrequency = request.query.payFrequency;
+	var payFrequencyID = request.query.payFrequency;
 	var retirement = request.query.retirement;
 	var filingStatus = request.query.filingStatus;
 	var dependents = request.query.dependents;
@@ -171,23 +177,27 @@ app.get('/api/calcPaycheck', function(request,response){
 		}],
 		getStateName:function(callback){
 			getStateNameFromID(stateID, callback);
+		},
+		getPayPeriods:function(callback){
+			getPayPeriodsFromFrequencyID(payFrequencyID,callback);
 		}
 		},
 		function(err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
 			var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var takehomePay = 0;
-			var fedTax = results.getAllTax[0]/12;
-			var ssTax = results.getAllTax[1]/12;
-			var medTax = results.getAllTax[2]/12;
-			var stateTax = results.getAllTax[3]/12;
+			var payPeriods = results.getPayPeriods;
+			var fedTax = results.getAllTax[0]/payPeriods;
+			var ssTax = results.getAllTax[1]/payPeriods;
+			var medTax = results.getAllTax[2]/payPeriods;
+			var stateTax = results.getAllTax[3]/payPeriods;
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
 			responseText += '<div id=\'StateTax\'>'+results.getStateName+' Tax Due: '+accounting.formatMoney(stateTax)+'</div>\n';
 			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+
 			accounting.formatMoney(fedTax+ssTax+medTax+stateTax)+'</div>\n';
-			takehomePay = income-retirement-fedTax-ssTax-medTax-stateTax;
+			takehomePay = (income/payPeriods)-(retirement/payPeriods)-fedTax-ssTax-medTax-stateTax;
 			responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
 			
 			response.send(responseText);
