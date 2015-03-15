@@ -20,7 +20,7 @@ block content
 		div Pay Frequency:
 			select#payFrequency
 				each frequency in pageInfo.payFrequencies
-					option(value='#frequency.id') #{frequency.name}
+					option(value='#frequency.id') #{frequency.schedulename}
 		div Retirement Contributions (401k, etc.)
 			input#retirement(type='number', name='retirement', placeholder='Retirement')
 		div State:

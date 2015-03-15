@@ -34,9 +34,12 @@ $(function(){
 
 		var parameters = { 
 			income: $('#income').val(), 
+			payFrequency: $('#payFrequency').val(),
 			state: $('#stateSelect').val(),
 			retirement: $('#retirement').val(),
-			filingStatus: $('#filingStatusSelect').val() };
+			filingStatus: $('#filingStatusSelect').val(),
+			dependents: $('#dependents').val()
+		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			$('#results').html(data);
 		});

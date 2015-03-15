@@ -51,6 +51,11 @@ function getJurisdictions(jurisdictionType, callback){
 	queryDatabase(queryString,callback);
 }
 
+function getPayFrequencies(callback){
+	// id, schedulename, pay_periods_per_year
+	queryDatabase('SELECT * from pay_schedule',callback);
+}
+
 function getFilingStatuses(callback){
 	queryDatabase('SELECT * from Filing_Status',callback);
 }
@@ -89,8 +94,10 @@ app.post('/api/createNewBracket', function(request, response){
 
 app.get('/api/calcPaycheck', function(request,response){
 	var income = request.query.income;
+	var payFrequency = request.query.payFrequency;
 	var retirement = request.query.retirement;
 	var filingStatus = request.query.filingStatus;
+	var dependents = request.query.dependents;
 	var state = request.query.state;
 	var taxyear = 2015;
 
@@ -191,27 +198,17 @@ app.get('/api/calcPaycheck', function(request,response){
 			var totalTaxes = 0;
 			var takehomePay = 0;
 			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
-			// calculate fed tax
 			totalTaxes += results.getFedTax;
-			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedTax)+'</div>\n';
-
-			// calculate ss tax
+			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedTax)+'</div>\n';			
 			totalTaxes += results.getSSTax;
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getSSTax)+'</div>\n';
-
-			// calculate medicare tax
 			totalTaxes += results.getMedicareTax;
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getMedicareTax)+'</div>\n';
-
-			// calculate state tax
 			totalTaxes += results.getStateTax;
 			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getStateTax)+'</div>\n';
-
-			// Calculate Total Taxes and Takehome
 			takehomePay = income-retirement-totalTaxes;
 			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
 			responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
-
 			
 			response.send(responseText);
 		}
@@ -226,10 +223,13 @@ app.get('/paycheck', function(request, response){
 		},
 		function(callback){
 			getJurisdictions('State',callback);
+		},
+		function(callback){
+			getPayFrequencies(callback);
 		}
 	],
 		function(err,results){
-			response.render('paycheck', {pageInfo: {filingStatuses:results[0],states:results[1]}});
+			response.render('paycheck', {pageInfo: {filingStatuses:results[0],states:results[1],payFrequencies:results[2]}});
 		});
 });
 
