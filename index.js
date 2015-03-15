@@ -155,33 +155,38 @@ app.get('/api/calcPaycheck', function(request,response){
 			};
 			console.log('Fed Standard: '+fedStandardDeduction);
 			console.log('Fed Personal: '+fedPersonalExemption);
-		});
 
-	var stateStandardDeduction = 3000;
-	var statePersonalExemption = 900;
-	var stateDeductionsExemptions = 0;
+			var stateStandardDeduction = 3000;
+			var statePersonalExemption = 900;
+			var stateDeductionsExemptions = 0;
 
-	switch(filingStatus){
-		case 1:
-			fedDeductionsExemptions = fedStandardDeduction+fedPersonalExemption;
-			stateDeductionsExemptions = stateStandardDeduction+statePersonalExemption;
-			break;
-		case 2:
-			fedDeductionsExemptions = 2*(fedStandardDeduction+fedPersonalExemption);
-			stateDeductionsExemptions = 2*(stateStandardDeduction+statePersonalExemption);
-			break;
-	}
+			switch(filingStatus){
+				case 1:
+					fedDeductionsExemptions = fedStandardDeduction+fedPersonalExemption;
+					stateDeductionsExemptions = stateStandardDeduction+statePersonalExemption;
+					break;
+				case 2:
+					fedDeductionsExemptions = 2*(fedStandardDeduction+fedPersonalExemption);
+					stateDeductionsExemptions = 2*(stateStandardDeduction+statePersonalExemption);
+					break;
+			}
 
-	var fedAGI = income-retirement-fedDeductionsExemptions;
-	var medicareAGI = income;
-	var ssAGI = income;
-	var stateAGI = income-retirement-stateDeductionsExemptions;
-	var taxrate = 0;
-	var baseTax = 0;
-	var minAGI = 0;
-	var taxDue = 0;
-	var marginalIncome = 0;
-	var marginalTax = 0;
+			var fedAGI = income-retirement-fedDeductionsExemptions;
+			var medicareAGI = income;
+			var ssAGI = income;
+			var stateAGI = income-retirement-stateDeductionsExemptions;
+			var taxrate = 0;
+			var baseTax = 0;
+			var minAGI = 0;
+			var taxDue = 0;
+			var marginalIncome = 0;
+			var marginalTax = 0;
+
+
+		}
+	);
+
+	
 	
 
 	async.parallel([
