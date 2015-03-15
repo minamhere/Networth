@@ -138,59 +138,45 @@ app.get('/api/calcPaycheck', function(request,response){
 		getFedTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
 			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
-				console.log('Fed data[0]: '+JSON.stringify(data[0]));
-				console.log('Fed getDedExempt: '+JSON.stringify(results.getDedExempt));
 				taxrate = data[0].taxrate/100;
 				marginalIncome = results.getDedExempt.fedAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data[0].base_tax;
-				console.log('FedBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
 		getSSTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 4 = Social Security
 			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, function(err,data){
-				console.log('ss data[0]: '+JSON.stringify(data[0]));
-				console.log('ss getDedExempt: '+JSON.stringify(results.getDedExempt));
 				taxrate = data[0].taxrate/100;
 				marginalIncome = results.getDedExempt.ssAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data[0].base_tax;
-				console.log('SSBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
 		getMedicareTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 5 = Medicare
 			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, function(err,data){
-				console.log('med data[0]: '+JSON.stringify(data[0]));
-				console.log('med getDedExempt: '+JSON.stringify(results.getDedExempt));
 				taxrate = data[0].taxrate/100;
 				marginalIncome = results.getDedExempt.medicareAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data[0].base_tax;
-				console.log('MedicareBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
 		getStateTax:['getDedExempt', function(callback,results){
 			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, function(err,data){
-				console.log('state data[0]: '+JSON.stringify(data[0]));
-				console.log('state getDedExempt: '+JSON.stringify(results.getDedExempt));
 				taxrate = data[0].taxrate/100;
 				marginalIncome = results.getDedExempt.stateAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data[0].base_tax;
-				console.log('StateBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}]
 		},
 		function(err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-			console.log('final results: '+JSON.stringify(results));
-
 			var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var totalTaxes = 0;
 			var takehomePay = 0;
