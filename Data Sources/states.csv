@@ -54,10 +54,4 @@
 ('Northern Mariana Islands','MP','State'),
 ('Palau','PW','State'),
 ('Puerto Rico','PR','State'),
-('Virgin Islands','VI','State'),
-('Armed Forces Africa','AE','State'),
-('Armed Forces Americas','AA','State'),
-('Armed Forces Canada','AE','State'),
-('Armed Forces Europe','AE','State'),
-('Armed Forces Middle East','AE','State'),
-('Armed Forces Pacific','AP','State');
+('Virgin Islands','VI','State');
