@@ -144,17 +144,17 @@ app.get('/api/calcPaycheck', function(request,response){
 					case 1:
 						switch(results[deductionIndex].name){
 							case 'Federal Standard Deduction':
-								fedStandardDeduction = results[deductionIndex].value;
+								fedStandardDeduction = results[deductionIndex].amount;
 								break;
 							case 'Federal Personal Exemption':
-								fedPersonalExemption = results[deductionIndex].value;
+								fedPersonalExemption = results[deductionIndex].amount;
 								break;
 						};
 						break;
 				};
 			};
-			console.log("Fed Standard: "+fedStandardDeduction);
-			console.log("Fed Personal: "+fedPersonalExemption);
+			console.log('Fed Standard: '+fedStandardDeduction);
+			console.log('Fed Personal: '+fedPersonalExemption);
 		});
 
 	var stateStandardDeduction = 3000;
@@ -317,5 +317,5 @@ app.get('/newuser', function (request, response) {
 })
 
 app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'));
+  console.log('Node app is running at localhost:' + app.get('port'));
 });
