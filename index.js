@@ -138,8 +138,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		getFedBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
 			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
-				if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-
+				console.log('Fed Data: '+JSON.stringify(data));
 				taxrate = data.taxrate/100;
 				marginalIncome = results.getDedExempt.fedAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
@@ -151,7 +150,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		getSSBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 4 = Social Security
 			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, function(err,data){
-				if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
+				console.log('ss Data: '+JSON.stringify(data));
 				taxrate = data.taxrate/100;
 				marginalIncome = results.getDedExempt.ssAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
@@ -163,7 +162,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		getMedicareBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 5 = Medicare
 			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, function(err,data){
-				if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
+				console.log('med Data: '+JSON.stringify(data));
 				taxrate = data.taxrate/100;
 				marginalIncome = results.getDedExempt.medicareAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
@@ -174,7 +173,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		}],
 		getStateBracket:['getDedExempt', function(callback,results){
 			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, function(err,data){
-				if (err) { console.log('calcPaycheck error: '+err); return callback(err); }				
+				console.log('state Data: '+JSON.stringify(data));
 				taxrate = data.taxrate/100;
 				marginalIncome = results.getDedExempt.stateAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
