@@ -142,7 +142,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				marginalIncome = results.getDedExempt.fedAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data.base_tax;
-
+				console.log('FedBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
@@ -153,7 +153,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				marginalIncome = results.getDedExempt.ssAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data.base_tax;
-
+				console.log('SSBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
@@ -164,7 +164,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				marginalIncome = results.getDedExempt.medicareAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data.base_tax;
-
+				console.log('MedicareBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
@@ -174,7 +174,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				marginalIncome = results.getDedExempt.stateAGI-data.minagi;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +data.base_tax;
-
+				console.log('StateBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}]
