@@ -152,14 +152,41 @@ app.get('/api/calcPaycheck', function(request,response){
 		}],
 		getSSBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 4 = Social Security
-			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, callback);
+			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, function(err,data){
+				taxrate = data.taxrate/100;
+				baseTax = data.base_tax;
+				minAGI = data.minagi;
+				marginalIncome = results.getDedExempt.ssAGI-minAGI;
+				marginalTax = taxrate*marginalIncome;
+				taxDue = +marginalTax + +baseTax;
+
+				callback(null,taxDue);
+			});
 		}],
 		getMedicareBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 5 = Medicare
-			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, callback);
+			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, function(err,data){
+				taxrate = data.taxrate/100;
+				baseTax = data.base_tax;
+				minAGI = data.minagi;
+				marginalIncome = results.getDedExempt.medicareAGI-minAGI;
+				marginalTax = taxrate*marginalIncome;
+				taxDue = +marginalTax + +baseTax;
+
+				callback(null,taxDue);
+			});
 		}],
 		getStateBracket:['getDedExempt', function(callback,results){
-			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, callback);
+			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, function(err,data){
+				taxrate = data.taxrate/100;
+				baseTax = data.base_tax;
+				minAGI = data.minagi;
+				marginalIncome = results.getDedExempt.stateAGI-minAGI;
+				marginalTax = taxrate*marginalIncome;
+				taxDue = +marginalTax + +baseTax;
+
+				callback(null,taxDue);
+			});
 		}]
 		},
 		function(err, results){
@@ -169,42 +196,22 @@ app.get('/api/calcPaycheck', function(request,response){
 			var takehomePay = 0;
 			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
 			// calculate fed tax
-			
 			totalTaxes += results.getFedBracket.taxDue;
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedBracket.taxDue)+'</div>\n';
 
 			// calculate ss tax
-			taxrate = results.getSSBracket[0].taxrate/100;
-			baseTax = results.getSSBracket[0].base_tax;
-			minAGI = results.getSSBracket[0].minagi;
-			marginalIncome = results.getDedExempt.ssAGI-minAGI;
-			marginalTax = taxrate*marginalIncome;
-			taxDue = +marginalTax + +baseTax;
-			totalTaxes += taxDue;
-			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+			totalTaxes += results.getSSBracket.taxDue;
+			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getSSBracket.taxDue)+'</div>\n';
 
 			// calculate medicare tax
-			taxrate = results.getMedicareBracket[0].taxrate/100;
-			baseTax = results.getMedicareBracket[0].base_tax;
-			minAGI = results.getMedicareBracket[0].minagi;
-			marginalIncome = results.getDedExempt.medicareAGI-minAGI;
-			marginalTax = taxrate*marginalIncome;
-			taxDue = +marginalTax + +baseTax;
-			totalTaxes += taxDue;
-			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+			totalTaxes += results.getMedicareBracket.taxDue;
+			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getMedicareBracket.taxDue)+'</div>\n';
 
 			// calculate state tax
-			taxrate = results.getStateBracket[0].taxrate/100;
-			baseTax = results.getStateBracket[0].base_tax;
-			minAGI = results.getStateBracket[0].minagi;
-			marginalIncome = results.getDedExempt.stateAGI-minAGI;
-			marginalTax = taxrate*marginalIncome;
-			taxDue = +marginalTax + +baseTax;
-			totalTaxes += taxDue;
-			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+			totalTaxes += results.getStateBracket.taxDue;
+			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getStateBracket.taxDue)+'</div>\n';
 
 			// Calculate Total Taxes and Takehome
-
 			takehomePay = income-retirement-totalTaxes;
 			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
 			responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
