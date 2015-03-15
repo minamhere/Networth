@@ -124,8 +124,6 @@ app.get('/api/calcPaycheck', function(request,response){
 	var fedStandardDeduction = 0;
 	var fedPersonalExemption = 0;
 	var fedAGI = 0;
-	var medicareAGI = 0;
-	var ssAGI = 0;
 	var stateAGI =0;
 	var stateStandardDeduction = 0;//3000; // VA for testing
 	var statePersonalExemption = 0;//930; // VA for testing
@@ -145,7 +143,7 @@ app.get('/api/calcPaycheck', function(request,response){
 									break;
 							};
 							break;
-						default: // Any other jurisdition should mean state
+						default: // These are states. Need to add support for County/local taxes.
 							switch(data[deductionIndex].deduction_exemption_type){
 								case 1: // 1 = Standard Deduction
 									stateStandardDeduction = data[deductionIndex].amount;
@@ -159,11 +157,9 @@ app.get('/api/calcPaycheck', function(request,response){
 				};
 
 				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
-				medicareAGI = income;
-				ssAGI = income;
 				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
-				callback(null,{fedAGI:fedAGI,ssAGI:ssAGI,medicareAGI:medicareAGI,stateAGI:stateAGI});
+				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income,stateAGI:stateAGI});
 			}
 			);
 		},
