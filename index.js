@@ -135,41 +135,41 @@ app.get('/api/calcPaycheck', function(request,response){
 	var taxDue = 0;
 	var marginalIncome = 0;
 	var marginalTax = 0;
+	var stateStandardDeduction = 3000;
+	var statePersonalExemption = 900;
 
 	async.auto({
 		getDedExempt:function(callback){
-			getDeductionsExemptions(state,taxyear,filingStatus, callback);
+			getDeductionsExemptions(state,taxyear,filingStatus, function(err,data){
+				for (var deductionIndex in data){
+					switch(data[deductionIndex].jurisdiction_id){
+						case 1:
+							switch(data[deductionIndex].name){
+								case 'Federal Standard Deduction':
+									fedStandardDeduction = data[deductionIndex].amount;
+									break;
+								case 'Federal Personal Exemption':
+									fedPersonalExemption = data[deductionIndex].amount;
+									break;
+							};
+							break;
+					};
+				};
+
+				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+				medicareAGI = income;
+				ssAGI = income;
+				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
+
+
+				callback(null,{fedAGI:fedAGI,ssAGI:ssAGI,medicareAGI:medicareAGI,stateAGI:stateAGI});
+			};
 		}
 		},
 		function(err, results){
-			if (err){ console.error(err);}
-			for (var deductionIndex in results.getDedExempt){
-				switch(results.getDedExempt[deductionIndex].jurisdiction_id){
-					case 1:
-						switch(results.getDedExempt[deductionIndex].name){
-							case 'Federal Standard Deduction':
-								fedStandardDeduction = results.getDedExempt[deductionIndex].amount;
-								break;
-							case 'Federal Personal Exemption':
-								fedPersonalExemption = results.getDedExempt[deductionIndex].amount;
-								break;
-						};
-						break;
-				};
-			};
-
-			var stateStandardDeduction = 3000;
-			var statePersonalExemption = 900;
-
-			fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
-			medicareAGI = income;
-			ssAGI = income;
-			stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
+			
 		}
 	);
-
-	
-	
 
 	async.parallel([
 		function(callback){
