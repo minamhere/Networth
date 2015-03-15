@@ -138,12 +138,12 @@ app.get('/api/calcPaycheck', function(request,response){
 		getFedBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
 			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
-				console.log('Fed Data: '+JSON.stringify(data));
+				console.log('Fed data[0]: '+JSON.stringify(data[0]));
 				console.log('Fed getDedExempt: '+JSON.stringify(results.getDedExempt));
-				taxrate = data.taxrate/100;
-				marginalIncome = results.getDedExempt.fedAGI-data.minagi;
+				taxrate = data[0].taxrate/100;
+				marginalIncome = results.getDedExempt.fedAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data.base_tax;
+				taxDue = +marginalTax + +data[0].base_tax;
 				console.log('FedBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
@@ -151,12 +151,12 @@ app.get('/api/calcPaycheck', function(request,response){
 		getSSBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 4 = Social Security
 			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, function(err,data){
-				console.log('ss Data: '+JSON.stringify(data));
+				console.log('ss data[0]: '+JSON.stringify(data[0]));
 				console.log('ss getDedExempt: '+JSON.stringify(results.getDedExempt));
-				taxrate = data.taxrate/100;
-				marginalIncome = results.getDedExempt.ssAGI-data.minagi;
+				taxrate = data[0].taxrate/100;
+				marginalIncome = results.getDedExempt.ssAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data.base_tax;
+				taxDue = +marginalTax + +data[0].base_tax;
 				console.log('SSBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
@@ -164,24 +164,24 @@ app.get('/api/calcPaycheck', function(request,response){
 		getMedicareBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 5 = Medicare
 			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, function(err,data){
-				console.log('med Data: '+JSON.stringify(data));
+				console.log('med data[0]: '+JSON.stringify(data[0]));
 				console.log('med getDedExempt: '+JSON.stringify(results.getDedExempt));
-				taxrate = data.taxrate/100;
-				marginalIncome = results.getDedExempt.medicareAGI-data.minagi;
+				taxrate = data[0].taxrate/100;
+				marginalIncome = results.getDedExempt.medicareAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data.base_tax;
+				taxDue = +marginalTax + +data[0].base_tax;
 				console.log('MedicareBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
 		}],
 		getStateBracket:['getDedExempt', function(callback,results){
 			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, function(err,data){
-				console.log('state Data: '+JSON.stringify(data));
+				console.log('state data[0]: '+JSON.stringify(data[0]));
 				console.log('state getDedExempt: '+JSON.stringify(results.getDedExempt));
-				taxrate = data.taxrate/100;
-				marginalIncome = results.getDedExempt.stateAGI-data.minagi;
+				taxrate = data[0].taxrate/100;
+				marginalIncome = results.getDedExempt.stateAGI-data[0].minagi;
 				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data.base_tax;
+				taxDue = +marginalTax + +data[0].base_tax;
 				console.log('StateBracket taxdue: '+taxDue);
 				callback(null,taxDue);
 			});
