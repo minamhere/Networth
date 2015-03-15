@@ -73,6 +73,7 @@ function getStateNameFromID(stateID, callback){
 }
 
 function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
+	console.log('SELECT pay_periods_per_year from pay_schedule where id ='+payFrequencyID);
 	queryDatabase('SELECT pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function(err, results){
 		callback(null, results[0].pay_periods_per_year);
 	})
