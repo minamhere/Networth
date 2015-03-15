@@ -144,10 +144,10 @@ app.get('/api/calcPaycheck', function(request,response){
 					case 1:
 						switch(results.getDedExempt[deductionIndex].name){
 							case 'Federal Standard Deduction':
-								fedStandardDeduction = results[deductionIndex].amount;
+								fedStandardDeduction = results.getDedExempt[deductionIndex].amount;
 								break;
 							case 'Federal Personal Exemption':
-								fedPersonalExemption = results[deductionIndex].amount;
+								fedPersonalExemption = results.getDedExempt[deductionIndex].amount;
 								break;
 						};
 						break;
