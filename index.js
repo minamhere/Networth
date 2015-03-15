@@ -135,7 +135,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			);
 		},
 		// TODO Can I consolidate these into a single applyeach???
-		getFedBracket:['getDedExempt', function(callback,results){
+		getFedTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
 			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
 				console.log('Fed data[0]: '+JSON.stringify(data[0]));
@@ -148,7 +148,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				callback(null,taxDue);
 			});
 		}],
-		getSSBracket:['getDedExempt', function(callback,results){
+		getSSTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 4 = Social Security
 			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, function(err,data){
 				console.log('ss data[0]: '+JSON.stringify(data[0]));
@@ -161,7 +161,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				callback(null,taxDue);
 			});
 		}],
-		getMedicareBracket:['getDedExempt', function(callback,results){
+		getMedicareTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 5 = Medicare
 			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, function(err,data){
 				console.log('med data[0]: '+JSON.stringify(data[0]));
@@ -174,7 +174,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				callback(null,taxDue);
 			});
 		}],
-		getStateBracket:['getDedExempt', function(callback,results){
+		getStateTax:['getDedExempt', function(callback,results){
 			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, function(err,data){
 				console.log('state data[0]: '+JSON.stringify(data[0]));
 				console.log('state getDedExempt: '+JSON.stringify(results.getDedExempt));
@@ -196,20 +196,20 @@ app.get('/api/calcPaycheck', function(request,response){
 			var takehomePay = 0;
 			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
 			// calculate fed tax
-			totalTaxes += results.getFedBracket.taxDue;
-			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedBracket.taxDue)+'</div>\n';
+			totalTaxes += results.getFedTax;
+			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedTax)+'</div>\n';
 
 			// calculate ss tax
-			totalTaxes += results.getSSBracket.taxDue;
-			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getSSBracket.taxDue)+'</div>\n';
+			totalTaxes += results.getSSTax;
+			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getSSTax)+'</div>\n';
 
 			// calculate medicare tax
-			totalTaxes += results.getMedicareBracket.taxDue;
-			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getMedicareBracket.taxDue)+'</div>\n';
+			totalTaxes += results.getMedicareTax;
+			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getMedicareTax)+'</div>\n';
 
 			// calculate state tax
-			totalTaxes += results.getStateBracket.taxDue;
-			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getStateBracket.taxDue)+'</div>\n';
+			totalTaxes += results.getStateTax;
+			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getStateTax)+'</div>\n';
 
 			// Calculate Total Taxes and Takehome
 			takehomePay = income-retirement-totalTaxes;
