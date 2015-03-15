@@ -125,6 +125,16 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	var fedStandardDeduction = 1000;
 	var fedPersonalExemption = 1000;
+	var fedAGI = 0;
+	var medicareAGI = 0;
+	var ssAGI = 0;
+	var stateAGI =0;
+	var taxrate = 0;
+	var baseTax = 0;
+	var minAGI = 0;
+	var taxDue = 0;
+	var marginalIncome = 0;
+	var marginalTax = 0;
 
 	async.auto({
 		getDedExempt:function(callback){
@@ -132,14 +142,8 @@ app.get('/api/calcPaycheck', function(request,response){
 		}
 		},
 		function(err, results){
-
 			if (err){ console.error(err);}
-			console.log('results: '+JSON.stringify(results.getDedExempt[0]));
-			console.log('results[0].jurisdiction_id: '+JSON.stringify(results.getDedExempt[0].jurisdiction_id));
 			for (var deductionIndex in results.getDedExempt){
-				console.log(JSON.stringify(results.getDedExempt[deductionIndex]));
-				console.log(JSON.stringify(results.getDedExempt[deductionIndex].jurisdiction_id));
-				console.log(JSON.stringify(results.getDedExempt[deductionIndex].name));
 				switch(results.getDedExempt[deductionIndex].jurisdiction_id){
 					case 1:
 						switch(results.getDedExempt[deductionIndex].name){
@@ -153,26 +157,14 @@ app.get('/api/calcPaycheck', function(request,response){
 						break;
 				};
 			};
-			console.log('Fed Standard: '+fedStandardDeduction);
-			console.log('Fed Personal: '+fedPersonalExemption);
 
 			var stateStandardDeduction = 3000;
 			var statePersonalExemption = 900;
-			var stateDeductionsExemptions = 0;
 
-
-			var fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
-			var medicareAGI = income;
-			var ssAGI = income;
-			var stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
-			var taxrate = 0;
-			var baseTax = 0;
-			var minAGI = 0;
-			var taxDue = 0;
-			var marginalIncome = 0;
-			var marginalTax = 0;
-
-
+			fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+			medicareAGI = income;
+			ssAGI = income;
+			stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 		}
 	);
 
