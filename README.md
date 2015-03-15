@@ -19,6 +19,9 @@ First, this project will start by building a standard "Takehome Paycheck Calcula
   - Some states have a Phase Out for Deductions/Exemptions. I don't know how this will be handled yet.
   - Some states (California) have bizarre tax situations. It is very likely that discrepencies will behave unexpectedly. Please create a bug for these situations so that I can account for the differences.
 
+## Known Issues:
+  - Known issues should be tracked in the github issue tracker. Please make a new issue when needed.
+
 ## Future Plans:
   - After the paycheck calculator is complete, we will add functionality for the remaining 10 year plan features. 
   - Once all existing features have been incorporated, we'd like to build fancy graphs and other visualizations.
