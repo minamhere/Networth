@@ -38,10 +38,10 @@ function getFilingStatusFromID(filing_status_id, callback){
 	queryDatabase('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id,callback);
 }
 
-function getTaxBracket(jurisdiction, taxyear, agi, callback){
+function getTaxBracket(bracketInfo, callback){
 	if (agi>999999) agi = 999999;
-	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi');
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',callback);
+	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi');
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',callback);
 }
 
 function getJurisdictions(jurisdictionType, callback){
@@ -152,14 +152,44 @@ app.get('/api/calcPaycheck', function(request,response){
 			);
 		},
 		// TODO Can I consolidate these into a single applyeach???
-		getFedTax:['getDedExempt', function(callback,results){
+
+		var arr = [{item:'2',thing:'3'},{item:'4',thing:'5'}];
+		async.map(arr, getInfo, function (e, r) {
+		  console.log(r);
+		});
+
+		function getInfo(name, callback) {
+		  setTimeout(function() {
+		    callback(null, name.item + 'words'+name.thing);
+		  }, 1000);
+		}
+
+		function getTaxBrackets(brackets, callback){
+			brackets.jurisdiction_id
+		}
+
+
+		getAllTax:['getDedExempt', function(callback,results){
+			var brackets = [
+				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear },
+				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
+				{jurisdiction_id:5, agi:results.getDedExempt.medicareAGI, taxyear: taxyear},
+				{jurisdiction_id:state, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
+			];
+
+			async.map(brackets,getTaxBracket, function(err, bracketData){
+				console.log(JSON.stringify(results));
+				taxrate = bracketData[0].taxrate/100;
+				marginalIncome = brackets.agi-bracketData[0].minagi;
+				marginalTax = taxrate*marginalIncome;
+				taxDue = +marginalTax + +bracketData[0].base_tax;
+				callback(null,taxDue);
+			})
+		}]
+		/*getFedTax:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
 			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
-				taxrate = data[0].taxrate/100;
-				marginalIncome = results.getDedExempt.fedAGI-data[0].minagi;
-				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data[0].base_tax;
-				callback(null,taxDue);
+				
 			});
 		}],
 		getSSTax:['getDedExempt', function(callback,results){
@@ -190,7 +220,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				taxDue = +marginalTax + +data[0].base_tax;
 				callback(null,taxDue);
 			});
-		}]
+		}]*/
 		},
 		function(err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
@@ -198,14 +228,14 @@ app.get('/api/calcPaycheck', function(request,response){
 			var totalTaxes = 0;
 			var takehomePay = 0;
 			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
-			totalTaxes += results.getFedTax;
-			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedTax)+'</div>\n';			
-			totalTaxes += results.getSSTax;
-			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getSSTax)+'</div>\n';
-			totalTaxes += results.getMedicareTax;
-			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getMedicareTax)+'</div>\n';
-			totalTaxes += results.getStateTax;
-			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getStateTax)+'</div>\n';
+			totalTaxes += results.getAllTax[0];
+			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getAllTax[0])+'</div>\n';			
+			totalTaxes += results.getAllTax[1];
+			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getAllTax[1])+'</div>\n';
+			totalTaxes += results.getAllTax[2];
+			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getAllTax[2])+'</div>\n';
+			totalTaxes += results.getAllTax[3];
+			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getAllTax[3])+'</div>\n';
 			takehomePay = income-retirement-totalTaxes;
 			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
 			responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
