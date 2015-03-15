@@ -122,7 +122,7 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	async.auto({
 		getDedExempt:function(callback){
-			getDeductionsExemptions(state,taxyear,filingStatus, function(err,data){
+			getDeductionsExemptions(stateID,taxyear,filingStatus, function(err,data){
 				for (var deductionIndex in data){
 					switch(data[deductionIndex].jurisdiction_id){
 						case 1: // 1 = Federal
