@@ -139,7 +139,16 @@ app.get('/api/calcPaycheck', function(request,response){
 		// TODO Can I consolidate these into a single applyeach???
 		getFedBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
-			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, callback);
+			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,results){
+				taxrate = results.taxrate/100;
+				baseTax = results.base_tax;
+				minAGI = results.minagi;
+				marginalIncome = results.getDedExempt.fedAGI-minAGI;
+				marginalTax = taxrate*marginalIncome;
+				taxDue = +marginalTax + +baseTax;
+
+				callback(null,taxDue);
+			});
 		}],
 		getSSBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 4 = Social Security
@@ -160,14 +169,9 @@ app.get('/api/calcPaycheck', function(request,response){
 			var takehomePay = 0;
 			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
 			// calculate fed tax
-			taxrate = results.getFedBracket[0].taxrate/100;
-			baseTax = results.getFedBracket[0].base_tax;
-			minAGI = results.getFedBracket[0].minagi;
-			marginalIncome = results.getDedExempt.fedAGI-minAGI;
-			marginalTax = taxrate*marginalIncome;
-			taxDue = +marginalTax + +baseTax;
-			totalTaxes += taxDue;
-			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+			
+			totalTaxes += results.getFedBracket.taxDue;
+			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getFedBracket.taxDue)+'</div>\n';
 
 			// calculate ss tax
 			taxrate = results.getSSBracket[0].taxrate/100;
