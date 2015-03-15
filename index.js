@@ -187,6 +187,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var totalTaxes = 0;
 			var takehomePay = 0;
+			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
 			// calculate fed tax
 			taxrate = results.getFedBracket[0].taxrate/100;
 			baseTax = results.getFedBracket[0].base_tax;
