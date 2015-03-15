@@ -153,21 +153,6 @@ app.get('/api/calcPaycheck', function(request,response){
 		},
 		// TODO Can I consolidate these into a single applyeach???
 
-		var arr = [{item:'2',thing:'3'},{item:'4',thing:'5'}];
-		async.map(arr, getInfo, function (e, r) {
-		  console.log(r);
-		});
-
-		function getInfo(name, callback) {
-		  setTimeout(function() {
-		    callback(null, name.item + 'words'+name.thing);
-		  }, 1000);
-		}
-
-		function getTaxBrackets(brackets, callback){
-			brackets.jurisdiction_id
-		}
-
 
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
