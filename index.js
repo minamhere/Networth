@@ -162,7 +162,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
 				callback(null,{fedAGI:fedAGI,ssAGI:ssAGI,medicareAGI:medicareAGI,stateAGI:stateAGI});
-			};
+			}
 			);
 		},
 		getFedBracket:['getDedExempt', function(callback,results){
