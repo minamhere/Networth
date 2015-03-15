@@ -160,21 +160,11 @@ app.get('/api/calcPaycheck', function(request,response){
 			var statePersonalExemption = 900;
 			var stateDeductionsExemptions = 0;
 
-			switch(filingStatus){
-				case 1:
-					fedDeductionsExemptions = fedStandardDeduction+fedPersonalExemption;
-					stateDeductionsExemptions = stateStandardDeduction+statePersonalExemption;
-					break;
-				case 2:
-					fedDeductionsExemptions = 2*(fedStandardDeduction+fedPersonalExemption);
-					stateDeductionsExemptions = 2*(stateStandardDeduction+statePersonalExemption);
-					break;
-			}
 
-			var fedAGI = income-retirement-fedDeductionsExemptions;
+			var fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
 			var medicareAGI = income;
 			var ssAGI = income;
-			var stateAGI = income-retirement-stateDeductionsExemptions;
+			var stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 			var taxrate = 0;
 			var baseTax = 0;
 			var minAGI = 0;
