@@ -189,6 +189,8 @@ app.get('/api/calcPaycheck', function(request,response){
 		},
 		function(err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
+			console.log('final results: '+JSON.stringify(results));
+
 			var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var totalTaxes = 0;
 			var takehomePay = 0;
