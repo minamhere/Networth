@@ -38,10 +38,23 @@ function getFilingStatusFromID(filing_status_id, callback){
 	queryDatabase('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id,callback);
 }
 
-function getTaxBracket(bracketInfo, callback){
+function getTaxDue(bracketInfo, callback){
 	if (bracketInfo.agi>999999) bracketInfo.agi = 999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi');
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',callback);
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',function(err,data){
+		console.log(JSON.stringify(data[0]));
+		taxrate = data[0].taxrate/100;
+		marginalIncome = bracketInfo.agi-data[0].minagi;
+		marginalTax = taxrate*marginalIncome;
+		taxDue = +marginalTax + +data[0].base_tax;
+
+		console.log('taxrate: '+taxrate);
+		console.log('marginalIncome: '+marginalIncome);
+		console.log('marginalTax: '+marginalTax);
+		console.log('taxDue: '+taxDue);
+		
+		callback(null,taxDue);
+	});
 }
 
 function getJurisdictions(jurisdictionType, callback){
@@ -162,20 +175,8 @@ app.get('/api/calcPaycheck', function(request,response){
 				{jurisdiction_id:state, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
 			];
 
-			async.map(brackets,getTaxBracket, function(err, bracketData){
-				console.log(JSON.stringify(bracketData[0][0]));
-				console.log('brackets: '+brackets);
-				taxrate = bracketData[0][0].taxrate/100;
-				marginalIncome = brackets.agi-bracketData[0][0].minagi;
-				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +bracketData[0][0].base_tax;
-
-				console.log('taxrate: '+taxrate);
-				console.log('marginalIncome: '+marginalIncome);
-				console.log('marginalTax: '+marginalTax);
-				console.log('taxDue: '+taxDue);
-				
-				callback(null,taxDue);
+			async.map(brackets,getTaxDue, function(err, taxDueData){
+				console.log('taxDueData: '+taxDueData);
 			})
 		}]
 		/*getFedTax:['getDedExempt', function(callback,results){
