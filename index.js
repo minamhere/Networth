@@ -67,7 +67,9 @@ function getFilingStatuses(callback){
 }
 
 function getStateNameFromID(stateID, callback){
-	queryDatabase('SELECT name from jurisdiction where id = '+stateID, callback);
+	queryDatabase('SELECT name from jurisdiction where id = '+stateID, function(err, results){
+		callback(null, results[0].name);
+	});
 }
 
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
