@@ -164,10 +164,13 @@ app.get('/api/calcPaycheck', function(request,response){
 
 			async.map(brackets,getTaxBracket, function(err, bracketData){
 				console.log(JSON.stringify(bracketData[0]));
-				taxrate = bracketData[0][0].taxrate/100;
-				marginalIncome = brackets.agi-bracketData[0][0].minagi;
+				console.log(JSON.stringify(bracketData[0][0]));
+				console.log(JSON.stringify(bracketData[0].taxrate));
+				console.log(JSON.stringify(bracketData[0][0].taxrate));
+				taxrate = bracketData[0].taxrate/100;
+				marginalIncome = brackets.agi-bracketData[0].minagi;
 				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +bracketData[0][0].base_tax;
+				taxDue = +marginalTax + +bracketData[0].base_tax;
 				callback(null,taxDue);
 			})
 		}]
