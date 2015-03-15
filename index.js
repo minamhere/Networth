@@ -5,8 +5,6 @@ var async = require('async');
 var bodyParser = require('body-parser');
 var accounting = require('accounting');
 
-
-
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
@@ -59,10 +57,7 @@ function getFilingStatuses(callback){
 
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
 	console.log('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
-	queryDatabase('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,function(err,data){
-		if (err){console.error(err); callback(err);}
-		callback(null,data);
-	});
+	queryDatabase('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
@@ -88,10 +83,8 @@ app.post('/api/createNewBracket', function(request, response){
 
 	queryDatabase(insertBracket, function(err,data){
 		if(err){console.error(err); }
-		//response.send(request.body);
 		response.status(200).send('Bracket Created');
 	})
-
 });
 
 app.get('/api/calcPaycheck', function(request,response){
@@ -101,8 +94,8 @@ app.get('/api/calcPaycheck', function(request,response){
 	var state = request.query.state;
 	var taxyear = 2015;
 
-	var fedStandardDeduction = 1000;
-	var fedPersonalExemption = 1000;
+	var fedStandardDeduction = 0;
+	var fedPersonalExemption = 0;
 	var fedAGI = 0;
 	var medicareAGI = 0;
 	var ssAGI = 0;
@@ -113,8 +106,8 @@ app.get('/api/calcPaycheck', function(request,response){
 	var taxDue = 0;
 	var marginalIncome = 0;
 	var marginalTax = 0;
-	var stateStandardDeduction = 3000;
-	var statePersonalExemption = 930;
+	var stateStandardDeduction = 3000; // VA for testing
+	var statePersonalExemption = 930; // VA for testing
 
 	async.auto({
 		getDedExempt:function(callback){
@@ -220,7 +213,6 @@ app.get('/api/calcPaycheck', function(request,response){
 });
 
 app.get('/paycheck', function(request, response){
-
 	async.parallel([
 		function(callback){
 			getFilingStatuses(callback);
@@ -228,11 +220,9 @@ app.get('/paycheck', function(request, response){
 		function(callback){
 			getJurisdictions('State',callback);
 		}
-
-		],
+	],
 		function(err,results){
 			response.render('paycheck', {pageInfo: {filingStatuses:results[0],states:results[1]}});
-
 		});
 });
 
