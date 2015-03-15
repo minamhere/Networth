@@ -28,55 +28,33 @@ function queryDatabase(queryText,callback){
 }
 
 function getUserList(callback){
-	queryDatabase('SELECT * FROM personal_data',function(err,data){
-		if (err){ console.error(err); callback(err);}
-		callback(null,data);
-	});
+	queryDatabase('SELECT * FROM personal_data',callback);
 }
 
 function getTaxBrackets(callback){
-	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate,  filing_status_id, base_tax from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 ORDER BY taxyear, jurisdiction_id, minagi',function(err,data){
-		if (err){ console.error(err); callback(err);}
-		callback(null,data);
-	});
-	
+	queryDatabase('SELECT jurisdiction.name, minagi, maxagi, taxyear, taxrate,  filing_status_id, base_tax from tax_brackets inner join jurisdiction on tax_brackets.jurisdiction_id=jurisdiction.id Where tax_brackets.filing_status_id = 1 ORDER BY taxyear, jurisdiction_id, minagi',callback);
 }
 
 function getFilingStatusFromID(filing_status_id, callback){
 	console.log('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id);
-	queryDatabase('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id,function(err,data){
-		if (err){ console.error(err); callback(err);}
-		callback(null,data);
-	});
-
+	queryDatabase('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id,callback);
 }
 
 function getTaxBracket(jurisdiction, taxyear, agi, callback){
-
-
 	if (agi>999999) agi = 999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi');
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',function(err,data){
-		if (err){ console.error(err); callback(err);}
-		callback(null,data);	
-	});
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+jurisdiction+' and taxyear = '+taxyear+' and '+agi+' BETWEEN minagi and maxagi',callback);
 }
 
 function getJurisdictions(jurisdictionType, callback){
 	var queryString = '';
 	if (jurisdictionType == 'All') queryString = 'SELECT * FROM Jurisdiction order by name';
 	else queryString = 'SELECT * FROM Jurisdiction where type=\''+jurisdictionType+'\' order by name';
-	queryDatabase(queryString,function(err,data){
-		if (err){ console.error(err); callback(err);}
-		callback(null, data);
-	});
+	queryDatabase(queryString,callback);
 }
 
 function getFilingStatuses(callback){
-	queryDatabase('SELECT * from Filing_Status',function(err,data){
-		if (err){ console.error(err); callback(err);}
-		callback(null,data);
-	});
+	queryDatabase('SELECT * from Filing_Status',callback);
 }
 
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
@@ -245,16 +223,10 @@ app.get('/paycheck', function(request, response){
 
 	async.parallel([
 		function(callback){
-			getFilingStatuses(function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getFilingStatuses(callback);
 		},
 		function(callback){
-			getJurisdictions('State',function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getJurisdictions('State',callback);
 		}
 
 		],
@@ -267,28 +239,16 @@ app.get('/paycheck', function(request, response){
 app.get('/admin', function(request, response) {
 	async.parallel([
 		function(callback){
-			getUserList(function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getUserList(callback);
 		},
 		function(callback){
-			getTaxBrackets(function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getTaxBrackets(callback);
 		},
 		function(callback){
-			getJurisdictions('All',function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getJurisdictions('All',callback);
 		},
 		function(callback){
-			getFilingStatuses(function(err,data){
-				if (err) return callback(err);
-      			callback(null, data);
-			});
+			getFilingStatuses(callback);
 		}
 	],
 	function(err,results){
