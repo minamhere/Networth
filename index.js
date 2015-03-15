@@ -184,7 +184,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
-			responseText += '<div id=\'StateTax\'>'+results.getStateName[0]+' Tax Due: '+accounting.formatMoney(stateTax)+'</div>\n';
+			responseText += '<div id=\'StateTax\'>'+results.getStateName+' Tax Due: '+accounting.formatMoney(stateTax)+'</div>\n';
 			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+
 			accounting.formatMoney(fedTax+ssTax+medTax+stateTax)+'</div>\n';
 			takehomePay = income-retirement-fedTax-ssTax-medTax-stateTax;
