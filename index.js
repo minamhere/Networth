@@ -47,11 +47,6 @@ function getTaxDue(bracketInfo, callback){
 		marginalIncome = bracketInfo.agi-data[0].minagi;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +data[0].base_tax;
-
-		console.log('taxrate: '+taxrate);
-		console.log('marginalIncome: '+marginalIncome);
-		console.log('marginalTax: '+marginalTax);
-		console.log('taxDue: '+taxDue);
 		
 		callback(null,taxDue);
 	});
@@ -176,7 +171,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			];
 
 			async.map(brackets,getTaxDue, function(err, taxDueData){
-				console.log('taxDueData: '+taxDueData);
+				callback(null,taxDueData);
 			})
 		}]
 		/*getFedTax:['getDedExempt', function(callback,results){
