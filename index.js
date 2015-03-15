@@ -136,7 +136,7 @@ app.get('/api/calcPaycheck', function(request,response){
 	var marginalIncome = 0;
 	var marginalTax = 0;
 	var stateStandardDeduction = 3000;
-	var statePersonalExemption = 900;
+	var statePersonalExemption = 930;
 
 	async.auto({
 		getDedExempt:function(callback){
@@ -165,6 +165,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			}
 			);
 		},
+		// TODO Can I consolidate these into a single applyeach???
 		getFedBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
 			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, callback);
