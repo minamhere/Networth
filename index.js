@@ -134,15 +134,15 @@ app.get('/api/calcPaycheck', function(request,response){
 		function(err, results){
 
 			if (err){ console.error(err);}
-			console.log('results: '+JSON.stringify(results.getDedExempt));
+			console.log('results: '+JSON.stringify(results.getDedExempt[0]));
 			console.log('results[0].jurisdiction_id: '+JSON.stringify(results.getDedExempt[0].jurisdiction_id));
 			for (var deductionIndex in results.getDedExempt){
-				console.log(JSON.stringify(results[deductionIndex]));
-				console.log(JSON.stringify(results[deductionIndex].jurisdiction_id));
-				console.log(JSON.stringify(results[deductionIndex].name));
-				switch(results[deductionIndex].jurisdiction_id){
+				console.log(JSON.stringify(results.getDedExempt[deductionIndex]));
+				console.log(JSON.stringify(results.getDedExempt[deductionIndex].jurisdiction_id));
+				console.log(JSON.stringify(results.getDedExempt[deductionIndex].name));
+				switch(results.getDedExempt[deductionIndex].jurisdiction_id){
 					case 1:
-						switch(results[deductionIndex].name){
+						switch(results.getDedExempt[deductionIndex].name){
 							case 'Federal Standard Deduction':
 								fedStandardDeduction = results[deductionIndex].amount;
 								break;
