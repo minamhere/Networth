@@ -42,6 +42,7 @@ function getTaxDue(bracketInfo, callback){
 	if (bracketInfo.agi>999999) bracketInfo.agi = 999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi');
 	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',function(err,data){
+		if (err) callback('No Tax Bracket Available'+err);
 		taxrate = data[0].taxrate/100;
 		marginalIncome = bracketInfo.agi-data[0].minagi;
 		marginalTax = taxrate*marginalIncome;
