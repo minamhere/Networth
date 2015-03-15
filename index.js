@@ -139,10 +139,10 @@ app.get('/api/calcPaycheck', function(request,response){
 		// TODO Can I consolidate these into a single applyeach???
 		getFedBracket:['getDedExempt', function(callback,results){
 			// Jurisdiction 1 = Federal
-			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,results){
-				taxrate = results.taxrate/100;
-				baseTax = results.base_tax;
-				minAGI = results.minagi;
+			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
+				taxrate = data.taxrate/100;
+				baseTax = data.base_tax;
+				minAGI = data.minagi;
 				marginalIncome = results.getDedExempt.fedAGI-minAGI;
 				marginalTax = taxrate*marginalIncome;
 				taxDue = +marginalTax + +baseTax;
