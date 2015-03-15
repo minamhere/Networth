@@ -126,17 +126,17 @@ app.get('/api/calcPaycheck', function(request,response){
 	var fedStandardDeduction = 1000;
 	var fedPersonalExemption = 1000;
 
-	async.waterfall([
-		function(callback){
+	async.auto({
+		getDedExempt:function(callback){
 			getDeductionsExemptions(state,taxyear,filingStatus, callback);
 		}
-		],
+		},
 		function(err, results){
 
 			if (err){ console.error(err);}
-			console.log('results: '+JSON.stringify(results[0]));
-			console.log('results[0].jurisdiction_id: '+JSON.stringify(results[0].jurisdiction_id));
-			for (var deductionIndex in results){
+			console.log('results: '+JSON.stringify(results.getDedExempt));
+			console.log('results[0].jurisdiction_id: '+JSON.stringify(results.getDedExempt[0].jurisdiction_id));
+			for (var deductionIndex in results.getDedExempt){
 				console.log(JSON.stringify(results[deductionIndex]));
 				console.log(JSON.stringify(results[deductionIndex].jurisdiction_id));
 				console.log(JSON.stringify(results[deductionIndex].name));
