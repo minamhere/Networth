@@ -17,6 +17,10 @@ block content
 	div#paycheckCalculator
 		div Gross Income: 
 			input#income(type='number', name='income', placeholder='Income')
+		div Pay Frequency:
+			select#payFrequency
+				each frequency in pageInfo.payFrequencies
+					option(value='#frequency.id') #{frequency.name}
 		div Retirement Contributions (401k, etc.)
 			input#retirement(type='number', name='retirement', placeholder='Retirement')
 		div State:
@@ -27,6 +31,8 @@ block content
 			select#filingStatusSelect
 				each filingStatus in pageInfo.filingStatuses
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
+		div Dependents:
+			input#dependents(type='number', name='dependents', placeholder='Dependents')
 		div#calc 				
 			input#calculate(type='submit',value='Calculate Takehome Paycheck')
 
