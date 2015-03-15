@@ -42,12 +42,10 @@ function getTaxDue(bracketInfo, callback){
 	if (bracketInfo.agi>999999) bracketInfo.agi = 999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi');
 	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',function(err,data){
-		console.log(JSON.stringify(data[0]));
 		taxrate = data[0].taxrate/100;
 		marginalIncome = bracketInfo.agi-data[0].minagi;
 		marginalTax = taxrate*marginalIncome;
 		taxDue = +marginalTax + +data[0].base_tax;
-		
 		callback(null,taxDue);
 	});
 }
@@ -66,6 +64,10 @@ function getPayFrequencies(callback){
 
 function getFilingStatuses(callback){
 	queryDatabase('SELECT * from Filing_Status',callback);
+}
+
+function getStateNameFromID(stateID, callback){
+	queryDatabase('SELECT name from jurisdiction where jurisdiction_id = '+stateID, callback);
 }
 
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
@@ -106,7 +108,7 @@ app.get('/api/calcPaycheck', function(request,response){
 	var retirement = request.query.retirement;
 	var filingStatus = request.query.filingStatus;
 	var dependents = request.query.dependents;
-	var state = request.query.state;
+	var stateID = request.query.state;
 	var taxyear = 2015;
 
 	var fedStandardDeduction = 0;
@@ -115,10 +117,6 @@ app.get('/api/calcPaycheck', function(request,response){
 	var medicareAGI = 0;
 	var ssAGI = 0;
 	var stateAGI =0;
-	var taxrate = 0;
-	var taxDue = 0;
-	var marginalIncome = 0;
-	var marginalTax = 0;
 	var stateStandardDeduction = 0;//3000; // VA for testing
 	var statePersonalExemption = 0;//930; // VA for testing
 
@@ -159,73 +157,35 @@ app.get('/api/calcPaycheck', function(request,response){
 			}
 			);
 		},
-		// TODO Can I consolidate these into a single applyeach???
-
-
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
-				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear },
+				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear},
 				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
 				{jurisdiction_id:5, agi:results.getDedExempt.medicareAGI, taxyear: taxyear},
-				{jurisdiction_id:state, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
+				{jurisdiction_id:stateID, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
 			];
 
-			async.map(brackets,getTaxDue, function(err, taxDueData){
-				callback(null,taxDueData);
-			})
-		}]
-		/*getFedTax:['getDedExempt', function(callback,results){
-			// Jurisdiction 1 = Federal
-			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, function(err,data){
-				
-			});
+			async.map(brackets, getTaxDue, callback);
 		}],
-		getSSTax:['getDedExempt', function(callback,results){
-			// Jurisdiction 4 = Social Security
-			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, function(err,data){
-				taxrate = data[0].taxrate/100;
-				marginalIncome = results.getDedExempt.ssAGI-data[0].minagi;
-				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data[0].base_tax;
-				callback(null,taxDue);
-			});
-		}],
-		getMedicareTax:['getDedExempt', function(callback,results){
-			// Jurisdiction 5 = Medicare
-			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, function(err,data){
-				taxrate = data[0].taxrate/100;
-				marginalIncome = results.getDedExempt.medicareAGI-data[0].minagi;
-				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data[0].base_tax;
-				callback(null,taxDue);
-			});
-		}],
-		getStateTax:['getDedExempt', function(callback,results){
-			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, function(err,data){
-				taxrate = data[0].taxrate/100;
-				marginalIncome = results.getDedExempt.stateAGI-data[0].minagi;
-				marginalTax = taxrate*marginalIncome;
-				taxDue = +marginalTax + +data[0].base_tax;
-				callback(null,taxDue);
-			});
-		}]*/
+		getStateName:function(callback){
+			getStateNameFromID(stateID, callback);
+		}
 		},
 		function(err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
 			var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
-			var totalTaxes = 0;
 			var takehomePay = 0;
-			// TODO Can I pull each of these calculations into the callback function above and put into an applyeach???
-			totalTaxes += results.getAllTax[0];
-			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(results.getAllTax[0])+'</div>\n';			
-			totalTaxes += results.getAllTax[1];
-			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(results.getAllTax[1])+'</div>\n';
-			totalTaxes += results.getAllTax[2];
-			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(results.getAllTax[2])+'</div>\n';
-			totalTaxes += results.getAllTax[3];
-			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(results.getAllTax[3])+'</div>\n';
-			takehomePay = income-retirement-totalTaxes;
-			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
+			var fedTax = results.getAllTax[0]/12;
+			var ssTax = results.getAllTax[1]/12;
+			var medTax = results.getAllTax[2]/12;
+			var stateTax = results.getAllTax[3]/12;
+			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
+			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
+			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
+			responseText += '<div id=\'StateTax\'>'+results.getStateName[0]+' Tax Due: '+accounting.formatMoney(stateTax)+'</div>\n';
+			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+
+			accounting.formatMoney(fedTax+ssTax+medTax+stateTax)+'</div>\n';
+			takehomePay = income-retirement-fedTax-ssTax-medTax-stateTax;
 			responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
 			
 			response.send(responseText);
