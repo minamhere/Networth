@@ -160,8 +160,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income,stateAGI:stateAGI});
-			}
-			);
+			});
 		},
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
@@ -194,7 +193,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
 			responseText += '<div id=\'StateTax\'>'+results.getStateName+' Tax Due: '+accounting.formatMoney(stateTax)+'</div>\n';
 			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+
-			accounting.formatMoney(fedTax+ssTax+medTax+stateTax)+'</div>\n';
+							accounting.formatMoney(fedTax+ssTax+medTax+stateTax)+'</div>\n';
 			takehomePay = (income/payPeriods)-(retirement/payPeriods)-fedTax-ssTax-medTax-stateTax;
 			responseText += '<div id=\'ActualTakehome\'>Actual '+results.getPayPeriods.name+' Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
 			
