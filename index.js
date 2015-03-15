@@ -56,8 +56,8 @@ function getFilingStatuses(callback){
 }
 
 function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
-	console.log('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
-	queryDatabase('SELECT jurisdiction_id, amount, name FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
+	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
+	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
@@ -104,23 +104,32 @@ app.get('/api/calcPaycheck', function(request,response){
 	var taxDue = 0;
 	var marginalIncome = 0;
 	var marginalTax = 0;
-	var stateStandardDeduction = 3000; // VA for testing
-	var statePersonalExemption = 930; // VA for testing
+	var stateStandardDeduction = 0;//3000; // VA for testing
+	var statePersonalExemption = 0;//930; // VA for testing
 
 	async.auto({
 		getDedExempt:function(callback){
 			getDeductionsExemptions(state,taxyear,filingStatus, function(err,data){
 				for (var deductionIndex in data){
 					switch(data[deductionIndex].jurisdiction_id){
-						case 1:
-							switch(data[deductionIndex].name){
-								case 'Federal Standard Deduction':
+						case 1: // 1 = Federal
+							switch(data[deductionIndex].deduction_exemption_type){
+								case 1: // 1 = Standard Deduction
 									fedStandardDeduction = data[deductionIndex].amount;
 									break;
-								case 'Federal Personal Exemption':
+								case 2:// 2 = Personal Exemption
 									fedPersonalExemption = data[deductionIndex].amount;
 									break;
 							};
+							break;
+						default: // Any other jurisdition should mean state
+							switch(data[deductionIndex].deduction_exemption_type){
+								case 1: // 1 = Standard Deduction
+									stateStandardDeduction = data[deductionIndex].amount;
+									break;
+								case 2: // 2 = Personal Exemption
+									statePersonalExemption = data[deductionIndex].amount;
+									break;
 							break;
 					};
 				};
