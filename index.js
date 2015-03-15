@@ -131,6 +131,7 @@ app.get('/api/calcPaycheck', function(request,response){
 									statePersonalExemption = data[deductionIndex].amount;
 									break;
 							break;
+						};
 					};
 				};
 
