@@ -161,87 +161,82 @@ app.get('/api/calcPaycheck', function(request,response){
 				ssAGI = income;
 				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
-
 				callback(null,{fedAGI:fedAGI,ssAGI:ssAGI,medicareAGI:medicareAGI,stateAGI:stateAGI});
 			};
-		}
+			);
+		},
+		getFedBracket:['getDedExempt', function(callback,results){
+			// Jurisdiction 1 = Federal
+			getTaxBracket(1,taxyear, results.getDedExempt.fedAGI, callback);
+		}],
+		getSSBracket:['getDedExempt', function(callback,results){
+			// Jurisdiction 4 = Social Security
+			getTaxBracket(4, taxyear, results.getDedExempt.ssAGI, callback);
+		}],
+		getMedicareBracket:['getDedExempt', function(callback,results){
+			// Jurisdiction 5 = Medicare
+			getTaxBracket(5, taxyear, results.getDedExempt.medicareAGI, callback);
+		}],
+		getStateBracket:['getDedExempt', function(callback,results){
+			getTaxBracket(state, taxyear, results.getDedExempt.stateAGI, callback);
+		}]
 		},
 		function(err, results){
+			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
+			var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
+			var totalTaxes = 0;
+			var takehomePay = 0;
+			// calculate fed tax
+			taxrate = results.getFedBracket.taxrate/100;
+			baseTax = results.getFedBracket.base_tax;
+			minAGI = results.getFedBracket.minagi;
+			marginalIncome = results.getDedExempt.fedAGI-minAGI;
+			marginalTax = taxrate*marginalIncome;
+			taxDue = +marginalTax + +baseTax;
+			totalTaxes += taxDue;
+			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+
+			// calculate ss tax
+			taxrate = results.getSSBracket.taxrate/100;
+			baseTax = results.getSSBracket.base_tax;
+			minAGI = results.getSSBracket.minagi;
+			marginalIncome = results.getDedExempt.ssAGI-minAGI;
+			marginalTax = taxrate*marginalIncome;
+			taxDue = +marginalTax + +baseTax;
+			totalTaxes += taxDue;
+			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+
+			// calculate medicare tax
+			taxrate = results.getMedicareBracket.taxrate/100;
+			baseTax = results.getMedicareBracket.base_tax;
+			minAGI = results.getMedicareBracket.minagi;
+			marginalIncome = results.getDedExempt.medicareAGI-minAGI;
+			marginalTax = taxrate*marginalIncome;
+			taxDue = +marginalTax + +baseTax;
+			totalTaxes += taxDue;
+			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+
+			// calculate state tax
+			taxrate = results.getStateBracket.taxrate/100;
+			baseTax = results.getStateBracket.base_tax;
+			minAGI = results.getStateBracket.minagi;
+			marginalIncome = results.getDedExempt.stateAGI-minAGI;
+			marginalTax = taxrate*marginalIncome;
+			taxDue = +marginalTax + +baseTax;
+			totalTaxes += taxDue;
+			responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
+
+			// Calculate Total Taxes and Takehome
+
+			takehomePay = income-retirement-totalTaxes;
+			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
+			responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
+
 			
+			response.send(responseText);
 		}
 	);
 
-	async.parallel([
-		function(callback){
-			// Jurisdiction 1 = Federal
-			getTaxBracket(1,taxyear, fedAGI, callback);
-		},
-		function(callback){
-			// Jurisdiction 4 = Social Security
-			getTaxBracket(4, taxyear, ssAGI, callback);
-		},
-		function(callback){
-			// Jurisdiction 5 = Medicare
-			getTaxBracket(5, taxyear, medicareAGI, callback);
-		},
-		function(callback){
-			getTaxBracket(state, taxyear, stateAGI, callback);
-		}
-	],
-	function(err,results){
-		if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-		var responseText = '<div id=\'AGI\'>Federal AGI: '+accounting.formatMoney(fedAGI)+'</div>\n';
-		var totalTaxes = 0;
-		var takehomePay = 0;
-		// calculate fed tax
-		taxrate = results[0][0].taxrate/100;
-		baseTax = results[0][0].base_tax;
-		minAGI = results[0][0].minagi;
-		marginalIncome = fedAGI-minAGI;
-		marginalTax = taxrate*marginalIncome;
-		taxDue = +marginalTax + +baseTax;
-		totalTaxes += taxDue;
-		responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
-
-		// calculate ss tax
-		taxrate = results[1][0].taxrate/100;
-		baseTax = results[1][0].base_tax;
-		minAGI = results[1][0].minagi;
-		marginalIncome = ssAGI-minAGI;
-		marginalTax = taxrate*marginalIncome;
-		taxDue = +marginalTax + +baseTax;
-		totalTaxes += taxDue;
-		responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
-
-		// calculate medicare tax
-		taxrate = results[2][0].taxrate/100;
-		baseTax = results[2][0].base_tax;
-		minAGI = results[2][0].minagi;
-		marginalIncome = medicareAGI-minAGI;
-		marginalTax = taxrate*marginalIncome;
-		taxDue = +marginalTax + +baseTax;
-		totalTaxes += taxDue;
-		responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
-
-		// calculate state tax
-		taxrate = results[3][0].taxrate/100;
-		baseTax = results[3][0].base_tax;
-		minAGI = results[3][0].minagi;
-		marginalIncome = stateAGI-minAGI;
-		marginalTax = taxrate*marginalIncome;
-		taxDue = +marginalTax + +baseTax;
-		totalTaxes += taxDue;
-		responseText += '<div id=\'StateTax\'>'+state+' Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
-
-		// Calculate Total Taxes and Takehome
-
-		takehomePay = income-retirement-totalTaxes;
-		responseText += '<div id=\'TotalTax\'>Total Tax Due: '+accounting.formatMoney(totalTaxes)+'</div>\n';
-		responseText += '<div id=\'ActualTakehome\'>Actual Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
-
-		
-		response.send(responseText);
-	});
 });
 
 app.get('/paycheck', function(request, response){
