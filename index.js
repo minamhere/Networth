@@ -187,9 +187,9 @@ app.get('/api/calcPaycheck', function(request,response){
 			var totalTaxes = 0;
 			var takehomePay = 0;
 			// calculate fed tax
-			taxrate = results.getFedBracket.taxrate/100;
-			baseTax = results.getFedBracket.base_tax;
-			minAGI = results.getFedBracket.minagi;
+			taxrate = results.getFedBracket[0].taxrate/100;
+			baseTax = results.getFedBracket[0].base_tax;
+			minAGI = results.getFedBracket[0].minagi;
 			marginalIncome = results.getDedExempt.fedAGI-minAGI;
 			marginalTax = taxrate*marginalIncome;
 			taxDue = +marginalTax + +baseTax;
@@ -197,9 +197,9 @@ app.get('/api/calcPaycheck', function(request,response){
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
 
 			// calculate ss tax
-			taxrate = results.getSSBracket.taxrate/100;
-			baseTax = results.getSSBracket.base_tax;
-			minAGI = results.getSSBracket.minagi;
+			taxrate = results.getSSBracket[0].taxrate/100;
+			baseTax = results.getSSBracket[0].base_tax;
+			minAGI = results.getSSBracket[0].minagi;
 			marginalIncome = results.getDedExempt.ssAGI-minAGI;
 			marginalTax = taxrate*marginalIncome;
 			taxDue = +marginalTax + +baseTax;
@@ -207,9 +207,9 @@ app.get('/api/calcPaycheck', function(request,response){
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
 
 			// calculate medicare tax
-			taxrate = results.getMedicareBracket.taxrate/100;
-			baseTax = results.getMedicareBracket.base_tax;
-			minAGI = results.getMedicareBracket.minagi;
+			taxrate = results.getMedicareBracket[0].taxrate/100;
+			baseTax = results.getMedicareBracket[0].base_tax;
+			minAGI = results.getMedicareBracket[0].minagi;
 			marginalIncome = results.getDedExempt.medicareAGI-minAGI;
 			marginalTax = taxrate*marginalIncome;
 			taxDue = +marginalTax + +baseTax;
@@ -217,9 +217,9 @@ app.get('/api/calcPaycheck', function(request,response){
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(taxDue)+'</div>\n';
 
 			// calculate state tax
-			taxrate = results.getStateBracket.taxrate/100;
-			baseTax = results.getStateBracket.base_tax;
-			minAGI = results.getStateBracket.minagi;
+			taxrate = results.getStateBracket[0].taxrate/100;
+			baseTax = results.getStateBracket[0].base_tax;
+			minAGI = results.getStateBracket[0].minagi;
 			marginalIncome = results.getDedExempt.stateAGI-minAGI;
 			marginalTax = taxrate*marginalIncome;
 			taxDue = +marginalTax + +baseTax;
