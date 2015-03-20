@@ -77,12 +77,12 @@ function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
 	console.log('SELECT schedulename, pay_periods_per_year from pay_schedule where id ='+payFrequencyID);
 	queryDatabase('SELECT schedulename, pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function(err, results){
 		callback(null, {name:results[0].schedulename, payperiods:results[0].pay_periods_per_year});
-	});
+	})
 }
 
-function getFedDeductionsExemptions(taxyear, filing_status_id, callback){
-	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id = 1 and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
-	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id = 1 and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
+function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
+	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
+	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
@@ -109,7 +109,7 @@ app.post('/api/createNewBracket', function(request, response){
 	queryDatabase(insertBracket, function(err,data){
 		if(err){console.error(err); }
 		response.status(200).send('Bracket Created');
-	});
+	})
 });
 
 app.get('/api/calcPaycheck', function(request,response){
@@ -129,31 +129,45 @@ app.get('/api/calcPaycheck', function(request,response){
 	var statePersonalExemption = 0;//930; // VA for testing
 
 	async.auto({
-		getFedDedExempt:function(callback){
-			getFedDeductionsExemptions(taxyear,filingStatus, function(err,data){
-				/*for (var deductionIndex in data){
-					if (data[deductionIndex].deduction_exemption_type == 1)
-						fedStandardDeduction = data[deductionIndex].amount;
-					else
-						fedPersonalExemption = data[deductionIndex].amount;
+		getDedExempt:function(callback){
+			getDeductionsExemptions(stateID,taxyear,filingStatus, function(err,data){
+				for (var deductionIndex in data){
+					switch(data[deductionIndex].jurisdiction_id){
+						case 1: // 1 = Federal
+							switch(data[deductionIndex].deduction_exemption_type){
+								case 1: // 1 = Standard Deduction
+									fedStandardDeduction = data[deductionIndex].amount;
+									break;
+								case 2:// 2 = Personal Exemption
+									fedPersonalExemption = data[deductionIndex].amount;
+									break;
+							};
+							break;
+						default: // These are states. Need to add support for County/local taxes.
+							switch(data[deductionIndex].deduction_exemption_type){
+								case 1: // 1 = Standard Deduction
+									stateStandardDeduction = data[deductionIndex].amount;
+									break;
+								case 2: // 2 = Personal Exemption
+									statePersonalExemption = data[deductionIndex].amount;
+									break;
+							};
+							break;
+					};
 				};
-				*/
-				fedAGI = 42000;//income-retirement-fedStandardDeduction-fedPersonalExemption;
-				//stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
-				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
+				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
+
+				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income,stateAGI:stateAGI});
 			});
-		},
-		getStateTax:function(callback){
-			stateAGI = income-retirement;
-			callback(null,{stateAGI:stateAGI});
 		},
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
-				{jurisdiction_id:1, agi:results.getFedDedExempt.fedAGI, taxyear: taxyear},
-				{jurisdiction_id:4, agi:results.getFedDedExempt.ssAGI, taxyear: taxyear},
-				{jurisdiction_id:5, agi:results.getFedDedExempt.medicareAGI, taxyear: taxyear}
-				//{jurisdiction_id:stateID, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
+				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear},
+				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
+				{jurisdiction_id:5, agi:results.getDedExempt.medicareAGI, taxyear: taxyear},
+				{jurisdiction_id:stateID, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
 			];
 
 			async.map(brackets, getTaxDue, callback);
@@ -173,7 +187,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			var fedTax = results.getAllTax[0]/payPeriods;
 			var ssTax = results.getAllTax[1]/payPeriods;
 			var medTax = results.getAllTax[2]/payPeriods;
-			var stateTax = results.getStateTax.stateAGI/payPeriods;
+			var stateTax = results.getAllTax[3]/payPeriods;
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
