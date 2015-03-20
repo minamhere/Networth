@@ -129,25 +129,30 @@ app.get('/api/calcPaycheck', function(request,response){
 	var statePersonalExemption = 0;//930; // VA for testing
 
 	async.auto({
-		getDedExempt:function(callback){
+		getFedDedExempt:function(callback){
 			getFedDeductionsExemptions(taxyear,filingStatus, function(err,data){
-				fedStandardDeduction = data[0].deduction_exemption_type;
-				fedPersonalExemption = data[1].deduction_exemption_type;
-				
-				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
-				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
+				for (var deductionIndex in data){
+					if (data[deductionIndex].deduction_exemption_type == 1)
+						fedStandardDeduction = data[deductionIndex].amount;
+					else
+						fedPersonalExemption = data[deductionIndex].amount;
+				};
 
-				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income,stateAGI:stateAGI});
+				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+				//stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
+
+				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
 		},
 		getStateTax:function(callback){
-
+			stateAGI = income-retirement;
+			callback(null,stateAGI);
 		},
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
-				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear},
-				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
-				{jurisdiction_id:5, agi:results.getDedExempt.medicareAGI, taxyear: taxyear},
+				{jurisdiction_id:1, agi:results.getFedDedExempt.fedAGI, taxyear: taxyear},
+				{jurisdiction_id:4, agi:results.getFedDedExempt.ssAGI, taxyear: taxyear},
+				{jurisdiction_id:5, agi:results.getFedDedExempt.medicareAGI, taxyear: taxyear},
 				//{jurisdiction_id:stateID, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
 			];
 
@@ -168,7 +173,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			var fedTax = results.getAllTax[0]/payPeriods;
 			var ssTax = results.getAllTax[1]/payPeriods;
 			var medTax = results.getAllTax[2]/payPeriods;
-			var stateTax = results.getAllTax[3]/payPeriods;
+			var stateTax = results.getStateTax/payPeriods;
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
