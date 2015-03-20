@@ -77,7 +77,7 @@ function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
 	console.log('SELECT schedulename, pay_periods_per_year from pay_schedule where id ='+payFrequencyID);
 	queryDatabase('SELECT schedulename, pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function(err, results){
 		callback(null, {name:results[0].schedulename, payperiods:results[0].pay_periods_per_year});
-	})
+	});
 }
 
 function getFedDeductionsExemptions(taxyear, filing_status_id, callback){
@@ -109,7 +109,7 @@ app.post('/api/createNewBracket', function(request, response){
 	queryDatabase(insertBracket, function(err,data){
 		if(err){console.error(err); }
 		response.status(200).send('Bracket Created');
-	})
+	});
 });
 
 app.get('/api/calcPaycheck', function(request,response){
@@ -146,7 +146,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		},
 		getStateTax:function(callback){
 			stateAGI = income-retirement;
-			return callback(null,stateAGI);
+			callback(null,{stateAGI:stateAGI});
 		},
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
@@ -173,7 +173,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			var fedTax = results.getAllTax[0]/payPeriods;
 			var ssTax = results.getAllTax[1]/payPeriods;
 			var medTax = results.getAllTax[2]/payPeriods;
-			var stateTax = results.getStateTax/payPeriods;
+			var stateTax = results.getStateTax.stateAGI/payPeriods;
 			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
 			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
 			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
