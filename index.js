@@ -152,7 +152,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			var brackets = [
 				{jurisdiction_id:1, agi:results.getFedDedExempt.fedAGI, taxyear: taxyear},
 				{jurisdiction_id:4, agi:results.getFedDedExempt.ssAGI, taxyear: taxyear},
-				{jurisdiction_id:5, agi:results.getFedDedExempt.medicareAGI, taxyear: taxyear},
+				{jurisdiction_id:5, agi:results.getFedDedExempt.medicareAGI, taxyear: taxyear}
 				//{jurisdiction_id:stateID, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
 			];
 
