@@ -131,14 +131,14 @@ app.get('/api/calcPaycheck', function(request,response){
 	async.auto({
 		getFedDedExempt:function(callback){
 			getFedDeductionsExemptions(taxyear,filingStatus, function(err,data){
-				for (var deductionIndex in data){
+				/*for (var deductionIndex in data){
 					if (data[deductionIndex].deduction_exemption_type == 1)
 						fedStandardDeduction = data[deductionIndex].amount;
 					else
 						fedPersonalExemption = data[deductionIndex].amount;
 				};
-
-				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+				*/
+				fedAGI = 42000;//income-retirement-fedStandardDeduction-fedPersonalExemption;
 				//stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
