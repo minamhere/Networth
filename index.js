@@ -146,7 +146,7 @@ app.get('/api/calcPaycheck', function(request,response){
 		},
 		getStateTax:function(callback){
 			stateAGI = income-retirement;
-			callback(null,stateAGI);
+			return callback(null,stateAGI);
 		},
 		getAllTax:['getDedExempt', function(callback,results){
 			var brackets = [
