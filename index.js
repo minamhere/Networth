@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 function queryDatabase(queryText,callback){
-	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+	pg.connect(process.env.DATABASE_URL, function (err, client, done) {
 	    client.query(queryText, function(err, result) {
 	    	done();
 			if (err){ console.error(err); callback(err); }
@@ -31,7 +31,7 @@ function handleState(stateInfo, callback){
 		case "3": // Virginia
 			async.waterfall([
 				function getDedExempt(callback){
-					getDeductionsExemptions(stateInfo.jurisdiction_id,stateInfo.taxyear,stateInfo.filingStatus, function(err,data){
+					getDeductionsExemptions(stateInfo.jurisdiction_id,stateInfo.taxyear,stateInfo.filingStatus, function (err,data){
 						for (var deductionIndex in data){
 							switch(data[deductionIndex].deduction_exemption_type){
 								case 1: // 1 = Standard Deduction
@@ -137,7 +137,7 @@ function getFilingStatusFromID(filing_status_id, callback){
 function getTaxDue(bracketInfo, callback){
 	if (bracketInfo.agi>9999999) bracketInfo.agi = 9999999;
 	console.log('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi');
-	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',function(err,data){
+	queryDatabase('SELECT taxrate,base_tax,minagi FROM Tax_Brackets WHERE jurisdiction_id = '+bracketInfo.jurisdiction_id+' and taxyear = '+bracketInfo.taxyear+' and '+bracketInfo.agi+' BETWEEN minagi and maxagi',function (err,data){
 		if (err) callback('No Tax Bracket Available'+err);
 		taxrate = data[0].taxrate/100;
 		marginalIncome = bracketInfo.agi-data[0].minagi;
@@ -164,14 +164,14 @@ function getFilingStatuses(callback){
 }
 
 function getStateNameFromID(stateID, callback){
-	queryDatabase('SELECT name from jurisdiction where id = '+stateID, function(err, results){
+	queryDatabase('SELECT name from jurisdiction where id = '+stateID, function (err, results){
 		callback(null, results[0].name);
 	});
 }
 
 function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
 	console.log('SELECT schedulename, pay_periods_per_year from pay_schedule where id ='+payFrequencyID);
-	queryDatabase('SELECT schedulename, pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function(err, results){
+	queryDatabase('SELECT schedulename, pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function (err, results){
 		callback(null, {name:results[0].schedulename, payperiods:results[0].pay_periods_per_year});
 	})
 }
@@ -181,14 +181,14 @@ function getDeductionsExemptions(jurisdiction_id, taxyear, filing_status_id, cal
 	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id ='+jurisdiction_id+' and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
 }
 
-app.get('/getFilingStatusFromID',function(req,res){
-	getFilingStatusFromID(req.query.filingStatus, function(err, data){
+app.get('/getFilingStatusFromID',function (req,res){
+	getFilingStatusFromID(req.query.filingStatus, function (err, data){
 		if (err) { console.error(err);}
 		res.send('<p>Filing Status Name: '+data[0].statusname+'</p>');
 	});
 });
 
-app.post('/api/createNewBracket', function(request, response){
+app.post('/api/createNewBracket', function (request, response){
 	console.log('request'+request.body);
 	var jurisdiction = request.body.jurisdiction;
 	var taxYear = request.body.taxYear;
@@ -208,7 +208,7 @@ app.post('/api/createNewBracket', function(request, response){
 	})
 });
 
-app.get('/api/calcPaycheck', function(request,response){
+app.get('/api/calcPaycheck', function (request,response){
 	var income = request.query.income;
 	var payFrequencyID = request.query.payFrequency;
 	var retirement = request.query.retirement;
@@ -243,7 +243,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
 		},
-		getStateTax:function(callback, results){
+		getStateTax:function (callback, results){
 			var stateInfo = {
 				jurisdiction_id:stateID, 
 				income:income, 
@@ -253,7 +253,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			};
 			handleState(stateInfo, callback);
 		},
-		getFedTax:['getDedExempt', function(callback,results){
+		getFedTax:['getDedExempt', function (callback,results){
 			var brackets = [
 				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear},
 				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
@@ -269,7 +269,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			getPayPeriodsFromFrequencyID(payFrequencyID,callback);
 		}
 		},
-		function(err, results){
+		function (err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
 			var responseText = '<div id=\'AGI\'>Federal Annual AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var takehomePay = 0;
@@ -299,7 +299,7 @@ app.get('/api/calcPaycheck', function(request,response){
 
 });
 
-app.get('/paycheck', function(request, response){
+app.get('/paycheck', function (request, response){
 	async.parallel([
 		function(callback){
 			getFilingStatuses(callback);
@@ -316,7 +316,7 @@ app.get('/paycheck', function(request, response){
 		});
 });
 
-app.get('/admin', function(request, response) {
+app.get('/admin', function (request, response) {
 	async.parallel([
 		function(callback){
 			getUserList(callback);
