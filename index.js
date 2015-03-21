@@ -48,6 +48,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -77,6 +78,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1864,6 +1866,7 @@ app.get('/api/calcPaycheck', function (request,response){
 				};
 
 				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+				if (fedAGI <0) fedAGI = 0;
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
 		},
