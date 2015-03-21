@@ -29,9 +29,17 @@ First, this project will start by building a standard "Takehome Paycheck Calcula
 
 
 ## Developer Requirements
-  - Install [Postgres.app](http://postgresapp.com) to provide psql command line database tool.
-  - Configure [Command Line Tools](http://postgresapp.com/documentation/cli-tools.html)
-    - If you are using bash (default shell on OS X), add the following line to ~/.bash_profile:
+
+### [Heroku Toolbelt](https://toolbelt.heroku.com)
+[Link Project with existing directory](http://stackoverflow.com/questions/5129598/how-to-link-a-folder-with-an-existing-heroku-app) - To maniuplate Heroku instance
 ```
+cd [project directory]
+heroku git:remote -a networth
+```
+
+### [Postgres.app](http://postgresapp.com) - To provide psql command line database tool.
+Configure [Command Line Tools](http://postgresapp.com/documentation/cli-tools.html)
+```
+vim ~/.bash_profile
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 ```
