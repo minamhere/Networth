@@ -26,3 +26,7 @@ First, this project will start by building a standard "Takehome Paycheck Calcula
   - After the paycheck calculator is complete, we will add functionality for the remaining 10 year plan features. 
   - Once all existing features have been incorporated, we'd like to build fancy graphs and other visualizations.
   - I would also like to integrate with http://payoff.io/ to support importing/exporting data between here and there. I'm not sure how this would work, or what it would accomplish, but I think it would be cool.
+
+
+## Developer Requirements
+  - Install [Postgres.app](http://postgresapp.com) to provide psql command line database tool.
