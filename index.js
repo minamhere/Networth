@@ -149,12 +149,16 @@ app.get('/api/calcPaycheck', function(request,response){
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
 		},
-		getAllTax:['getDedExempt', function(callback,results){
+		getStateTax:['getDedExempt', function(callback, results){
+			var stateBracket = [{jurisdiction_id:stateID, agi:results.getDedExempt.fedAGI, taxyear: taxyear}];
+			getTaxDue(stateBracket,callback);
+		}],
+		getFedTax:['getDedExempt', function(callback,results){
 			var brackets = [
 				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear},
 				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
 				{jurisdiction_id:5, agi:results.getDedExempt.medicareAGI, taxyear: taxyear},
-				{jurisdiction_id:stateID, agi:results.getDedExempt.fedAGI, taxyear: taxyear}
+				
 			];
 
 			async.map(brackets, getTaxDue, callback);
@@ -171,10 +175,10 @@ app.get('/api/calcPaycheck', function(request,response){
 			var responseText = '<div id=\'AGI\'>Federal Annual AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var takehomePay = 0;
 			var payPeriods = results.getPayPeriods.payperiods;
-			var fedTax = results.getAllTax[0]/payPeriods;
-			var ssTax = results.getAllTax[1]/payPeriods;
-			var medTax = results.getAllTax[2]/payPeriods;
-			var stateTax = results.getAllTax[3]/payPeriods;
+			var fedTax = results.getFedTax[0]/payPeriods;
+			var ssTax = results.getFedTax[1]/payPeriods;
+			var medTax = results.getFedTax[2]/payPeriods;
+			var stateTax = results.getStateTax/payPeriods;
 			var retirementContribution = retirement/payPeriods;
 			takehomePay = (income/payPeriods)-retirementContribution-fedTax-ssTax-medTax-stateTax;
 
