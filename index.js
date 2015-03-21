@@ -80,9 +80,9 @@ function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
 	})
 }
 
-function getDeductionsExemptions(state, taxyear, filing_status_id, callback){
-	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
-	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id in (1,'+state+') and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
+function getDeductionsExemptions(jurisdiction_id, taxyear, filing_status_id, callback){
+	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id ='+jurisdiction_id+' and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
+	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id ='+jurisdiction_id+' and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
 }
 
 app.get('/getFilingStatusFromID',function(req,res){
@@ -130,36 +130,23 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	async.auto({
 		getDedExempt:function(callback){
-			getDeductionsExemptions(stateID,taxyear,filingStatus, function(err,data){
+			var fedJuris_id = 1
+			getDeductionsExemptions(fedJuris_id,taxyear,filingStatus, function(err,data){
 				for (var deductionIndex in data){
-					switch(data[deductionIndex].jurisdiction_id){
-						case 1: // 1 = Federal
-							switch(data[deductionIndex].deduction_exemption_type){
-								case 1: // 1 = Standard Deduction
-									fedStandardDeduction = data[deductionIndex].amount;
-									break;
-								case 2:// 2 = Personal Exemption
-									fedPersonalExemption = data[deductionIndex].amount;
-									break;
-							};
+					switch(data[deductionIndex].deduction_exemption_type){
+						case 1: // 1 = Standard Deduction
+							fedStandardDeduction = data[deductionIndex].amount;
 							break;
-						default: // These are states. Need to add support for County/local taxes.
-							switch(data[deductionIndex].deduction_exemption_type){
-								case 1: // 1 = Standard Deduction
-									stateStandardDeduction = data[deductionIndex].amount;
-									break;
-								case 2: // 2 = Personal Exemption
-									statePersonalExemption = data[deductionIndex].amount;
-									break;
-							};
+						case 2:// 2 = Personal Exemption
+							fedPersonalExemption = data[deductionIndex].amount;
 							break;
 					};
 				};
 
 				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
-				stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
+				//stateAGI = income-retirement-stateStandardDeduction-statePersonalExemption;
 
-				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income,stateAGI:stateAGI});
+				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
 		},
 		getAllTax:['getDedExempt', function(callback,results){
@@ -167,7 +154,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				{jurisdiction_id:1, agi:results.getDedExempt.fedAGI, taxyear: taxyear},
 				{jurisdiction_id:4, agi:results.getDedExempt.ssAGI, taxyear: taxyear},
 				{jurisdiction_id:5, agi:results.getDedExempt.medicareAGI, taxyear: taxyear},
-				{jurisdiction_id:stateID, agi:results.getDedExempt.stateAGI, taxyear: taxyear}
+				{jurisdiction_id:stateID, agi:results.getDedExempt.fedAGI, taxyear: taxyear}
 			];
 
 			async.map(brackets, getTaxDue, callback);
