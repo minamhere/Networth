@@ -22,7 +22,7 @@ block content
 				each frequency in pageInfo.payFrequencies
 					option(value='#{frequency.id}') #{frequency.schedulename}
 		div Federal Filing Status: 
-			select#filingStatusSelect
+			select#fedFilingStatusSelect
 				each filingStatus in pageInfo.filingStatuses
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
 		div Federal Allowances:

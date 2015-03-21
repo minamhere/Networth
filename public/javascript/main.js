@@ -35,12 +35,15 @@ $(function(){
 		var parameters = { 
 			income: $('#income').val(), 
 			payFrequency: $('#payFrequency').val(),
-			state: $('#stateSelect').val(),
-			retirement: $('#retirement').val(),
-			filingStatus: $('#filingStatusSelect').val(),
-			dependents: $('#dependents').val(),
+			
+			fedFilingStatus: $('#fedFilingStatusSelect').val(),
 			fedAllowances: $('#fedAllowances').val(),
-			stateAllowances: $('#stateAllowances').val()
+
+			state: $('#stateSelect').val(),
+			stateFilingStatus: $('#stateFilingStatusSelect').val(),
+			stateAllowances: $('#stateAllowances').val(),
+
+			retirement: $('#retirement').val()
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
