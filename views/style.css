@@ -1,8 +1,8 @@
 /* style.css */
 
 .table { display: table; table-layout: fixed; width: 100%;} 
-.tableRow { display: table-row; }
-.tableCell { display: table-cell; }
+.tableRow { display: table-row; width: 100%;}
+.tableCell { display: table-cell; width: 100%;}
 
 h1 {text-align: center;}
 
@@ -12,11 +12,13 @@ div#paycheckCalculator{
 	width: 500px;
 }
 
-#samplePaystub .tableCell { 
+.tableCell { 
 	border: solid;
 }
 
-#samplePaystub .sectionHeading { 
+
+
+.sectionHeading { 
 	width: 100%;
 	font-weight: bold;
 }
