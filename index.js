@@ -46,9 +46,10 @@ function handleState(stateInfo, callback){
 									break;
 							};
 						};
+						console.log('state Standard Deduction: '+stateStandardDeduction);
+						callback(null,stateStandardDeduction, statePersonalExemption);
 					});
-					console.log('state Standard Deduction: '+stateStandardDeduction);
-					callback(null,stateStandardDeduction, statePersonalExemption);
+					
 				},
 				function(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
