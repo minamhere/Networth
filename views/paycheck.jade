@@ -21,18 +21,29 @@ block content
 			select#payFrequency
 				each frequency in pageInfo.payFrequencies
 					option(value='#{frequency.id}') #{frequency.schedulename}
-		div Retirement Contributions (401k, etc.)
-			input#retirement(type='number', name='retirement', placeholder='Retirement')
+		div Federal Filing Status: 
+			select#filingStatusSelect
+				each filingStatus in pageInfo.filingStatuses
+						option(value='#{filingStatus.id}') #{filingStatus.statusname}
+		div Federal Allowances:
+			input#fedAllowances(type='number', name='fedAllowances', placeholder='Fed Allowances')
+
 		div State:
 			select#stateSelect
 				each state in pageInfo.states
 					option(value='#{state.id}') #{state.name}
-		div Filing Status: 
-			select#filingStatusSelect
+
+		div State Filing Status: 
+			select#stateFilingStatusSelect
 				each filingStatus in pageInfo.filingStatuses
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
-		div Dependents:
-			input#dependents(type='number', name='dependents', placeholder='Dependents')
+		div State Allowances:
+			input#stateAllowances(type='number', name='stateAllowances', placeholder='State Allowances')
+
+		div Retirement Contributions (401k, etc.)
+			input#retirement(type='number', name='retirement', placeholder='Retirement')
+
+
 		div#calc 				
 			input#calculate(type='submit',value='Calculate Takehome Paycheck')
 

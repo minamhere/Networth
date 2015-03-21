@@ -38,7 +38,9 @@ $(function(){
 			state: $('#stateSelect').val(),
 			retirement: $('#retirement').val(),
 			filingStatus: $('#filingStatusSelect').val(),
-			dependents: $('#dependents').val()
+			dependents: $('#dependents').val(),
+			fedAllowances: $('#fedAllowances').val(),
+			stateAllowances: $('#stateAllowances').val()
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
@@ -46,6 +48,8 @@ $(function(){
 			
 			$('#fedFilingStatus').html(parameters.filingStatus);
 			$('#stateFilingStatus').html(parameters.filingStatus);
+			$('#fedAllowances').html(parameters.fedAllowances);
+			$('#stateAllowances').html(parameters.stateAllowances);
 			
 			$('#grossEarnings').html(paycheckData.grossEarnings);
 			$('#fedGrossEarnings').html(paycheckData.fedGrossEarnings);
