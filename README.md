@@ -30,3 +30,8 @@ First, this project will start by building a standard "Takehome Paycheck Calcula
 
 ## Developer Requirements
   - Install [Postgres.app](http://postgresapp.com) to provide psql command line database tool.
+  - Configure [Command Line Tools](http://postgresapp.com/documentation/cli-tools.html)
+    - If you are using bash (default shell on OS X), add the following line to ~/.bash_profile:
+```
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+```
