@@ -33,16 +33,20 @@ $(function(){
 		}
 
 		var parameters = { 
+			// Income Info
 			income: $('#income').val(), 
 			payFrequency: $('#payFrequency').val(),
 			
+			// Federal Info
 			fedFilingStatus: $('#fedFilingStatusSelect').val(),
 			fedAllowances: $('#fedAllowances').val(),
 
+			// State Info
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
 			stateAllowances: $('#stateAllowances').val(),
 
+			// Deduction Info
 			retirement: $('#retirement').val()
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
