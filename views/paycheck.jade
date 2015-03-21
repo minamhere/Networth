@@ -36,33 +36,6 @@ block content
 		div#calc 				
 			input#calculate(type='submit',value='Calculate Takehome Paycheck')
 
-		div(class=['table', 'paystub'], id='resultsLabels')
-			div.tableRow
-				div.tableCell Federal Tax Due: 
-				div.tableCell#fedTax
-			div.tableRow
-				div.tableCell Social Security Tax Due: 
-				div.tableCell#ssTax
-			div.tableRow
-				div.tableCell Medicare Tax Due: 
-				div.tableCell#medicareTax
-			div.tableRow
-				div.tableCell
-					span#stateName State
-					span  Tax Due: 
-				div.tableCell#stateTax
-			div.tableRow
-				div.tableCell Retirement Contributions: 
-				div.tableCell#retirementContributions
-			div.tableRow
-				div.tableCell Total Tax Withheld: 
-				div.tableCell#totalTax
-			div.tableRow
-				div.tableCell
-					span Actual 
-					span#paySchedule
-					span  Takehome Pay: 
-				div.tableCell#takehomePay
 
 		div(class=['table', 'paystub'], id='samplePaystub')
 
@@ -158,3 +131,32 @@ block content
 				div.tableCell Amount 
 				div.tableCell YTD Amount
 			div.tableRow Net Pay Distribution
+
+
+		div(class=['table', 'paystub'], id='resultsLabels')
+			div.tableRow
+				div.tableCell Federal Tax Due: 
+				div.tableCell#fedTax
+			div.tableRow
+				div.tableCell Social Security Tax Due: 
+				div.tableCell#ssTax
+			div.tableRow
+				div.tableCell Medicare Tax Due: 
+				div.tableCell#medicareTax
+			div.tableRow
+				div.tableCell
+					span#stateName State
+					span  Tax Due: 
+				div.tableCell#stateTax
+			div.tableRow
+				div.tableCell Retirement Contributions: 
+				div.tableCell#retirementContributions
+			div.tableRow
+				div.tableCell Total Tax Withheld: 
+				div.tableCell#totalTax
+			div.tableRow
+				div.tableCell
+					span Actual 
+					span#paySchedule
+					span  Takehome Pay: 
+				div.tableCell#takehomePay
