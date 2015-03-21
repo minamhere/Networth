@@ -58,7 +58,7 @@ function handleState(stateInfo, callback){
 				}
 				],
 				function(err, stateAGI) {
-					stateBracket = {jurisdiction_id:stateInfo.stateID, agi:stateAGI, taxyear: stateInfo.taxyear, filingStatus: stateInfo.filingStatus};
+					stateBracket = {jurisdiction_id:stateInfo.jurisdiction_id, agi:stateAGI, taxyear: stateInfo.taxyear, filingStatus: stateInfo.filingStatus};
 					console.log('state bracket: '+JSON.stringify(stateBracket));
 					getTaxDue(stateBracket,function(data){
 						callback(null,data);
