@@ -42,7 +42,7 @@ function handleState(stateInfo, callback){
 									break;
 							};
 						};
-					};
+					});
 					callback(null,stateStandardDeduction, statePersonalExemption);
 				},
 				function calcAGI (stateStandardDeduction, statePersonalExemption, callback) {
