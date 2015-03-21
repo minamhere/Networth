@@ -66,8 +66,8 @@ block content
 
 		div(class=['table', 'paystub'], id='samplePaystub')
 
-			div.tableRow General
-			div.tableRow Tax Data
+			div(class=['tableRow', 'sectionHeading']) General
+			div(class=['tableRow', 'sectionHeading']) Tax Data
 			div.tableRow 
 				div.tableCell Federal Filing Status
 				div.tableCell State Filing Status
@@ -77,7 +77,7 @@ block content
 			div.tableRow
 				div.tableCell Federal Additional Witholding
 				div.tableCell State Additional Witholding
-			div.tableRow Paycheck Summary
+			div(class=['tableRow', 'sectionHeading']) Paycheck Summary
 				div.tableCell
 				div.tableCell Gross Earnings
 				div.tableCell Federal Taxable Gross
@@ -98,7 +98,7 @@ block content
 				div.tableCell x
 				div.tableCell x
 				div.tableCell x
-			div.tableRow Earnings and Taxes
+			div(class=['tableRow', 'sectionHeading']) Earnings and Taxes
 				div.tableCell Earnings
 				div.tableCell Taxes
 			div.tableRow
@@ -106,7 +106,7 @@ block content
 				div.tableCell Description
 				div.tableCell Amount
 				div.tableCell YTD Amount
-			div.tableRow Deductions
+			div(class=['tableRow', 'sectionHeading']) Deductions
 				div.tableCell Before-Tax Deductions
 				div.tableCell After-Tax Deductions
 			div.tableRow 
