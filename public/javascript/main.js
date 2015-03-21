@@ -47,8 +47,8 @@ $(function(){
 			$('#fedFilingStatus').html(parameters.filingStatus);
 			$('#stateFilingStatus').html(parameters.filingStatus);
 			
-			$('grossEarnings').html(parseInt(parameters.income/parameters.payFrequency));
-			$('fedGrossEarnings').html(parseInt(parameters.income/parameters.payFrequency));
+			$('grossEarnings').html(paycheckData.grossEarnings);
+			$('fedGrossEarnings').html(paycheckData.fedGrossEarnings);
 			$('#totalTax').html(paycheckData.totalTax);
 			$('#totalDeductions').html(totalDeductions);
 			$('#takehomePay').html(paycheckData.takehomePay);

@@ -180,14 +180,18 @@ app.get('/api/calcPaycheck', function (request,response){
 			var responseText = '<div id=\'AGI\'>Federal Annual AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var takehomePay = 0;
 			var payPeriods = results.getPayPeriods.payperiods;
+			var grossEarnings = income/payPeriods;
+			var fedGrossEarnings = grossEarnings;
 			var fedTax = results.getFedTax[0]/payPeriods;
 			var ssTax = results.getFedTax[1]/payPeriods;
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
 			var retirementContribution = retirement/payPeriods;
-			takehomePay = (income/payPeriods)-retirementContribution-fedTax-ssTax-medTax-stateTax;
+			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
 
 			responseText = {
+				grossEarnings: accounting.formatMoney(grossEarnings),
+				fedGrossEarnings: accounting.formatMoney(fedGrossEarnings),
 				fedTax: accounting.formatMoney(fedTax), 
 				ssTax: accounting.formatMoney(ssTax), 
 				medTax: accounting.formatMoney(medTax),
