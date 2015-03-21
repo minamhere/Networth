@@ -150,7 +150,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			});
 		},
 		getStateTax:['getDedExempt', function(callback, results){
-			var stateBracket = [{jurisdiction_id:stateID, agi:results.getDedExempt.fedAGI, taxyear: taxyear}];
+			var stateBracket = {jurisdiction_id:stateID, agi:results.getDedExempt.fedAGI, taxyear: taxyear};
 			getTaxDue(stateBracket,callback);
 		}],
 		getFedTax:['getDedExempt', function(callback,results){
