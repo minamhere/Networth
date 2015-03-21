@@ -46,7 +46,7 @@ $(function(){
 			paycheckData = $.parseJSON(data);
 			$('#fedTax').html(paycheckData.fedTax);
 			$('#ssTax').html(paycheckData.ssTax);
-			$('#medTax').html(paycheckData.medTax);
+			$('#medicareTax').html(paycheckData.medTax);
 			$('#stateTax').html(paycheckData.stateTax);
 			$('#stateName').html(paycheckData.stateName);
 			$('#totalTax').html(paycheckData.totalTax);
