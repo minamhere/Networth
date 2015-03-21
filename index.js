@@ -130,8 +130,8 @@ app.get('/api/calcPaycheck', function(request,response){
 
 	async.auto({
 		getDedExempt:function(callback){
-			var fedJuris_id = 1
-			getDeductionsExemptions(fedJuris_id,taxyear,filingStatus, function(err,data){
+			var fedJurisdiction_id = 1
+			getDeductionsExemptions(fedJurisdiction_id,taxyear,filingStatus, function(err,data){
 				for (var deductionIndex in data){
 					switch(data[deductionIndex].deduction_exemption_type){
 						case 1: // 1 = Standard Deduction
