@@ -43,18 +43,20 @@ function handleState(stateInfo, callback){
 							};
 						};
 					});
+					console.log('state Standard Deduction: '+stateStandardDeduction);
 					callback(null,stateStandardDeduction, statePersonalExemption);
 				},
 				function(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					console.log('state AGI: '+stateAGI);
 					callback(null, stateAGI);
 				}
 				],
 				function(err, stateAGI) {
 					stateBracket = {jurisdiction_id:stateID, agi:stateAGI, taxyear: taxyear, filingStatus: filingStatus};
-					getTaxDue(stateBracket,callback);
+					console.log('state bracket: '+JSON.stringify(stateBracket));
 
-					callback(null,stateTaxDue);
+					callback(null,getTaxDue(stateBracket,callback));
 				}
 			);
 			break;
