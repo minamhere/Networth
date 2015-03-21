@@ -188,15 +188,20 @@ app.get('/api/calcPaycheck', function(request,response){
 			var ssTax = results.getAllTax[1]/payPeriods;
 			var medTax = results.getAllTax[2]/payPeriods;
 			var stateTax = results.getAllTax[3]/payPeriods;
-			responseText += '<div id=\'FederalTax\'>Federal Tax Due: '+accounting.formatMoney(fedTax)+'</div>\n';			
-			responseText += '<div id=\'SocialSecurityTax\'>Social Security Tax Due: '+accounting.formatMoney(ssTax)+'</div>\n';
-			responseText += '<div id=\'MedicareTax\'>Medicare Tax Due: '+accounting.formatMoney(medTax)+'</div>\n';
-			responseText += '<div id=\'StateTax\'>'+results.getStateName+' Tax Due: '+accounting.formatMoney(stateTax)+'</div>\n';
-			responseText += '<div id=\'TotalTax\'>Total Tax Due: '+
-							accounting.formatMoney(fedTax+ssTax+medTax+stateTax)+'</div>\n';
 			takehomePay = (income/payPeriods)-(retirement/payPeriods)-fedTax-ssTax-medTax-stateTax;
-			responseText += '<div id=\'ActualTakehome\'>Actual '+results.getPayPeriods.name+' Takehome: '+accounting.formatMoney(takehomePay)+'</div>\n';
-			
+
+			responseText = {
+				fedTax: accounting.formatMoney(fedTax), 
+				ssTax: accounting.formatMoney(ssTax), 
+				medTax: accounting.formatMoney(medTax),
+				stateTax: accounting.formatMoney(stateTax),
+				stateName: results.getStateName,
+				totalTax: accounting.formatMoney(fedTax+ssTax+medTax+stateTax),
+				retirement: retirement,
+				paySchedule: results.getPayPeriods.name,
+				takehomePay: accounting.formatMoney(takehomePay)
+			};
+
 			response.send(responseText);
 		}
 	);
