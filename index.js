@@ -30,7 +30,7 @@ function handleState(stateInfo, callback){
 	switch(stateInfo.jurisdiction_id){
 		case 3: // Virginia
 			async.waterfall([
-				function standardDeductions (callback){
+				function(callback){
 					getDeductionsExemptions(stateInfo.jurisdiction_id,stateInfo.taxyear,stateInfo.filingStatus, function(err,data){
 						for (var deductionIndex in data){
 							switch(data[deductionIndex].deduction_exemption_type){
@@ -45,18 +45,18 @@ function handleState(stateInfo, callback){
 					});
 					callback(null,stateStandardDeduction, statePersonalExemption);
 				},
-				function calcAGI (stateStandardDeduction, statePersonalExemption, callback) {
+				function(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
 					callback(null, stateAGI);
 				}
 				],
-				function calcStateTax (err, stateAGI) {
+				function(err, stateAGI) {
 					stateBracket = {jurisdiction_id:stateID, agi:stateAGI, taxyear: taxyear, filingStatus: filingStatus};
 					getTaxDue(stateBracket,callback);
 
 					callback(null,stateTaxDue);
-				});
-			});
+				}
+			);
 			break;
 		case 6: // Colorado
 		case 7:
