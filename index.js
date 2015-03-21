@@ -27,12 +27,8 @@ function queryDatabase(queryText,callback){
 
 function handleState(stateInfo, callback){
 	//stateInfo = {jurisdiction_id:stateID, income:income, retirement:retirement, taxyear: taxyear, filingStatus: filingStatus};
-	console.log('starting state handling');
-	console.log('state info: '+JSON.stringify(stateInfo));
-
 	switch(stateInfo.jurisdiction_id){
 		case "3": // Virginia
-			console.log('starting virginia!');
 			async.waterfall([
 				function(callback){
 					getDeductionsExemptions(stateInfo.jurisdiction_id,stateInfo.taxyear,stateInfo.filingStatus, function(err,data){
@@ -46,22 +42,18 @@ function handleState(stateInfo, callback){
 									break;
 							};
 						};
-						console.log('state Standard Deduction: '+stateStandardDeduction);
 						callback(null,stateStandardDeduction, statePersonalExemption);
 					});
 					
 				},
 				function(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
-					console.log('state AGI: '+stateAGI);
 					callback(null, stateAGI);
 				}
 				],
 				function(err, stateAGI) {
 					stateBracket = {jurisdiction_id:stateInfo.jurisdiction_id, agi:stateAGI, taxyear: stateInfo.taxyear, filingStatus: stateInfo.filingStatus};
-					console.log('state bracket: '+JSON.stringify(stateBracket));
 					getTaxDue(stateBracket,function(err,data){
-						console.log('state tax due: '+JSON.stringify(data));
 						callback(null,data);
 					});
 
