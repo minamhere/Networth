@@ -44,7 +44,7 @@ $(function(){
 			paycheckData = $.parseJSON(data);
 			var totalDeductions = paycheckData.retirement;
 			
-			$('#fedFilingStatus').html(parameters.filingStatus;
+			$('#fedFilingStatus').html(parameters.filingStatus);
 			$('#stateFilingStatus').html(parameters.filingStatus);
 			
 			$('grossEarnings').html(parseInt(parameters.income/parameters.payFrequency);
