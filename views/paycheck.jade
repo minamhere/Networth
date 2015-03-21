@@ -43,13 +43,25 @@ block content
 			div(class=['tableRow', 'sectionHeading']) Tax Data
 			div.tableRow 
 				div.tableCell Federal Filing Status
+				div.tableCell#fedFilingStatus x
+				div.tableCell
+				div.tableCell
 				div.tableCell State Filing Status
+				div.tableCell#stateFilingStatus x
 			div.tableRow
 				div.tableCell Federal Allowances
+				div.tableCell#fedAllowances x
+				div.tableCell
+				div.tableCell
 				div.tableCell State Allowances
+				div.tableCell#stateAllowances x
 			div.tableRow
 				div.tableCell Federal Additional Witholding
+				div.tableCell#fedAdditionalWitholding x
+				div.tableCell
+				div.tableCell
 				div.tableCell State Additional Witholding
+				div.tableCell#stateAdditionalWitholding x
 			div(class=['tableRow', 'sectionHeading']) Paycheck Summary
 			div.tableRow
 				div.tableCell
@@ -62,9 +74,9 @@ block content
 				div.tableCell Current
 				div.tableCell x
 				div.tableCell x
+				div.tableCell#totalTax x
 				div.tableCell x
-				div.tableCell x
-				div.tableCell x
+				div.tableCell#takehomePay x
 			div.tableRow
 				div.tableCell YTD
 				div.tableCell x
@@ -130,6 +142,12 @@ block content
 				div.tableCell Description 
 				div.tableCell Amount 
 				div.tableCell YTD Amount
+			div.tableCell 401k
+			div.tableCell#retirementContributions x
+			div.tableCell#retirementContributionsYTD x
+			div.tableCell Disability
+			div.tableCell#disabilityContributions x
+			div.tableCell#disabilityContributionsYTD x
 			div.tableRow Net Pay Distribution
 
 
