@@ -190,7 +190,7 @@ app.get('/api/calcPaycheck', function(request,response){
 			var stateTax = results.getAllTax[3]/payPeriods;
 			takehomePay = (income/payPeriods)-(retirement/payPeriods)-fedTax-ssTax-medTax-stateTax;
 
-			responseText = {
+			responseText = "{
 				fedTax: accounting.formatMoney(fedTax), 
 				ssTax: accounting.formatMoney(ssTax), 
 				medTax: accounting.formatMoney(medTax),
@@ -200,7 +200,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				retirement: retirement,
 				paySchedule: results.getPayPeriods.name,
 				takehomePay: accounting.formatMoney(takehomePay)
-			};
+			}";
 
 			response.send(responseText);
 		}
