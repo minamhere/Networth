@@ -6,4 +6,7 @@
 
 h1 {text-align: center;}
 
-div#paycheckCalculator{text-align: center;}
+div#paycheckCalculator{
+	margin: auto; 
+	text-align: left;
+}
