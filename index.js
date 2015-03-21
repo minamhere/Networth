@@ -31,7 +31,7 @@ function handleState(stateInfo, callback){
 	console.log('state info: '+JSON.stringify(stateInfo));
 
 	switch(stateInfo.jurisdiction_id){
-		case 3: // Virginia
+		case "3": // Virginia
 			console.log('starting virginia!');
 			async.waterfall([
 				function(callback){
