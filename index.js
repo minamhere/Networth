@@ -202,7 +202,7 @@ app.get('/api/calcPaycheck', function(request,response){
 				takehomePay: accounting.formatMoney(takehomePay)
 			};
 
-			response.send(JSON.stringify(responseText);
+			response.send(JSON.stringify(responseText));
 		}
 	);
 
