@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 function queryDatabase(queryText,callback){
 	pg.connect(process.env.DATABASE_URL, function (err, client, done) {
-	    client.query(queryText, function(err, result) {
+	    client.query(queryText, function (err, result) {
 	    	done();
 			if (err){ console.error(err); callback(err); }
 			callback(null, result.rows);
@@ -202,7 +202,7 @@ app.post('/api/createNewBracket', function (request, response){
 	
 	console.log('insertString'+insertBracket);
 
-	queryDatabase(insertBracket, function(err,data){
+	queryDatabase(insertBracket, function (err,data){
 		if(err){console.error(err); }
 		response.status(200).send('Bracket Created');
 	})
@@ -225,9 +225,9 @@ app.get('/api/calcPaycheck', function (request,response){
 	var statePersonalExemption = 0;//930; // VA for testing
 
 	async.auto({
-		getDedExempt:function(callback){
+		getDedExempt:function (callback){
 			var fedJurisdiction_id = 1
-			getDeductionsExemptions(fedJurisdiction_id,taxyear,filingStatus, function(err,data){
+			getDeductionsExemptions(fedJurisdiction_id,taxyear,filingStatus, function (err,data){
 				for (var deductionIndex in data){
 					switch(data[deductionIndex].deduction_exemption_type){
 						case 1: // 1 = Standard Deduction
@@ -262,10 +262,10 @@ app.get('/api/calcPaycheck', function (request,response){
 
 			async.map(brackets, getTaxDue, callback);
 		}],
-		getStateName:function(callback){
+		getStateName:function (callback){
 			getStateNameFromID(stateID, callback);
 		},
-		getPayPeriods:function(callback){
+		getPayPeriods:function (callback){
 			getPayPeriodsFromFrequencyID(payFrequencyID,callback);
 		}
 		},
@@ -301,37 +301,37 @@ app.get('/api/calcPaycheck', function (request,response){
 
 app.get('/paycheck', function (request, response){
 	async.parallel([
-		function(callback){
+		function (callback){
 			getFilingStatuses(callback);
 		},
-		function(callback){
+		function (callback){
 			getJurisdictions('State',callback);
 		},
-		function(callback){
+		function (callback){
 			getPayFrequencies(callback);
 		}
 	],
-		function(err,results){
+		function (err,results){
 			response.render('paycheck', {pageInfo: {filingStatuses:results[0],states:results[1],payFrequencies:results[2]}});
 		});
 });
 
 app.get('/admin', function (request, response) {
 	async.parallel([
-		function(callback){
+		function (callback){
 			getUserList(callback);
 		},
-		function(callback){
+		function (callback){
 			getTaxBrackets(callback);
 		},
-		function(callback){
+		function (callback){
 			getJurisdictions('All',callback);
 		},
-		function(callback){
+		function (callback){
 			getFilingStatuses(callback);
 		}
 	],
-	function(err,results){
+	function (err,results){
 		response.render('createTaxBrackets', {pageInfo: {users:results[0],taxBrackets:results[1],jurisdictions:results[2],filingStatuses:results[3]}});
 	});
 });
