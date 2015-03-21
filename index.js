@@ -28,6 +28,8 @@ function queryDatabase(queryText,callback){
 function handleState(stateInfo, callback){
 	//stateInfo = {jurisdiction_id:stateID, income:income, retirement:retirement, taxyear: taxyear, filingStatus: filingStatus};
 	console.log('starting state handling');
+	console.log('state info: '+JSON.stringify(stateInfo));
+
 	switch(stateInfo.jurisdiction_id){
 		case 3: // Virginia
 			console.log('starting virginia!');
@@ -123,6 +125,8 @@ function handleState(stateInfo, callback){
 		case 61:
 		case 62:
 		case 63:
+		default: 
+			console.log('Default state case');
 
 	}
 
