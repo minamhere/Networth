@@ -108,6 +108,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -137,6 +138,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -166,6 +168,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -195,6 +198,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -224,6 +228,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -253,6 +258,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -282,6 +288,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -311,6 +318,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -340,6 +348,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -369,6 +378,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -398,6 +408,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -427,6 +438,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -456,6 +468,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -485,6 +498,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -514,6 +528,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -543,6 +558,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -572,6 +588,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -601,6 +618,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -630,6 +648,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -659,6 +678,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -688,6 +708,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -717,6 +738,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -746,6 +768,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -775,6 +798,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -804,6 +828,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -833,6 +858,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -862,6 +888,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -891,6 +918,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -920,6 +948,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -949,6 +978,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -978,6 +1008,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1007,6 +1038,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1036,6 +1068,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1065,6 +1098,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1094,6 +1128,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1123,6 +1158,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1152,6 +1188,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1181,6 +1218,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1210,6 +1248,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1239,6 +1278,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1268,6 +1308,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1297,6 +1338,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1326,6 +1368,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1355,6 +1398,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1384,6 +1428,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1413,6 +1458,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1442,6 +1488,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1471,6 +1518,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1500,6 +1548,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1529,6 +1578,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1558,6 +1608,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1587,6 +1638,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1616,6 +1668,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1645,6 +1698,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1674,6 +1728,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1703,6 +1758,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1732,6 +1788,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
 				],
@@ -1896,7 +1953,7 @@ app.get('/api/calcPaycheck', function (request,response){
 			getPayPeriodsFromFrequencyID(payFrequencyID,callback);
 		}
 		},
-		function (err, results){
+		function calcTakehome (err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
 			var responseText = '<div id=\'AGI\'>Federal Annual AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
 			var takehomePay = 0;
