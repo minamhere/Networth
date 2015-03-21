@@ -12,7 +12,7 @@ div#paycheckCalculator{
 	width: 500px;
 }
 
-#samplePaystub .table, #samplePaystub .tableRow { 
+#samplePaystub .tableCell { 
 	border: solid;
 }
 
