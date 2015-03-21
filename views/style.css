@@ -9,4 +9,9 @@ h1 {text-align: center;}
 div#paycheckCalculator{
 	margin: auto; 
 	text-align: left;
+	width: 500px;
+}
+
+.paycheckInfo {
+	text-align: right;
 }
