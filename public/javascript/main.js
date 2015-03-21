@@ -44,11 +44,11 @@ $(function(){
 			paycheckData = $.parseJSON(data);
 			var totalDeductions = paycheckData.retirement;
 			
-			$('#fedFilingStatus').html(filingStatus.val());
-			$('#stateFilingStatus').html(filingStatus.val());
+			$('#fedFilingStatus').html(parameters.filingStatus;
+			$('#stateFilingStatus').html(parameters.filingStatus);
 			
-			$('grossEarnings').html(parseInt(income.val()/payFrequency.val()));
-			$('fedGrossEarnings').html(parseInt(income.val()/payFrequency.val()));
+			$('grossEarnings').html(parseInt(parameters.income/parameters.payFrequency);
+			$('fedGrossEarnings').html(parseInt(parameters.income/parameters.payFrequency);
 			$('#totalTax').html(paycheckData.totalTax);
 			$('#totalDeductions').html(totalDeductions);
 			$('#takehomePay').html(paycheckData.takehomePay);
