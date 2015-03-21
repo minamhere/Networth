@@ -36,23 +36,26 @@ block content
 		div#calc 				
 			input#calculate(type='submit',value='Calculate Takehome Paycheck')
 
-		div#results
-			div Federal Tax Due: 
-				span(class='paycheckInfo', id='fedTax')
+		div.table#resultsLabels
+			div.tableRow
+				div.tableCell Federal Tax Due: 
+				div.tableCell#fedTax
+				
 			div Social Security Tax Due: 
-				span(class='paycheckInfo', id='ssTax')
+				span#ssTax
 			div Medicare Tax Due: 
-				span(class='paycheckInfo', id='medicareTax')
+				span#medicareTax
 			div 
 				span#stateName State
 				span  Tax Due: 
-				span(class='paycheckInfo', id='stateTax')
+				span#stateTax
 			div Retirement Contributions: 
-				span(class='paycheckInfo', id='retirementContributions')
+				span#retirementContributions
 			div Total Tax Withheld: 
-				span(class='paycheckInfo', id='totalTax')
+				span#totalTax
 			div 
 				span Actual
 				span#paySchedule
 				span  Takehome Pay: 
-				span(class='paycheckInfo', id='takehomePay')
+				span#takehomePay
+
