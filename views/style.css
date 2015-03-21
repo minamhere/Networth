@@ -12,6 +12,11 @@ div#paycheckCalculator{
 	width: 500px;
 }
 
-#samplePaystub.table, #samplePaystub.tableRow, #samplePaystub.tableCell { border: solid;}
+#samplePaystub .table, #samplePaystub .tableRow { 
+	border: solid;
+}
 
-#samplePaystub.sectionHeading { font-weight: bold;}
+#samplePaystub .sectionHeading { 
+	width: 100%;
+	font-weight: bold;
+}
