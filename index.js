@@ -27,8 +27,10 @@ function queryDatabase(queryText,callback){
 
 function handleState(stateInfo, callback){
 	//stateInfo = {jurisdiction_id:stateID, income:income, retirement:retirement, taxyear: taxyear, filingStatus: filingStatus};
+	console.log('starting state handling');
 	switch(stateInfo.jurisdiction_id){
 		case 3: // Virginia
+			console.log('starting virginia!');
 			async.waterfall([
 				function(callback){
 					getDeductionsExemptions(stateInfo.jurisdiction_id,stateInfo.taxyear,stateInfo.filingStatus, function(err,data){
@@ -55,8 +57,11 @@ function handleState(stateInfo, callback){
 				function(err, stateAGI) {
 					stateBracket = {jurisdiction_id:stateID, agi:stateAGI, taxyear: taxyear, filingStatus: filingStatus};
 					console.log('state bracket: '+JSON.stringify(stateBracket));
+					getTaxDue(stateBracket,function(data){
+						callback(null,data);
+					});
 
-					callback(null,getTaxDue(stateBracket,callback));
+					
 				}
 			);
 			break;
