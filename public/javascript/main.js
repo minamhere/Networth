@@ -42,15 +42,26 @@ $(function(){
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
+			var totalDeductions = paycheckData.retirement;
+			
+			$('#fedFilingStatus').html(filingStatus.val());
+			$('#stateFilingStatus').html(filingStatus.val());
+			
+			$('grossEarnings').html(parseInt(income.val()/payFrequency.val()));
+			$('fedGrossEarnings').html(parseInt(income.val()/payFrequency.val()));
+			$('#totalTax').html(paycheckData.totalTax);
+			$('#totalDeductions').html(totalDeductions);
+			$('#takehomePay').html(paycheckData.takehomePay);
+
 			$('#fedTax').html(paycheckData.fedTax);
 			$('#ssTax').html(paycheckData.ssTax);
 			$('#medicareTax').html(paycheckData.medTax);
 			$('#stateTax').html(paycheckData.stateTax);
 			$('#stateName').html(paycheckData.stateName);
-			$('#totalTax').html(paycheckData.totalTax);
+			
 			$('#retirementContributions').html(paycheckData.retirement);
 			$('#paySchedule').html(paycheckData.paySchedule);
-			$('#takehomePay').html(paycheckData.takehomePay);
+			
 		});
 	});
 });
