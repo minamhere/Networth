@@ -52,20 +52,19 @@ block content
 
 			table
 				tr 
-					th(colspan='6') General
+					th(colspan='5') General
+			table
 				tr 
-					th(colspan='6') Tax Data
+					th(colspan='5') Tax Data
 				tr 
-					td(width='20%') Federal Filing Status
-					td.filledValue#fedFilingStatus(width='12%') x
-					td
-					td
-					td State Filing Status
-					td.filledValue#stateFilingStatus x
+					td(width='30%') Federal Filing Status
+					td.filledValue#fedFilingStatus(width='15%') x
+					td(width='10%')
+					td(width='30%') State Filing Status
+					td.filledValue#stateFilingStatus(width='15%') x
 				tr
 					td Federal Allowances
 					td.filledValue#fedAllowances x
-					td
 					td
 					td State Allowances
 					td.filledValue#stateAllowances x
@@ -73,9 +72,9 @@ block content
 					td Federal Additional Witholding
 					td.filledValue#fedAdditionalWitholding x
 					td
-					td
 					td State Additional Witholding
 					td.filledValue#stateAdditionalWitholding x
+			table	
 				tr
 					th(colspan='6') Paycheck Summary
 				tr
@@ -99,6 +98,7 @@ block content
 					td x
 					td x
 					td x
+			table
 				tr
 					th(colspan='6') Earnings and Taxes
 				tr
@@ -139,6 +139,7 @@ block content
 					td State Witholding
 					td.filledValue#stateTax x
 					td x
+			table
 				tr
 					th(colspan='6') Deductions
 				tr
@@ -158,5 +159,6 @@ block content
 					td Disability
 					td.filledValue#disabilityContributions x
 					td.filledValue#disabilityContributionsYTD x
+			table
 				tr 
 					th(colspan='6') Net Pay Distribution
