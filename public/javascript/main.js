@@ -27,20 +27,27 @@ $(function(){
 	$('#calculate').click(function(){
 		//if ($('#income').val() > 0){return false;}
 		// Check for valid inputs
-		if (parseInt($('#income').val()) < parseInt($('#retirement').val())) {
+		var strippedIncome = $('#income').val().replace(/\D/g,'');
+		var strippedRetirement = $('#retirementInput').val().replace(/\D/g,'');
+		var strippedFedAllowances = $('#fedAllowancesInput').val().replace(/\D/g,'');
+		var strippedStateAllowances = $('#stateFilingStatusSelect').val().replace(/\D/g,'');
+
+		if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
 			$('#results').html('Retirement savings must be less than Gross Income');
 			return false;
 		}
 
+
+
 		var parameters = { 
-			income: $('#income').val(), 
+			income: strippedIncome, 
 			payFrequency: $('#payFrequency').val(),
-			fedFilingStatus: $('#fedFilingStatusSelect').val(),
+			fedFilingStatus: strippedFedAllowances,
 			fedAllowances: $('#fedAllowancesInput').val(),
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
-			stateAllowances: $('#stateAllowancesInput').val(),
-			retirement: $('#retirementInput').val()
+			stateAllowances: strippedStateAllowances,
+			retirement: strippedRetirement
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
