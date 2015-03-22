@@ -12,7 +12,7 @@ div#paycheckCalculator{
 	width: 500px;
 }
 
-table {
+table, th, td {
 	border: solid;
 	border-width: 1px;
 }
