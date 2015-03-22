@@ -33,28 +33,21 @@ $(function(){
 		}
 
 		var parameters = { 
-			// Income Info
 			income: $('#income').val(), 
 			payFrequency: $('#payFrequency').val(),
-			
-			// Federal Info
 			fedFilingStatus: $('#fedFilingStatusSelect').val(),
-			fedAllowances: $('#fedAllowances').val(),
-
-			// State Info
+			fedAllowances: $('#fedAllowancesInput').val(),
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
-			stateAllowances: $('#stateAllowances').val(),
-
-			// Deduction Info
+			stateAllowances: $('#stateAllowancesInput').val(),
 			retirement: $('#retirement').val()
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
 			var totalDeductions = paycheckData.retirement;
 			
-			$('#fedFilingStatus').html(parameters.filingStatus);
-			$('#stateFilingStatus').html(parameters.filingStatus);
+			$('#fedFilingStatus').html(parameters.fedFilingStatus);
+			$('#stateFilingStatus').html(parameters.stateFilingStatus);
 			$('#fedAllowances').html(parameters.fedAllowances);
 			$('#stateAllowances').html(parameters.stateAllowances);
 			

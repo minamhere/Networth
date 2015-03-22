@@ -26,7 +26,7 @@ block content
 				each filingStatus in pageInfo.filingStatuses
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
 		div Federal Allowances:
-			input#fedAllowances(type='number', name='fedAllowances', placeholder='Fed Allowances')
+			input#fedAllowancesInput(type='number', name='fedAllowances', placeholder='Fed Allowances')
 
 		div State:
 			select#stateSelect
@@ -38,10 +38,10 @@ block content
 				each filingStatus in pageInfo.filingStatuses
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
 		div State Allowances:
-			input#stateAllowances(type='number', name='stateAllowances', placeholder='State Allowances')
+			input#stateAllowancesInput(type='number', name='stateAllowances', placeholder='State Allowances')
 
 		div Retirement Contributions (401k, etc.)
-			input#retirement(type='number', name='retirement', placeholder='Retirement')
+			input#retirementInput(type='number', name='retirement', placeholder='Retirement')
 
 
 		div#calc 				
