@@ -50,113 +50,122 @@ block content
 
 		div(class=['table', 'paystub'], id='samplePaystub')
 
-			div(class=['tableRow', 'sectionHeading']) General
-			div(class=['tableRow', 'sectionHeading']) Tax Data
-			div.tableRow 
-				div.tableCell Federal Filing Status
-				div.tableCell#fedFilingStatus x
-				div.tableCell
-				div.tableCell
-				div.tableCell State Filing Status
-				div.tableCell#stateFilingStatus x
-			div.tableRow
-				div.tableCell Federal Allowances
-				div.tableCell#fedAllowances x
-				div.tableCell
-				div.tableCell
-				div.tableCell State Allowances
-				div.tableCell#stateAllowances x
-			div.tableRow
-				div.tableCell Federal Additional Witholding
-				div.tableCell#fedAdditionalWitholding x
-				div.tableCell
-				div.tableCell
-				div.tableCell State Additional Witholding
-				div.tableCell#stateAdditionalWitholding x
-			div(class=['tableRow', 'sectionHeading']) Paycheck Summary
-			div.tableRow
-				div.tableCell
-				div.tableCell Gross Earnings
-				div.tableCell Federal Taxable Gross
-				div.tableCell Total Taxes
-				div.tableCell Total Deductions
-				div.tableCell Total Net Pay
-			div.tableRow
-				div.tableCell Current
-				div.tableCell#grossEarnings x
-				div.tableCell#fedGrossEarnings x
-				div.tableCell#totalTax x
-				div.tableCell#totalDeductions x
-				div.tableCell#takehomePay x
-			div.tableRow
-				div.tableCell YTD
-				div.tableCell x
-				div.tableCell x
-				div.tableCell x
-				div.tableCell x
-				div.tableCell x
-			div(class=['tableRow', 'sectionHeading']) Earnings and Taxes
-			div.tableRow
-				div.tableCell Earnings
-				div.tableCell
-				div.tableCell
-				div.tableCell Taxes
-				div.tableCell
-				div.tableCell
-			div.tableRow 
-				div.tableCell Description
-				div.tableCell Amount
-				div.tableCell YTD Amount
-				div.tableCell Description
-				div.tableCell Amount
-				div.tableCell YTD Amount
-			div.tableRow
-				div.tableCell
-				div.tableCell
-				div.tableCell
-				div.tableCell Fed Witholding
-				div.tableCell#fedTax x
-				div.tableCell x
-			div.tableRow
-				div.tableCell
-				div.tableCell
-				div.tableCell
-				div.tableCell Medicare Witholding
-				div.tableCell#medicareTax x
-				div.tableCell x
-			div.tableRow
-				div.tableCell
-				div.tableCell
-				div.tableCell
-				div.tableCell Social Security Witholding
-				div.tableCell#ssTax x
-				div.tableCell x
-			div.tableRow
-				div.tableCell
-				div.tableCell
-				div.tableCell
-				div.tableCell State Witholding
-				div.tableCell#stateTax x
-				div.tableCell x
-			div(class=['tableRow', 'sectionHeading']) Deductions
-			div.tableRow
-				div.tableCell Before-Tax Deductions
-				div.tableCell
-				div.tableCell
-				div.tableCell After-Tax Deductions
-				div.tableCell
-				div.tableCell
-			div.tableRow 
-				div.tableCell Description 
-				div.tableCell Amount 
-				div.tableCell YTD Amount
-				div.tableCell Description 
-				div.tableCell Amount 
-				div.tableCell YTD Amount
-			div.tableCell 401k
-			div.tableCell#retirementContributions x
-			div.tableCell#retirementContributionsYTD x
-			div.tableCell Disability
-			div.tableCell#disabilityContributions x
-			div.tableCell#disabilityContributionsYTD x
-			div.tableRow Net Pay Distribution
+			table
+				tr 
+					td General
+			table
+				tr 
+					td Tax Data
+				tr 
+					td Federal Filing Status
+					td#fedFilingStatus x
+					td
+					td
+					td State Filing Status
+					td#stateFilingStatus x
+				tr
+					td Federal Allowances
+					td#fedAllowances x
+					td
+					td
+					td State Allowances
+					td#stateAllowances x
+				tr
+					td Federal Additional Witholding
+					td#fedAdditionalWitholding x
+					td
+					td
+					td State Additional Witholding
+					td#stateAdditionalWitholding x
+				tr
+					td Paycheck Summary
+				tr
+					td
+					td Gross Earnings
+					td Federal Taxable Gross
+					td Total Taxes
+					td Total Deductions
+					td Total Net Pay
+				tr
+					td Current
+					td#grossEarnings x
+					td#fedGrossEarnings x
+					td#totalTax x
+					td#totalDeductions x
+					td#takehomePay x
+				tr
+					td YTD
+					td x
+					td x
+					td x
+					td x
+					td x
+				tr
+					td Earnings and Taxes
+				tr
+					td Earnings
+					td
+					td
+					td Taxes
+					td
+					td
+				tr 
+					td Description
+					td Amount
+					td YTD Amount
+					td Description
+					td Amount
+					td YTD Amount
+				tr
+					td
+					td
+					td
+					td Fed Witholding
+					td#fedTax x
+					td x
+				tr
+					td
+					td
+					td
+					td Medicare Witholding
+					td#medicareTax x
+					td x
+				tr
+					td
+					td
+					td
+					td Social Security Witholding
+					td#ssTax x
+					td x
+				tr
+					td
+					td
+					td
+					td State Witholding
+					td#stateTax x
+					td x
+				tr
+					td Deductions
+				tr
+					td Before-Tax Deductions
+					td
+					td
+					td After-Tax Deductions
+					td
+					td
+				tr 
+					td Description 
+					td Amount 
+					td YTD Amount
+					td Description 
+					td Amount 
+					td YTD Amount
+				tr
+					td 401k
+					td#retirementContributions x
+					td#retirementContributionsYTD x
+					td Disability
+					td#disabilityContributions x
+					td#disabilityContributionsYTD x
+				tr 
+					td Net Pay Distribution
