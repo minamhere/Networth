@@ -40,7 +40,7 @@ $(function(){
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
 			stateAllowances: $('#stateAllowancesInput').val(),
-			retirement: $('#retirement').val()
+			retirement: $('#retirementInput').val()
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
