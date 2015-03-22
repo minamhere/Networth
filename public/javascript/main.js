@@ -52,6 +52,7 @@ $(function(){
 			$('#stateAllowances').html(parameters.stateAllowances);
 			
 			$('#grossEarnings').html(paycheckData.grossEarnings);
+			$('#regEarnings').html(paycheckData.grossEarnings);
 			$('#fedGrossEarnings').html(paycheckData.fedGrossEarnings);
 			$('#totalTax').html(paycheckData.totalTax);
 			$('#totalDeductions').html(totalDeductions);
