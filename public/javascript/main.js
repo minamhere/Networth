@@ -31,7 +31,7 @@ $(function(){
 		var strippedRetirement = $('#retirementInput').val().replace(/\D/g,'');
 		
 		if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
-			$('#results').html('Retirement savings must be less than Gross Income');
+			alert('Retirement savings must be less than Gross Income');
 			return false;
 		};
 		
