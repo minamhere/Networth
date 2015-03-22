@@ -171,7 +171,8 @@ app.get('/api/calcPaycheck', function (request,response){
 				income:income, 
 				retirement:retirement, 
 				taxyear: taxyear, 
-				stateFilingStatus: stateFilingStatus
+				stateFilingStatus: stateFilingStatus,
+				stateAllowances: stateAllowances
 			};
 			handleState(stateInfo, callback);
 		},
@@ -275,7 +276,7 @@ app.listen(app.get('port'), function() {
 });
 
 function handleState(stateInfo, callback){
-	//stateInfo = {jurisdiction_id:stateID, income:income, retirement:retirement, taxyear: taxyear, stateFilingStatus: stateFilingStatus};
+	//stateInfo = {jurisdiction_id:stateID, income:income, retirement:retirement, taxyear: taxyear, stateFilingStatus: stateFilingStatus, stateAllowances: stateAllowances};
 	var stateWithholdingDeductions = 0;
 	var stateStandardDeduction = 0;
 	var statePersonalExemption = 0;
@@ -303,7 +304,7 @@ function handleState(stateInfo, callback){
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
 					// start handling allowances
-					stateWithholdingDeductions = (stateAllowances)*statePersonalExemption+stateStandardDeduction;
+					stateWithholdingDeductions = (stateInfo.stateAllowances)*statePersonalExemption+stateStandardDeduction;
 					// end handling allowances
 					stateAGI = stateInfo.income-stateInfo.retirement-stateWithholdingDeductions;
 					if (stateAGI<0) stateAGI = 0;
