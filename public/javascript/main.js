@@ -46,10 +46,10 @@ $(function(){
 			paycheckData = $.parseJSON(data);
 			var totalDeductions = paycheckData.retirement;
 			
-			$('#fedFilingStatus').html(parameters.fedFilingStatus);
+			$('#fedFilingStatus').html(parameters.fedFilingStatus + ' - ' + $('#fedFilingStatusSelect option:selected').text());
 			$('#stateFilingStatus').html(parameters.stateFilingStatus);
 			$('#fedAllowances').html(parameters.fedAllowances);
-			$('#stateAllowances').html(parameters.stateAllowances);
+			$('#stateAllowances').html(parameters.stateAllowances + ' - ' + $('#stateFilingStatusSelect option:selected').text());
 			
 			$('#grossEarnings').html(paycheckData.grossEarnings);
 			$('#regEarnings').html(paycheckData.grossEarnings);
