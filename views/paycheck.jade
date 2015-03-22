@@ -52,19 +52,20 @@ block content
 
 			table
 				tr 
-					th(colspan='5') General
-			table
+					th(colspan='6') General
 				tr 
-					th(colspan='5') Tax Data
+					th(colspan='6') Tax Data
 				tr 
-					td(width='35%') Federal Filing Status
-					td.filledValue#fedFilingStatus(width='9%') x
-					td(width='2%')
-					td(width='35%') State Filing Status
-					td.filledValue#stateFilingStatus(width='9%') x
+					td Federal Filing Status
+					td.filledValue#fedFilingStatus x
+					td
+					td
+					td State Filing Status
+					td.filledValue#stateFilingStatus x
 				tr
 					td Federal Allowances
 					td.filledValue#fedAllowances x
+					td
 					td
 					td State Allowances
 					td.filledValue#stateAllowances x
@@ -72,18 +73,18 @@ block content
 					td Federal Additional Witholding
 					td.filledValue#fedAdditionalWitholding x
 					td
+					td
 					td State Additional Witholding
 					td.filledValue#stateAdditionalWitholding x
-			table
 				tr
 					th(colspan='6') Paycheck Summary
 				tr
-					th(width='16%')
-					th(width='16%') Gross Earnings
-					th(width='16%') Federal Taxable Gross
-					th(width='16%') Total Taxes
-					th(width='16%') Total Deductions
-					th(width='16%') Total Net Pay
+					th
+					th Gross Earnings
+					th Federal Taxable Gross
+					th Total Taxes
+					th Total Deductions
+					th Total Net Pay
 				tr
 					th Current
 					td.filledValue#grossEarnings x
@@ -98,19 +99,18 @@ block content
 					td x
 					td x
 					td x
-			table
 				tr
 					th(colspan='6') Earnings and Taxes
 				tr
 					th(colspan='3') Earnings
 					th(colspan='3') Taxes
 				tr 
-					th(width='16%') Description
-					th(width='16%') Amount
-					th(width='16%') YTD Amount
-					th(width='16%') Description
-					th(width='16%') Amount
-					th(width='16%') YTD Amount
+					th Description
+					th Amount
+					th Yth Amount
+					th Description
+					th Amount
+					th YTD Amount
 				tr
 					td Regular Earnings
 					td.filledValue#regEarnings x
@@ -139,19 +139,18 @@ block content
 					td State Witholding
 					td.filledValue#stateTax x
 					td x
-			table
 				tr
 					th(colspan='6') Deductions
 				tr
 					th(colspan='3') Before-Tax Deductions
 					th(colspan='3') After-Tax Deductions
 				tr 
-					th(width='16%') Description 
-					th(width='16%') Amount 
-					th(width='16%') YTD Amount
-					th(width='16%') Description 
-					th(width='16%') Amount 
-					th(width='16%') YTD Amount
+					th Description 
+					th Amount 
+					th YTD Amount
+					th Description 
+					th Amount 
+					th YTD Amount
 				tr
 					td 401k
 					td.filledValue#retirementContributions x
@@ -159,6 +158,5 @@ block content
 					td Disability
 					td.filledValue#disabilityContributions x
 					td.filledValue#disabilityContributionsYTD x
-			table
 				tr 
 					th(colspan='6') Net Pay Distribution
