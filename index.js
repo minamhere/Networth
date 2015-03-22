@@ -135,9 +135,12 @@ app.get('/api/calcPaycheck', function (request,response){
 	var stateStandardDeduction = 0;//3000; // VA for testing
 	var statePersonalExemption = 0;//930; // VA for testing
 
+	var fedWithholdingDeductions = 0;
+
 	async.auto({
 		getDedExempt:function (callback){
 			var fedJurisdiction_id = 1
+
 			getDeductionsExemptions(fedJurisdiction_id,taxyear,fedFilingStatus, function (err,data){
 				for (var deductionIndex in data){
 					switch(data[deductionIndex].deduction_exemption_type){
@@ -150,7 +153,14 @@ app.get('/api/calcPaycheck', function (request,response){
 					};
 				};
 
-				fedAGI = income-retirement-fedStandardDeduction-fedPersonalExemption;
+				// start handling allowances
+				if (fedAllowances == 0) fedWithholdingDeductions = fedStandardDeduction - fedPersonalExemption;
+				else  fedWithholdingDeductions = (fedAllowances-1)*fedPersonalExemption+fedStandardDeduction;
+				// This is not correct for Head of Household witholding. HOH is withheld at the single rate, but has a larger standard deduction. 
+				// Need to find a way to handle that.
+				// end handling allowances
+
+				fedAGI = income-retirement-fedWithholdingDeductions;
 				if (fedAGI <0) fedAGI = 0;
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
