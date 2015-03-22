@@ -47,9 +47,9 @@ $(function(){
 			var totalDeductions = paycheckData.retirement;
 			
 			$('#fedFilingStatus').html(parameters.fedFilingStatus + ' - ' + $('#fedFilingStatusSelect option:selected').text());
-			$('#stateFilingStatus').html(parameters.stateFilingStatus);
+			$('#stateFilingStatus').html(parameters.stateFilingStatus + ' - ' + $('#stateFilingStatusSelect option:selected').text());
 			$('#fedAllowances').html(parameters.fedAllowances);
-			$('#stateAllowances').html(parameters.stateAllowances + ' - ' + $('#stateFilingStatusSelect option:selected').text());
+			$('#stateAllowances').html(parameters.stateAllowances);
 			
 			$('#grossEarnings').html(paycheckData.grossEarnings);
 			$('#regEarnings').html(paycheckData.grossEarnings);
