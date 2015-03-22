@@ -280,9 +280,10 @@ function handleState(stateInfo, callback){
 	var stateStandardDeduction = 0;
 	var statePersonalExemption = 0;
 	switch(stateInfo.jurisdiction_id){
+		case "6": // Colorado. Listed before 3, so that it will fall through to case 3. Once VA code is correct, I will copy/paste expand to other states, but want CO to work while testing.
 		case "3": // Virginia
 		// Virginia Witholding Formulas: http://www.tax.virginia.gov/withholding-calculator
-		case "6":
+		
 			async.waterfall([
 				function getDedExempt(callback){
 					getDeductionsExemptions(stateInfo.jurisdiction_id,stateInfo.taxyear,stateInfo.stateFilingStatus, function (err,data){
