@@ -276,8 +276,12 @@ app.listen(app.get('port'), function() {
 
 function handleState(stateInfo, callback){
 	//stateInfo = {jurisdiction_id:stateID, income:income, retirement:retirement, taxyear: taxyear, stateFilingStatus: stateFilingStatus};
+	var stateWithholdingDeductions = 0;
+	var stateStandardDeduction = 0;
+	var statePersonalExemption = 0;
 	switch(stateInfo.jurisdiction_id){
 		case "3": // Virginia
+		// Virginia Witholding Formulas: http://www.tax.virginia.gov/withholding-calculator
 		case "6":
 			async.waterfall([
 				function getDedExempt(callback){
@@ -297,7 +301,10 @@ function handleState(stateInfo, callback){
 					
 				},
 				function calcAGI(stateStandardDeduction, statePersonalExemption, callback) {
-					stateAGI = stateInfo.income-stateInfo.retirement-stateStandardDeduction-statePersonalExemption;
+					// start handling allowances
+					stateWithholdingDeductions = (stateAllowances)*statePersonalExemption+stateStandardDeduction;
+					// end handling allowances
+					stateAGI = stateInfo.income-stateInfo.retirement-stateWithholdingDeductions;
 					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
