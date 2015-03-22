@@ -29,15 +29,14 @@ $(function(){
 		// Check for valid inputs
 		var strippedIncome = $('#income').val().replace(/\D/g,'');
 		var strippedRetirement = $('#retirementInput').val().replace(/\D/g,'');
-		var strippedFedAllowances = $('#fedAllowancesInput').val().replace(/\D/g,'');
-		var strippedStateAllowances = $('#stateFilingStatusSelect').val().replace(/\D/g,'');
-
+		
 		if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
 			$('#results').html('Retirement savings must be less than Gross Income');
 			return false;
-		}
-
-
+		};
+		
+		var strippedFedAllowances = $('#fedAllowancesInput').val().replace(/\D/g,'');
+		var strippedStateAllowances = $('#stateFilingStatusSelect').val().replace(/\D/g,'');
 
 		var parameters = { 
 			income: strippedIncome, 
