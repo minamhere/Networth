@@ -132,8 +132,6 @@ app.get('/api/calcPaycheck', function (request,response){
 	var fedPersonalExemption = 0;
 	var fedAGI = 0;
 	var stateAGI =0;
-	var stateStandardDeduction = 0;//3000; // VA for testing
-	var statePersonalExemption = 0;//930; // VA for testing
 
 	var fedWithholdingDeductions = 0;
 
