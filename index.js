@@ -200,11 +200,11 @@ app.get('/api/calcPaycheck', function (request,response){
 			var grossEarnings = income/payPeriods;
 			var fedGrossEarnings = grossEarnings;
 			var fedTax = results.getFedTax[0]/payPeriods;
-			var fedTax += additionalFedWitholding/payPeriods;
+			var fedTax += additionalFedWitholding/payPeriods; // Add additional witholding to fedTax owed. 
 			var ssTax = results.getFedTax[1]/payPeriods;
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
-			var stateTax += = additionalStateWitholding/payPeriods;
+			var stateTax += = additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
 			var retirementContribution = retirement/payPeriods;
 			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
 
