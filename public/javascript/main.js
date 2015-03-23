@@ -41,7 +41,7 @@ $(function(){
 		var parameters = { 
 			income: strippedIncome, 
 			payFrequency: $('#payFrequency').val(),
-			fedFilingStatus: ,$('#fedFilingStatusSelect').val(),
+			fedFilingStatus: $('#fedFilingStatusSelect').val(),
 			fedAllowances: strippedFedAllowances,
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
