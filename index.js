@@ -287,6 +287,71 @@ function handleState(stateInfo, callback){
 	var stateStandardDeduction = 0;
 	var statePersonalExemption = 0;
 	switch(stateInfo.jurisdiction_id){
+		
+		// These states have not been specifically built yet. 
+		// If they can be treated similarly to Virginia, they can just move to the section below.
+		// If they need some sort of special handling, we need to build a new function for them.
+		// This new function should be added below the VA function, so that "unknown" states will
+		// continue to "fall through" to the VA handling.
+		case "7": // Alabama
+		case "8": // Alaska
+		case "9": // Arizona 
+		case "10": // Arkansas
+		case "11": // California
+		case "12": // Connecticut
+		case "13": // Delaware
+		case "14": // Florida
+		case "15": // Georgia
+		case "16": // Hawaii
+		case "17": // Idaho
+		case "18": // Illinois
+		case "19": // Indiana
+		case "20": // Iowa
+		case "21": // Kansas
+		case "22": // Kentucky
+		case "23": // Louisiana
+		case "24": // Maine
+		case "25": // Maryland
+		case "26": // Massachusetts
+		case "27": // Michigan
+		case "28": // Minnesota
+		case "29": // Mississippi
+		case "30": // Missouri
+		case "31": // Montana
+		case "32": // Nebraska
+		case "33": // Nevada
+		case "34": // New Hampshire
+		case "35": // New Jersey
+		case "36": // New Mexico
+		case "37": // New York
+		case "38": // North Carolina
+		case "39": // North Dakota
+		case "40": // Ohio
+		case "41": // Oklahoma
+		case "42": // Oregon
+		case "43": // Pennsylvania
+		case "44": // Rhode Island
+		case "45": // South Carolina
+		case "46": // South Dakota
+		case "47": // Tennessee
+		case "48": // Texas
+		case "49": // Utah
+		case "50": // Vermont
+		case "51": // Washington
+		case "52": // West Virginia
+		case "53": // Wisconsin
+		case "54": // Wyoming
+		case "55": // American Samoa
+		case "56": // District of Columbia
+		case "57": // Federated States of Micronesia
+		case "58": // Guam
+		case "59": // Marshall Islands
+		case "60": // Northern Mariana Islands
+		case "61": // Palau
+		case "62": // Puerto Rico
+		case "63": // Virgin Islands
+		
+		// These states all handle taxes similarly. They do not require special handling.
 		case "6": // Colorado. Listed before 3, so that it will fall through to case 3. Once VA code is correct, I will copy/paste expand to other states, but want CO to work while testing.
 		case "3": // Virginia
 		// Virginia Witholding Formulas: http://www.tax.virginia.gov/withholding-calculator
@@ -324,8 +389,10 @@ function handleState(stateInfo, callback){
 			);
 			break;
 		
+		// This is where "non-standard" states should begin. 
+
 		default: 
-			console.log('Default state case');
+			console.log('Default state case. This should never happen.');
 
 	}
 
