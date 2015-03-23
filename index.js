@@ -119,7 +119,7 @@ app.get('/api/calcPaycheck', function (request,response){
 	
 	var fedFilingStatus = request.query.fedFilingStatus;
 	var fedAllowances = request.query.fedAllowances;
-	var additionalFedWitholding = request.query.additionalFedWitholding;
+	var additionalFedWitholding = request.query.additionalFederalWitholding;
 
 	var stateID = request.query.state;
 	var stateFilingStatus = request.query.stateFilingStatus;
