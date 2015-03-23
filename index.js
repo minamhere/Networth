@@ -209,7 +209,7 @@ app.get('/api/calcPaycheck', function (request,response){
 			var retirementContribution = retirement/payPeriods;
 			var afterTaxDeductionPerPaycheck = afterTaxDeduction/payPeriods;
 
-			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
+			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax-afterTaxDeductionPerPaycheck;
 
 			responseText = {
 				grossEarnings: accounting.formatMoney(grossEarnings),
