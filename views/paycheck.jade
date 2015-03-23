@@ -27,6 +27,9 @@ block content
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
 		div Federal Allowances:
 			input#fedAllowancesInput(type='number', name='fedAllowances', placeholder='Fed Allowances')
+		
+		div Additional Federal Witholding
+			input#additionalFederalWitholding(type='number', name='additionalFederalWitholding', placeholder='Additional Annual Federal Witholding')
 
 		div State:
 			select#stateSelect
@@ -39,6 +42,9 @@ block content
 						option(value='#{filingStatus.id}') #{filingStatus.statusname}
 		div State Allowances:
 			input#stateAllowancesInput(type='number', name='stateAllowances', placeholder='State Allowances')
+
+		div Additional State Witholding
+			input#additionalStateWitholding(type='number', name='additionalStateWitholding', placeholder='Additional Annual State Witholding')
 
 		div Retirement Contributions (401k, etc.)
 			input#retirementInput(type='number', name='retirement', placeholder='Retirement')
@@ -70,11 +76,11 @@ block content
 					td State Allowances
 					td.filledValue#stateAllowances x
 				tr
-					td Federal Additional Witholding
+					td Federal Annual Additional Witholding
 					td.filledValue#fedAdditionalWitholding x
 					td
 					td
-					td State Additional Witholding
+					td State Annual Additional Witholding
 					td.filledValue#stateAdditionalWitholding x
 				tr
 					th(colspan='6') Paycheck Summary

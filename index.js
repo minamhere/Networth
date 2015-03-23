@@ -119,10 +119,12 @@ app.get('/api/calcPaycheck', function (request,response){
 	
 	var fedFilingStatus = request.query.fedFilingStatus;
 	var fedAllowances = request.query.fedAllowances;
+	var additionalFedWitholding = request.query.additionalFedWitholding;
 
 	var stateID = request.query.state;
 	var stateFilingStatus = request.query.stateFilingStatus;
 	var stateAllowances = request.query.stateAllowances;
+	var additionalStateWitholding = request.query.additionalStateWitholding;
 	
 	var retirement = request.query.retirement;
 
@@ -198,9 +200,11 @@ app.get('/api/calcPaycheck', function (request,response){
 			var grossEarnings = income/payPeriods;
 			var fedGrossEarnings = grossEarnings;
 			var fedTax = results.getFedTax[0]/payPeriods;
+			var fedTax += additionalFedWitholding/payPeriods;
 			var ssTax = results.getFedTax[1]/payPeriods;
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
+			var stateTax += = additionalStateWitholding/payPeriods;
 			var retirementContribution = retirement/payPeriods;
 			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
 

@@ -38,14 +38,19 @@ $(function(){
 		var strippedFedAllowances = $('#fedAllowancesInput').val().replace(/\D/g,'');
 		var strippedStateAllowances = $('#stateAllowancesInput').val().replace(/\D/g,'');
 
+		var strippedAdditionalStateWitholding = $('#additionalStateWitholding').val().replace(/[^\d.-]/g, '');
+		var strippedAdditionalFederalWitholding = $('#additionalFederalWitholding').val().replace(/[^\d.-]/g, '');
+
 		var parameters = { 
 			income: strippedIncome, 
 			payFrequency: $('#payFrequency').val(),
 			fedFilingStatus: $('#fedFilingStatusSelect').val(),
-			fedAllowances: strippedFedAllowances,
+			fedAllowances: strippedFedAllowances,			
+			additionalFederalWitholding: strippedAdditionalFederalWitholding,
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
 			stateAllowances: strippedStateAllowances,
+			additionalStateWitholding: strippedAdditionalStateWitholding,
 			retirement: strippedRetirement
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
