@@ -64,8 +64,8 @@ $(function(){
 			$('#stateFilingStatus').html(parameters.stateFilingStatus + ' - ' + $('#stateFilingStatusSelect option:selected').text());
 			$('#fedAllowances').html(parameters.fedAllowances);
 			$('#stateAllowances').html(parameters.stateAllowances);
-			$('#fedAdditionalWitholding').html(parameters.additionalFederalWitholding);
-			$('#stateAdditionalWitholding').html(parameters.additionalStateWitholding);
+			$('#fedAdditionalWitholding').html(accounting.formatMoney(parameters.additionalFederalWitholding));
+			$('#stateAdditionalWitholding').html(accounting.formatMoney(parameters.additionalStateWitholding));
 			
 			$('#grossEarnings').html(paycheckData.grossEarnings);
 			$('#regEarnings').html(paycheckData.grossEarnings);
