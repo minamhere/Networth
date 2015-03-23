@@ -205,7 +205,7 @@ app.get('/api/calcPaycheck', function (request,response){
 			var ssTax = results.getFedTax[1]/payPeriods;
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
-			stateTax += = additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
+			stateTax += additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
 			var retirementContribution = retirement/payPeriods;
 			var afterTaxDeductionPerPaycheck = afterTaxDeduction/payPeriods;
 
