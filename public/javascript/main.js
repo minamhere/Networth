@@ -27,8 +27,8 @@ $(function(){
 	$('#calculate').click(function(){
 		//if ($('#income').val() > 0){return false;}
 		// Check for valid inputs
-		var strippedIncome = $('#income').val().replace(/\D/g,'');
-		var strippedRetirement = $('#retirementInput').val().replace(/\D/g,'');
+		var strippedIncome = $('#income').val().replace(/[^\d.-]/g, '');
+		var strippedRetirement = $('#retirementInput').val().replace(/[^\d.-]/g, '');
 		
 		if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
 			alert('Retirement savings must be less than Gross Income');
@@ -36,13 +36,13 @@ $(function(){
 		};
 		
 		var strippedFedAllowances = $('#fedAllowancesInput').val().replace(/\D/g,'');
-		var strippedStateAllowances = $('#stateFilingStatusSelect').val().replace(/\D/g,'');
+		var strippedStateAllowances = $('#stateAllowancesInput').val().replace(/\D/g,'');
 
 		var parameters = { 
 			income: strippedIncome, 
 			payFrequency: $('#payFrequency').val(),
-			fedFilingStatus: strippedFedAllowances,
-			fedAllowances: $('#fedAllowancesInput').val(),
+			fedFilingStatus: ,$('#fedFilingStatusSelect').val()
+			fedAllowances: strippedFedAllowances,
 			state: $('#stateSelect').val(),
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
 			stateAllowances: strippedStateAllowances,
