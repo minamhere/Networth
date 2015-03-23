@@ -127,6 +127,7 @@ app.get('/api/calcPaycheck', function (request,response){
 	var additionalStateWitholding = request.query.additionalStateWitholding;
 	
 	var retirement = request.query.retirement;
+	var afterTaxDeduction = request.query.afterTaxDeduction;
 
 	var taxyear = 2015;
 
@@ -206,6 +207,8 @@ app.get('/api/calcPaycheck', function (request,response){
 			var stateTax = results.getStateTax/payPeriods;
 			var stateTax += = additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
 			var retirementContribution = retirement/payPeriods;
+			var afterTaxDeductionPerPaycheck = afterTaxDeduction/payPeriods;
+
 			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
 
 			responseText = {
@@ -219,7 +222,8 @@ app.get('/api/calcPaycheck', function (request,response){
 				totalTax: accounting.formatMoney(fedTax+ssTax+medTax+stateTax),
 				retirement: accounting.formatMoney(retirementContribution),
 				paySchedule: results.getPayPeriods.name,
-				takehomePay: accounting.formatMoney(takehomePay)
+				takehomePay: accounting.formatMoney(takehomePay),
+				afterTaxDeduction: accounting.formatMoney(afterTaxDeductionPerPaycheck)
 			};
 
 			response.send(JSON.stringify(responseText));

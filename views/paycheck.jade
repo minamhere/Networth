@@ -49,6 +49,9 @@ block content
 		div Retirement Contributions (401k, etc.)
 			input#retirementInput(type='number', name='retirement', placeholder='Retirement')
 
+		div After Tax Deductions (Disability, etc.)
+			input#afterTaxDeductionInput(type='number', name='afterTaxDeduction', placeholder='After Tax Deductions')
+
 
 		div#calc 				
 			input#calculate(type='submit',value='Calculate Takehome Paycheck')
@@ -164,6 +167,6 @@ block content
 					td.filledValue#retirementContributions x
 					td.filledValue#retirementContributionsYTD x
 					td Disability
-					td.filledValue#disabilityContributions x
-					td.filledValue#disabilityContributionsYTD x
+					td.filledValue#afterTaxDeduction x
+					td.filledValue#afterTaxDeductionYTD x
 

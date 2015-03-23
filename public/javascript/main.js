@@ -41,6 +41,8 @@ $(function(){
 		var strippedAdditionalStateWitholding = $('#additionalStateWitholding').val().replace(/[^\d.-]/g, '');
 		var strippedAdditionalFederalWitholding = $('#additionalFederalWitholding').val().replace(/[^\d.-]/g, '');
 
+		var strippedAfterTaxDeduction = $('#afterTaxDeductionInput').val().replace(/[^\d.-]/g, '');
+
 		var parameters = { 
 			income: strippedIncome, 
 			payFrequency: $('#payFrequency').val(),
@@ -51,7 +53,8 @@ $(function(){
 			stateFilingStatus: $('#stateFilingStatusSelect').val(),
 			stateAllowances: strippedStateAllowances,
 			additionalStateWitholding: strippedAdditionalStateWitholding,
-			retirement: strippedRetirement
+			retirement: strippedRetirement,
+			afterTaxDeduction: afterTaxDeductionInput,
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
@@ -78,6 +81,7 @@ $(function(){
 			$('#stateName').html(paycheckData.stateName);
 			
 			$('#retirementContributions').html(paycheckData.retirement);
+			$('#afterTaxDeduction').html(paycheckData.afterTaxDeduction);
 			$('#paySchedule').html(paycheckData.paySchedule);
 			
 		});
