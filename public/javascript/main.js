@@ -54,7 +54,7 @@ $(function(){
 			stateAllowances: strippedStateAllowances,
 			additionalStateWitholding: strippedAdditionalStateWitholding,
 			retirement: strippedRetirement,
-			afterTaxDeduction: afterTaxDeductionInput,
+			afterTaxDeduction: strippedAfterTaxDeduction
 		 };
 		$.get( '/api/calcPaycheck',parameters, function(data) {
 			paycheckData = $.parseJSON(data);
