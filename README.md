@@ -46,3 +46,12 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
 ### [Node.js](https://nodejs.org)
 Probably want this... Even if just for npm.
+If this is a new installation, you can automatically download the required libraries:
+```
+sudo npm install -g npm-install-missing
+npm-install-missing
+```
+If you want to find outdated packages:
+```
+npm outdated
+```
