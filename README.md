@@ -43,3 +43,6 @@ Configure [Command Line Tools](http://postgresapp.com/documentation/cli-tools.ht
 vim ~/.bash_profile
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 ```
+
+### [Node.js](https://nodejs.org)
+Probably want this... Even if just for npm.
