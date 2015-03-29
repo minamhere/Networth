@@ -27,7 +27,8 @@
 			<input  id="income" type='number' name='income' placeholder='Income'></input>
 		</div>
 		<div> Pay Frequency:
-			<select id="payFrequency">	each frequency in pageInfo.payFrequencies option(value='#{frequency.id}') #{frequency.chedulename}
+			<select id="payFrequency">
+				<option ng-repeat="frequency in paycheck.payFrequencies" value="{{frequency.id}}">{{frequency.schedulename}}</option>
 		</div>
 		<div> Federal Filing Status: 
 			<select id="fedFilingStatusSelect">

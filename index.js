@@ -93,6 +93,20 @@ app.get('/getFilingStatusFromID',function (req,res){
 	});
 });
 
+app.get('/api/getFilingStatuses',function(request, response){
+	getFilingStatuses(function(err, data){
+		if (err) console.error(err);
+		repsonse.json(data);
+	});
+});
+
+app.get('/api/getPayFrequencies',function(request, response){
+	getPayFrequencies(function(err, data){
+		if (err) console.error(err);
+		repsonse.json(data);
+	});
+});
+
 app.post('/api/createNewBracket', function (request, response){
 	console.log('request'+request.body);
 	var jurisdiction = request.body.jurisdiction;
