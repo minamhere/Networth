@@ -27,13 +27,10 @@
 			<input  id="income" type='number' name='income' placeholder='Income'></input>
 		</div>
 		<div> Pay Frequency:
-			<select id="payFrequency">
-				<option ng-repeat="frequency in paycheck.payFrequencies" value="{{frequency.id}}">{{frequency.schedulename}}</option>
+			<select id="payFrequency" ng-model="myFrequency" ng-options="frequency.id for frequency in payFrequencies"></select>
 		</div>
 		<div> Federal Filing Status: 
-			<select id="fedFilingStatusSelect">
-				<option ng-repeat="filingStatus in paycheck.filingStatuses" value="{{filingstatus.id}}">{{filingStatus.statusname}}</option>
-			</select>
+			<select id="fedFilingStatusSelect" ng-model="myFilingStatus" ng-options="filingStatus.id for filingStatus in paycheck.filingStatuses"></select>
 		</div>
 		<div> Federal Allowances:
 			<input id="fedAllowancesInput" type='number' name='fedAllowances' placeholder='Fed Allowances'>
