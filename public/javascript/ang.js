@@ -42,7 +42,7 @@ angular.module('paycheckCalculator', [])
 			});
 
 
-		paycheck.calculate = function () {
+		$scope.calculate = function () {
 			//if ($('#income').val() > 0){return false;}
 			// Check for valid inputs
 			var strippedIncome = $('#income').val().replace(/[^\d.-]/g, '');
@@ -107,8 +107,4 @@ angular.module('paycheckCalculator', [])
 		
 
 
-	    paycheck.addTodo = function() {
-	      paycheck.todos.push({text:paycheck.todoText, done:false});
-	      paycheck.todoText = '';
-	    };
 });
