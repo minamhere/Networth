@@ -55,8 +55,8 @@ angular.module('paycheckCalculator', [])
 				return false;
 			};
 			
-			var strippedFedAllowances = $scope.paycheck.fedAllowancesInput;
-			var strippedStateAllowances = $scope.paycheck.stateAllowancesInput;
+			var strippedFedAllowances = $scope.paycheck.fedAllowances;
+			var strippedStateAllowances = $scope.paycheck.stateAllowances;
 
 			var strippedAdditionalStateWitholding = $scope.paycheck.additionalStateWitholding;
 			var strippedAdditionalFederalWitholding = $scope.paycheck.additionalFederalWitholding;
@@ -65,12 +65,12 @@ angular.module('paycheckCalculator', [])
 
 			var parameters = { 
 				income: strippedIncome, 
-				payFrequency: $scope.paycheck.payFrequency,
-				fedFilingStatus: $scope.paycheck.fedFilingStatusSelect,
+				payFrequency: $scope.paycheck.payFrequency.id,
+				fedFilingStatus: $scope.paycheck.fedFilingStatus.id,
 				fedAllowances: strippedFedAllowances,			
 				additionalFederalWitholding: strippedAdditionalFederalWitholding,
-				state: $scope.paycheck.stateSelect,
-				stateFilingStatus: $scope.paycheck.stateFilingStatusSelect,
+				state: $scope.paycheck.state.id,
+				stateFilingStatus: $scope.paycheck.stateFilingStatus.id,
 				stateAllowances: strippedStateAllowances,
 				additionalStateWitholding: strippedAdditionalStateWitholding,
 				retirement: strippedRetirement,
