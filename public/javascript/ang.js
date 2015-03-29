@@ -29,9 +29,4 @@ angular.module('paycheckCalculator', [])
 	      paycheck.todos.push({text:paycheck.todoText, done:false});
 	      paycheck.todoText = '';
 	    };
- 
-   
- 
-   
-	};
 });
