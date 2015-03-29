@@ -47,30 +47,30 @@ angular.module('paycheckCalculator', [])
 			// Check for valid inputs
 			console.log($scope);
 			console.log($scope.paycheck);
-			var strippedIncome = $scope.paycheck.income.replace(/[^\d.-]/g, '');
-			var strippedRetirement = $('#retirementInput').val().replace(/[^\d.-]/g, '');
+			var strippedIncome = $scope.paycheck.income;
+			var strippedRetirement = $scope.paycheck.retirementInput;
 			
 			if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
 				alert('Retirement savings must be less than Gross Income');
 				return false;
 			};
 			
-			var strippedFedAllowances = $('#fedAllowancesInput').val().replace(/\D/g,'');
-			var strippedStateAllowances = $('#stateAllowancesInput').val().replace(/\D/g,'');
+			var strippedFedAllowances = $scope.paycheck.fedAllowancesInput;
+			var strippedStateAllowances = $scope.paycheck.stateAllowancesInput;
 
-			var strippedAdditionalStateWitholding = $('#additionalStateWitholding').val().replace(/[^\d.-]/g, '');
-			var strippedAdditionalFederalWitholding = $('#additionalFederalWitholding').val().replace(/[^\d.-]/g, '');
+			var strippedAdditionalStateWitholding = $scope.paycheck.additionalStateWitholding;
+			var strippedAdditionalFederalWitholding = $scope.paycheck.additionalFederalWitholding;
 
-			var strippedAfterTaxDeduction = $('#afterTaxDeductionInput').val().replace(/[^\d.-]/g, '');
+			var strippedAfterTaxDeduction = $scope.paycheck.afterTaxDeductionInput;
 
 			var parameters = { 
 				income: strippedIncome, 
-				payFrequency: $('#payFrequency').val(),
-				fedFilingStatus: $('#fedFilingStatusSelect').val(),
+				payFrequency: $scope.paycheck.payFrequency,
+				fedFilingStatus: $scope.paycheck.fedFilingStatusSelect,
 				fedAllowances: strippedFedAllowances,			
 				additionalFederalWitholding: strippedAdditionalFederalWitholding,
-				state: $('#stateSelect').val(),
-				stateFilingStatus: $('#stateFilingStatusSelect').val(),
+				state: $scope.paycheck.stateSelect,
+				stateFilingStatus: $scope.paycheck.stateFilingStatusSelect,
 				stateAllowances: strippedStateAllowances,
 				additionalStateWitholding: strippedAdditionalStateWitholding,
 				retirement: strippedRetirement,
