@@ -273,6 +273,10 @@ app.get('/',function (request, response) {
   response.redirect('/paycheck');
 });
 
+app.get('/angular',function (request, response) {
+        response.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+ });
+
 app.get('/newuser', function (request, response) {
   response.render('newuser');
 });
