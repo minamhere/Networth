@@ -19,6 +19,198 @@
 </head>
 <body>
 
+<h1> Paycheck Calculator</h1>
+
+	<div id="paycheckCalculator">
+		<div> Gross Annual Income: 
+			<input  id="income" type='number' name='income' placeholder='Income'></input>
+		</div>
+		<div> Pay Frequency:
+			<select id="payFrequency">	each frequency in pageInfo.payFrequencies option(value='#{frequency.id}') #{frequency.chedulename}
+		</div>
+		<div> Federal Filing Status: 
+			<select id="fedFilingStatusSelect">
+				each filingStatus in pageInfo.filingStatuses
+						option(value='#{filingStatus.id}') #{filingStatus.statusname}
+		</div>
+		<div> Federal Allowances:
+			<input id="fedAllowancesInput" type='number' name='fedAllowances' placeholder='Fed Allowances'>
+		</div>
+		
+		<div> Additional Federal Witholding
+			<input id="additionalFederalWitholding" type='number' name='additionalFederalWitholding' placeholder='Additional Annual Federal Witholding'>
+		</div>
+
+		<div> State:
+			<select id="stateSelect"> each state in pageInfo.states option(value='#{state.id}') #{state.name}
+			</select>
+		</div>
+
+
+		<div> State Filing Status: 
+			<select id="stateFilingStatusSelect">				each filingStatus in pageInfo.filingStatuses option(value='#{filingStatus.id}') #{filingStatus.statusname}
+			</select>
+		</div>
+
+		<div> State Allowances:
+			<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='State Allowances'>
+		</div>
+
+		<div> Additional State Witholding
+			<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional Annual State Witholding'>
+		</div>
+
+		<div> Retirement Contributions (401k, etc.)
+			<input id="retirementInput" type='number' name='retirement' placeholder='Retirement'>
+		</div>
+
+		<div> After Tax Deductions (Disability, etc.)
+			<input id="afterTaxDeductionInput" type='number' name='afterTaxDeduction' placeholder='After Tax Deductions'>
+		</div>
+
+		<div id="calc">
+			<input id="calculate" type='submit',value='Calculate Takehome Paycheck'>
+		</div>
+
+
+		<div id="samplePaystub" class="paystub">
+			<table>
+				<tbody>
+					<tr> 
+						<th colspan="6">General</th>
+					</tr>
+					<tr> 
+						<th colspan="6">Tax Data</th>
+					</tr>
+					<tr> 
+						<td>Federal Filing Status</td>
+						<td id="fedFilingStatus" class="filledValue">x</td>
+						<td></td>
+						<td></td>
+						<td>State Filing Status</td>
+						<td id="stateFilingStatus" class="filledValue">x</td>
+					</tr>
+					<tr>
+					<td>Federal Allowances</td>
+					<td id="fedAllowances" class="filledValue">x</td>
+					<td></td>
+					<td></td>
+					<td>State Allowances</td>
+					<td id="stateAllowances" class="filledValue">x</td>
+				</tr>
+				<tr>
+					<td>Federal Annual Additional Witholding</td>
+					<td id="fedAdditionalWitholding" class="filledValue">x</td>
+					<td></td>
+					<td></td>
+					<td>State Annual Additional Witholding</td>
+					<td id="stateAdditionalWitholding" class="filledValue">x</td>
+				</tr>
+					<tr>
+						<th colspan="6">Paycheck Summary</th>
+					</tr>
+					<tr>
+						<th></th>
+						<th>Gross Earnings</th>
+						<th>Federal Taxable Gross</th>
+						<th>Total Taxes</th>
+						<th>Total Deductions</th>
+						<th>Total Net Pay</th>
+					</tr>
+					<tr>
+						<th>Current</th>
+						<td id="grossEarnings" class="filledValue">x</td>
+						<td id="fedGrossEarnings" class="filledValue">x</td>
+						<td id="totalTax" class="filledValue">x</td>
+						<td id="totalDeductions" class="filledValue">x</td>
+						<td id="takehomePay" class="filledValue">x</td>
+					</tr>
+					<tr>
+						<th>YTD</th>
+						<td>x</td>
+						<td>x</td>
+						<td>x</td>
+						<td>x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<th colspan="6">Earnings and Taxes</th>
+					</tr>
+					<tr>
+						<th colspan="3">Earnings</th>
+						<th colspan="3">Taxes</th>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>Yth Amount</th>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>YTD Amount</th>
+					</tr>
+					<tr>
+						<td>Regular Earnings</td>
+						<td id="regEarnings" class="filledValue">x</td>
+						<td>x</td>
+						<td>Fed Witholding</td>
+						<td id="fedTax" class="filledValue">x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Medicare Witholding</td>
+						<td id="medicareTax" class="filledValue">x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Social Security Witholding</td>
+						<td id="ssTax" class="filledValue">x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td> <span id="stateName">State</span><span> Witholding</span></td>
+						<td id="stateTax" class="filledValue">x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<th colspan="6">Deductions</th>
+					</tr>
+					<tr>
+						<th colspan="3">Before-Tax Deductions</th>
+						<th colspan="3">After-Tax Deductions</th>
+					</tr>
+					<tr>
+						<th>Description </th>
+						<th>Amount </th>
+						<th>YTD Amount</th>
+						<th>Description </th>
+						<th>Amount </th>
+						<th>YTD Amount</th>
+					</tr>
+					<tr>
+						<td>401k</td>
+						<td id="retirementContributions" class="filledValue">x</td>
+						<td id="retirementContributionsYTD" class="filledValue">x</td>
+						<td>Disability</td>
+						<td id="afterTaxDeduction" class="filledValue">x</td>
+						<td id="afterTaxDeductionYTD" class="filledValue">x</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+
+
+
 </body>
 
 </html>
