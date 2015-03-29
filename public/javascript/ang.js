@@ -1,5 +1,5 @@
 angular.module('paycheckCalculator', [])
-	.controller('PaycheckController', function() {
+	.controller('PaycheckController', function($scope, $http) {
 		var paycheck = this;
 
 	    $http.get('/api/getFilingStatuses').
