@@ -103,7 +103,7 @@ app.get('/api/getFilingStatuses',function(request, response){
 app.get('/api/getPayFrequencies',function(request, response){
 	getPayFrequencies(function(err, data){
 		if (err) console.error(err);
-		repsonse.json(data);
+		response.json(data);
 	});
 });
 
