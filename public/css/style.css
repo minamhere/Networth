@@ -1,0 +1,22 @@
+/* style.css */
+
+.table { display: table; } 
+.tableRow { display: table-row; }
+.tableCell { display: table-cell; }
+
+h1 {text-align: center;}
+
+div#paycheckCalculator{
+	margin: auto; 
+	text-align: left;
+	width: 750px;
+}
+
+table, th, td {
+	border: solid;
+	border-width: 1px;
+}
+
+.filledValue {
+	text-align: center;
+}

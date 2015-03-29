@@ -1,18 +1,19 @@
 <!doctype html>
 
-<html ng-app>
+<html ng-app="paycheckCalculator">
 <head>
 <title> Paycheck Calculator </title>
 
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"><!-- load bootstrap -->
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/style.css">
 
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="javascript/accounting.min.js"></script>
 	<script src="javascript/main.js"></script>
+	<script src="javascript/ang.js"></script>
 
 
 
@@ -21,7 +22,7 @@
 
 <h1> Paycheck Calculator</h1>
 
-	<div id="paycheckCalculator">
+	<div id="paycheckCalculator" ng-controller="PaycheckController as paycheck">
 		<div> Gross Annual Income: 
 			<input  id="income" type='number' name='income' placeholder='Income'></input>
 		</div>
@@ -30,8 +31,8 @@
 		</div>
 		<div> Federal Filing Status: 
 			<select id="fedFilingStatusSelect">
-				each filingStatus in pageInfo.filingStatuses
-						option(value='#{filingStatus.id}') #{filingStatus.statusname}
+				<option ng-repeat="filingStatus in paycheck.filingStatuses" value="{{filingstatus.id}}">{{filingStatus.statusname}}</option>
+			</select>
 		</div>
 		<div> Federal Allowances:
 			<input id="fedAllowancesInput" type='number' name='fedAllowances' placeholder='Fed Allowances'>
