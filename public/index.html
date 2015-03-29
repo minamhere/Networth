@@ -41,14 +41,10 @@
 		</div>
 
 		<div> State:
-			<select id="stateSelect"> each state in pageInfo.states option(value='#{state.id}') #{state.name}
-			</select>
+			<select id="stateSelect" ng-model="myState" ng-options="state.id as state.name for state in states"></select>
 		</div>
-
-
 		<div> State Filing Status: 
-			<select id="stateFilingStatusSelect">				each filingStatus in pageInfo.filingStatuses option(value='#{filingStatus.id}') #{filingStatus.statusname}
-			</select>
+			<select id="stateFilingStatusSelect" ng-model="myStateFilingStatus" ng-options="filingStatus.id as filingStatus.statusname for filingStatus in filingStatuses"></select>
 		</div>
 
 		<div> State Allowances:

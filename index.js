@@ -108,6 +108,13 @@ app.get('/api/getPayFrequencies',function(request, response){
 	});
 });
 
+app.get('/api/getStates', function(request, response){
+	getJurisdictions('State', function(err, data){
+		if (err) console.error(err);
+		response.json(data);
+	});
+});
+
 app.post('/api/createNewBracket', function (request, response){
 	console.log('request'+request.body);
 	var jurisdiction = request.body.jurisdiction;
