@@ -7,6 +7,8 @@ angular.module('paycheckCalculator', [])
 				// this callback will be called asynchronously
 				// when the response is available
 				$scope.filingStatuses = data;
+				$scope.selectedItem = $scope.filingStatuses[0];
+
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
@@ -18,6 +20,8 @@ angular.module('paycheckCalculator', [])
 				// this callback will be called asynchronously
 				// when the response is available
 				$scope.payFrequencies = data;
+				$scope.selectedItem = $scope.payFrequencies[0];
+
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
@@ -29,6 +33,8 @@ angular.module('paycheckCalculator', [])
 				// this callback will be called asynchronously
 				// when the response is available
 				$scope.states = data;
+				$scope.selectedItem = $scope.states[0];
+
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
