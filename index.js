@@ -96,7 +96,7 @@ app.get('/getFilingStatusFromID',function (req,res){
 app.get('/api/getFilingStatuses',function(request, response){
 	getFilingStatuses(function(err, data){
 		if (err) console.error(err);
-		console.log(JSON.stringify(data);
+		console.log(JSON.stringify(data));
 		repsonse.json(data);
 	});
 });
@@ -104,7 +104,7 @@ app.get('/api/getFilingStatuses',function(request, response){
 app.get('/api/getPayFrequencies',function(request, response){
 	getPayFrequencies(function(err, data){
 		if (err) console.error(err);
-		console.log(JSON.stringify(data);
+		console.log(JSON.stringify(data));
 		response.json(data);
 	});
 });
