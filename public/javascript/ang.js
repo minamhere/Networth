@@ -42,7 +42,7 @@ angular.module('paycheckCalculator', [])
 			});
 
 
-		$scope.calculate = function ($scope, $http) {
+		$scope.calculate = function () {
 			//if ($('#income').val() > 0){return false;}
 			// Check for valid inputs
 			console.log($scope);
