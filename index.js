@@ -96,7 +96,7 @@ app.get('/getFilingStatusFromID',function (req,res){
 app.get('/api/getFilingStatuses',function(request, response){
 	getFilingStatuses(function(err, data){
 		if (err) console.error(err);
-		repsonse.json(data);
+		response.json(data);
 	});
 });
 
