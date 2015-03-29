@@ -46,7 +46,7 @@ angular.module('paycheckCalculator', [])
 			//if ($('#income').val() > 0){return false;}
 			// Check for valid inputs
 			console.log($scope);
-			var strippedIncome = $scope.income.replace(/[^\d.-]/g, '');
+			var strippedIncome = $scope.paycheck.income.replace(/[^\d.-]/g, '');
 			var strippedRetirement = $('#retirementInput').val().replace(/[^\d.-]/g, '');
 			
 			if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
