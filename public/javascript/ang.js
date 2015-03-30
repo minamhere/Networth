@@ -80,29 +80,29 @@ angular.module('paycheckCalculator', [])
 				paycheckData = $.parseJSON(data);
 				var totalDeductions = paycheckData.retirement;
 				
-				$('#fedFilingStatus').html(parameters.fedFilingStatus + ' - ' + $('#fedFilingStatusSelect option:selected').text());
-				$('#stateFilingStatus').html(parameters.stateFilingStatus + ' - ' + $('#stateFilingStatusSelect option:selected').text());
-				$('#fedAllowances').html(parameters.fedAllowances);
-				$('#stateAllowances').html(parameters.stateAllowances);
-				$('#fedAdditionalWitholding').html(accounting.formatMoney(parameters.additionalFederalWitholding));
-				$('#stateAdditionalWitholding').html(accounting.formatMoney(parameters.additionalStateWitholding));
+				$scope.fedFilingStatus = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
+				$scope.stateFilingStatus = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
+				$scope.fedAllowances = strippedFedAllowances;
+				$scope.stateAllowances = strippedStateAllowances;
+				$scope.fedAdditionalWitholding = strippedAdditionalFederalWitholding;
+				$scope.stateAdditionalWitholding = strippedAdditionalStateWitholding;
 				
-				$('#grossEarnings').html(paycheckData.grossEarnings);
-				$('#regEarnings').html(paycheckData.grossEarnings);
-				$('#fedGrossEarnings').html(paycheckData.fedGrossEarnings);
-				$('#totalTax').html(paycheckData.totalTax);
-				$('#totalDeductions').html(totalDeductions);
-				$('#takehomePay').html(paycheckData.takehomePay);
+				$scope.grossEarnings = paycheckData.grossEarnings;
+				$scope.regEarnings = paycheckData.grossEarnings;
+				$scope.fedGrossEarnings = paycheckData.fedGrossEarnings;
+				$scope.totalTax = paycheckData.totalTax;
+				$scope.totalDeductions = totalDeductions;
+				$scope.takehomePay = paycheckData.takehomePay;
 
-				$('#fedTax').html(paycheckData.fedTax);
-				$('#ssTax').html(paycheckData.ssTax);
-				$('#medicareTax').html(paycheckData.medTax);
-				$('#stateTax').html(paycheckData.stateTax);
-				$('#stateName').html(paycheckData.stateName);
+				$scope.fedTax = paycheckData.fedTax;
+				$scope.ssTax = paycheckData.ssTax;
+				$scope.medicareTax = paycheckData.medTax;
+				$scope.stateTax = paycheckData.stateTax;
+				$scope.stateName = paycheckData.stateName;
 				
-				$('#retirementContributions').html(paycheckData.retirement);
-				$('#afterTaxDeduction').html(paycheckData.afterTaxDeduction);
-				$('#paySchedule').html(paycheckData.paySchedule);
+				$scope.retirementContributions = paycheckData.retirement;
+				$scope.afterTaxDeduction = paycheckData.afterTaxDeduction;
+				$scope.paySchedule = paycheckData.paySchedule;
 				
 			});
 		};
