@@ -89,19 +89,19 @@
 					</tr>
 					<tr>
 					<td>Federal Allowances</td>
-					<td id="fedAllowances"  ng-model="paycheck.fedAllowances">x</td>
+					<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
 					<td></td>
 					<td></td>
 					<td>State Allowances</td>
-					<td id="stateAllowances"  ng-model="paycheck.stateAllowances">x</td>
+					<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
 				</tr>
 				<tr>
 					<td>Federal Annual Additional Witholding</td>
-					<td id="fedAdditionalWitholding"  ng-model="paycheck.fedAdditionalWitholding">x</td>
+					<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub }}</td>
 					<td></td>
 					<td></td>
 					<td>State Annual Additional Witholding</td>
-					<td id="stateAdditionalWitholding"  ng-model="paycheck.stateAdditionalWitholding">x</td>
+					<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub }}</td>
 				</tr>
 					<tr>
 						<th colspan="6">Paycheck Summary</th>
@@ -116,11 +116,11 @@
 					</tr>
 					<tr>
 						<th>Current</th>
-						<td id="grossEarnings"  ng-model="paycheck.grossEarnings">x</td>
-						<td id="fedGrossEarnings"  ng-model="paycheck.fedGrossEarnings">x</td>
-						<td id="totalTax"  ng-model="paycheck.totalTax">x</td>
-						<td id="totalDeductions"  ng-model="paycheck.totalDeductions">x</td>
-						<td id="takehomePay"  ng-model="paycheck.takehomePay">x</td>
+						<td id="grossEarnings">{{ grossEarningsPaystub }}</td>
+						<td id="fedGrossEarnings">{{ fedGrossEarningsPaystub }}</td>
+						<td id="totalTax">{{ totalTaxPaystub }}</td>
+						<td id="totalDeductions">{{ totalDeductionsPaystub }}</td>
+						<td id="takehomePay">{{ takehomePayPaystub }}</td>
 					</tr>
 					<tr>
 						<th>YTD</th>
@@ -147,10 +147,10 @@
 					</tr>
 					<tr>
 						<td>Regular Earnings</td>
-						<td id="regEarnings"  ng-model="paycheck.regEarnings">x</td>
+						<td id="regEarnings">{{ regEarningsPaystub }}</td>
 						<td>x</td>
 						<td>Fed Witholding</td>
-						<td id="fedTax"  ng-model="paycheck.fedTax">x</td>
+						<td id="fedTax">{{ fedTaxPaystub }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@
 						<td></td>
 						<td></td>
 						<td>Medicare Witholding</td>
-						<td id="medicareTax"  ng-model="paycheck.medicareTax">x</td>
+						<td id="medicareTax">{{ medicareTaxPaystub }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -166,7 +166,7 @@
 						<td></td>
 						<td></td>
 						<td>Social Security Witholding</td>
-						<td id="ssTax"  ng-model="paycheck.ssTax">x</td>
+						<td id="ssTax">{{ ssTaxPaystub }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -174,7 +174,7 @@
 						<td></td>
 						<td></td>
 						<td> <span id="stateName" ng-model="paycheck.stateName">State</span><span> Witholding</span></td>
-						<td id="stateTax"  ng-model="paycheck.stateTax">x</td>
+						<td id="stateTax">{{ stateTaxPaystub }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -194,11 +194,11 @@
 					</tr>
 					<tr>
 						<td>401k</td>
-						<td id="retirementContributions"  ng-model="paycheck.retirementContributions">x</td>
-						<td id="retirementContributionsYTD"  ng-model="paycheck.retirementContributionsYTD">x</td>
+						<td id="retirementContributions">{{ retirementContributionsPaystub }}</td>
+						<td id="retirementContributionsYTD">{{ retirementContributionsYTDPaystub }}</td>
 						<td>Disability</td>
-						<td id="afterTaxDeduction"  ng-model="paycheck.afterTaxDeduction">x</td>
-						<td id="afterTaxDeductionYTD"  ng-model="paycheck.afterTaxDeductionYTD">x</td>
+						<td id="afterTaxDeduction">{{ afterTaxDeductionPaystub }}</td>
+						<td id="afterTaxDeductionYTD">{{ afterTaxDeductionYTDPaystub }}</td>
 					</tr>
 				</tbody>
 			</table>

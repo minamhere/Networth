@@ -87,27 +87,27 @@ angular.module('paycheckCalculator', [])
 					
 					$scope.fedFilingStatusPaystub = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
 					$scope.stateFilingStatusPaystub = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
-					$scope.fedAllowances = strippedFedAllowances;
-					$scope.stateAllowances = strippedStateAllowances;
-					$scope.fedAdditionalWitholding = strippedAdditionalFederalWitholding;
-					$scope.stateAdditionalWitholding = strippedAdditionalStateWitholding;
+					$scope.fedAllowancesPaystub = strippedFedAllowances;
+					$scope.stateAllowancesPaystub = strippedStateAllowances;
+					$scope.fedAdditionalWitholdingPaystub = strippedAdditionalFederalWitholding;
+					$scope.stateAdditionalWitholdingPaystub = strippedAdditionalStateWitholding;
 					
-					$scope.grossEarnings = paycheckData.grossEarnings;
-					$scope.regEarnings = paycheckData.grossEarnings;
-					$scope.fedGrossEarnings = paycheckData.fedGrossEarnings;
-					$scope.totalTax = paycheckData.totalTax;
-					$scope.totalDeductions = totalDeductions;
-					$scope.takehomePay = paycheckData.takehomePay;
+					$scope.grossEarningsPaystub = paycheckData.grossEarnings;
+					$scope.regEarningsPaystub = paycheckData.grossEarnings;
+					$scope.fedGrossEarningsPaystub = paycheckData.fedGrossEarnings;
+					$scope.totalTaxPaystub = paycheckData.totalTax;
+					$scope.totalDeductionsPaystub = totalDeductions;
+					$scope.takehomePayPaystub = paycheckData.takehomePay;
 
-					$scope.fedTax = paycheckData.fedTax;
-					$scope.ssTax = paycheckData.ssTax;
-					$scope.medicareTax = paycheckData.medTax;
-					$scope.stateTax = paycheckData.stateTax;
-					$scope.stateName = paycheckData.stateName;
+					$scope.fedTaxPaystub = paycheckData.fedTax;
+					$scope.ssTaxPaystub = paycheckData.ssTax;
+					$scope.medicareTaxPaystub = paycheckData.medTax;
+					$scope.stateTaxPaystub = paycheckData.stateTax;
+					$scope.stateNamePaystub = paycheckData.stateName;
 					
-					$scope.retirementContributions = paycheckData.retirement;
-					$scope.afterTaxDeduction = paycheckData.afterTaxDeduction;
-					$scope.paySchedule = paycheckData.paySchedule;
+					$scope.retirementContributionsPaystub = paycheckData.retirement;
+					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
+					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
 				}).
 				error(function(data, status, headers, config) {
