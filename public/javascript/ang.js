@@ -85,8 +85,8 @@ angular.module('paycheckCalculator', [])
 					paycheckData = data;
 					var totalDeductions = paycheckData.retirement;
 					
-					$scope.fedFilingStatus = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
-					$scope.stateFilingStatus = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
+					$scope.fedFilingStatusPaystub = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
+					$scope.stateFilingStatusPaystub = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
 					$scope.fedAllowances = strippedFedAllowances;
 					$scope.stateAllowances = strippedStateAllowances;
 					$scope.fedAdditionalWitholding = strippedAdditionalFederalWitholding;
