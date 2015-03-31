@@ -84,7 +84,7 @@
 						<td id="fedFilingStatus">{{ fedFilingStatusPaystub }}</td>
 						<td></td>
 						<td></td>
-						<td>State Filing Status</td>
+						<td>{{ paycheck.state.name || "State" }}  Filing Status</td>
 						<td id="stateFilingStatus">{{ stateFilingStatusPaystub }}</td>
 					</tr>
 					<tr>
@@ -92,7 +92,7 @@
 					<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
 					<td></td>
 					<td></td>
-					<td>State Allowances</td>
+					<td>{{ paycheck.state.name || "State" }}  Allowances</td>
 					<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
 				</tr>
 				<tr>
@@ -100,7 +100,7 @@
 					<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
 					<td></td>
 					<td></td>
-					<td>State Annual Additional Witholding</td>
+					<td>{{ paycheck.state.name || "State" }}  Annual Additional Witholding</td>
 					<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
 				</tr>
 					<tr>
