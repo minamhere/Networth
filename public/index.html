@@ -40,7 +40,7 @@
 			<input id="additionalFederalWitholding" type='number' name='additionalFederalWitholding' placeholder='Additional Annual Federal Witholding' ng-model="paycheck.additionalFederalWitholding">
 		</div>
 
-		<div> {{ paycheck.state.name || "State" }} :
+		<div> State:
 			<select id="stateSelect" ng-model="paycheck.state" ng-options="state.name for state in states"></select>
 		</div>
 		<div> {{ paycheck.state.name || "State" }}  Filing Status: 
@@ -51,16 +51,16 @@
 			<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='State Allowances' ng-model="paycheck.stateAllowances">
 		</div>
 
-		<div> Additional {{ paycheck.state.name || "State" }}  Witholding
+		<div> Additional {{ paycheck.state.name || "State" }}  Witholding: 
 			<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional Annual State Witholding' ng-model="paycheck.additionalStateWitholding">
 		</div>
 
-		<div> Retirement Contributions (401k, etc.)
+		<div> Retirement Contributions (401k, etc.):
 			<input id="retirementInput" type='number' name='retirement' placeholder='Retirement' ng-model="paycheck.retirementInput">
 			<span class="icon-plus-sign"></span>
 		</div>
 
-		<div> After Tax Deductions (Disability, etc.)
+		<div> After Tax Deductions (Disability, etc.): 
 			<input id="afterTaxDeductionInput" type='number' name='afterTaxDeduction' placeholder='After Tax Deductions' ng-model="paycheck.afterTaxDeductionInput">
 			<span class="icon-plus-sign"></span>
 		</div>
