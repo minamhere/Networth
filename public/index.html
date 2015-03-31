@@ -40,18 +40,18 @@
 			<input id="additionalFederalWitholding" type='number' name='additionalFederalWitholding' placeholder='Additional Annual Federal Witholding' ng-model="paycheck.additionalFederalWitholding">
 		</div>
 
-		<div> State:
+		<div> {{ paycheck.state.name || "State" }} :
 			<select id="stateSelect" ng-model="paycheck.state" ng-options="state.name for state in states"></select>
 		</div>
-		<div> State Filing Status: 
+		<div> {{ paycheck.state.name || "State" }}  Filing Status: 
 			<select id="stateFilingStatusSelect" ng-model="paycheck.stateFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses"></select>
 		</div>
 
-		<div> State Allowances:
+		<div> {{ paycheck.state.name || "State" }}  Allowances:
 			<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='State Allowances' ng-model="paycheck.stateAllowances">
 		</div>
 
-		<div> Additional State Witholding
+		<div> Additional {{ paycheck.state.name || "State" }}  Witholding
 			<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional Annual State Witholding' ng-model="paycheck.additionalStateWitholding">
 		</div>
 
