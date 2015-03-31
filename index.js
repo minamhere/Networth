@@ -320,6 +320,7 @@ function handleState(stateInfo, callback){
 		// If they need some sort of special handling, we need to build a new function for them.
 		// This new function should be added below the VA function, so that "unknown" states will
 		// continue to "fall through" to the VA handling.
+		/*
 		case "7": // Alabama
 		case "8": // Alaska
 		case "9": // Arizona 
@@ -377,7 +378,7 @@ function handleState(stateInfo, callback){
 		case "61": // Palau
 		case "62": // Puerto Rico
 		case "63": // Virgin Islands
-		
+		*/
 		// These states all handle taxes similarly. They do not require special handling.
 		case "6": // Colorado. Listed before 3, so that it will fall through to case 3. Once VA code is correct, I will copy/paste expand to other states, but want CO to work while testing.
 		case "3": // Virginia
