@@ -218,7 +218,7 @@ app.get('/api/calcPaycheck', function (request,response){
 		},
 		function calcTakehome (err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-			var responseText = '<div id=\'AGI\'>Federal Annual AGI: '+accounting.formatMoney(results.getDedExempt.fedAGI)+'</div>\n';
+			var responseText = '';//<div id=\'AGI\'>Federal Annual AGI: '+results.getDedExempt.fedAGI+'</div>\n';
 			var takehomePay = 0;
 			var payPeriods = results.getPayPeriods.payperiods;
 			var grossEarnings = income/payPeriods;
@@ -235,18 +235,18 @@ app.get('/api/calcPaycheck', function (request,response){
 			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax-afterTaxDeductionPerPaycheck;
 
 			responseText = {
-				grossEarnings: accounting.formatMoney(grossEarnings),
-				fedGrossEarnings: accounting.formatMoney(fedGrossEarnings),
-				fedTax: accounting.formatMoney(fedTax), 
-				ssTax: accounting.formatMoney(ssTax), 
-				medTax: accounting.formatMoney(medTax),
-				stateTax: accounting.formatMoney(stateTax),
+				grossEarnings: grossEarnings,
+				fedGrossEarnings: fedGrossEarnings,
+				fedTax: fedTax, 
+				ssTax: ssTax, 
+				medTax: medTax,
+				stateTax: stateTax,
 				stateName: results.getStateName,
-				totalTax: accounting.formatMoney(fedTax+ssTax+medTax+stateTax),
-				retirement: accounting.formatMoney(retirementContribution),
+				totalTax: fedTax+ssTax+medTax+stateTax,
+				retirement: retirementContribution,
 				paySchedule: results.getPayPeriods.name,
-				takehomePay: accounting.formatMoney(takehomePay),
-				afterTaxDeduction: accounting.formatMoney(afterTaxDeductionPerPaycheck)
+				takehomePay: takehomePay,
+				afterTaxDeduction: afterTaxDeductionPerPaycheck
 			};
 
 			response.send(JSON.stringify(responseText));
@@ -420,7 +420,7 @@ function handleState(stateInfo, callback){
 		// This is where "non-standard" states should begin. 
 
 		default: 
-			console.log('Default state case. This should never happen.');
+			console.log('Default state case. This state has no tax information, do not calculate with it.');
 
 	}
 

@@ -97,11 +97,11 @@
 				</tr>
 				<tr>
 					<td>Federal Annual Additional Witholding</td>
-					<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub }}</td>
+					<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
 					<td></td>
 					<td></td>
 					<td>State Annual Additional Witholding</td>
-					<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub }}</td>
+					<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
 				</tr>
 					<tr>
 						<th colspan="6">Paycheck Summary</th>
@@ -116,11 +116,11 @@
 					</tr>
 					<tr>
 						<th>Current</th>
-						<td id="grossEarnings">{{ grossEarningsPaystub }}</td>
-						<td id="fedGrossEarnings">{{ fedGrossEarningsPaystub }}</td>
-						<td id="totalTax">{{ totalTaxPaystub }}</td>
-						<td id="totalDeductions">{{ totalDeductionsPaystub }}</td>
-						<td id="takehomePay">{{ takehomePayPaystub }}</td>
+						<td id="grossEarnings">{{ grossEarningsPaystub | currency }}</td>
+						<td id="fedGrossEarnings">{{ fedGrossEarningsPaystub | currency }}</td>
+						<td id="totalTax">{{ totalTaxPaystub | currency }}</td>
+						<td id="totalDeductions">{{ totalDeductionsPaystub | currency }}</td>
+						<td id="takehomePay">{{ takehomePayPaystub | currency }}</td>
 					</tr>
 					<tr>
 						<th>YTD</th>
@@ -147,10 +147,10 @@
 					</tr>
 					<tr>
 						<td>Regular Earnings</td>
-						<td id="regEarnings">{{ regEarningsPaystub }}</td>
+						<td id="regEarnings">{{ regEarningsPaystub | currency }}</td>
 						<td>x</td>
 						<td>Fed Witholding</td>
-						<td id="fedTax">{{ fedTaxPaystub }}</td>
+						<td id="fedTax">{{ fedTaxPaystub | currency }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@
 						<td></td>
 						<td></td>
 						<td>Medicare Witholding</td>
-						<td id="medicareTax">{{ medicareTaxPaystub }}</td>
+						<td id="medicareTax">{{ medicareTaxPaystub | currency }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -166,15 +166,15 @@
 						<td></td>
 						<td></td>
 						<td>Social Security Witholding</td>
-						<td id="ssTax">{{ ssTaxPaystub }}</td>
+						<td id="ssTax">{{ ssTaxPaystub | currency }}</td>
 						<td>x</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
 						<td></td>
-						<td> <span id="stateName" ng-model="paycheck.stateName">State</span><span> Witholding</span></td>
-						<td id="stateTax">{{ stateTaxPaystub }}</td>
+						<td> {{ state.name || "State" }} Witholding</span></td>
+						<td id="stateTax">{{ stateTaxPaystub | currency}}</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -194,11 +194,11 @@
 					</tr>
 					<tr>
 						<td>401k</td>
-						<td id="retirementContributions">{{ retirementContributionsPaystub }}</td>
-						<td id="retirementContributionsYTD">{{ retirementContributionsYTDPaystub }}</td>
+						<td id="retirementContributions">{{ retirementContributionsPaystub | currency }}</td>
+						<td id="retirementContributionsYTD">{{ retirementContributionsYTDPaystub | currency }}</td>
 						<td>Disability</td>
-						<td id="afterTaxDeduction">{{ afterTaxDeductionPaystub }}</td>
-						<td id="afterTaxDeductionYTD">{{ afterTaxDeductionYTDPaystub }}</td>
+						<td id="afterTaxDeduction">{{ afterTaxDeductionPaystub | currency }}</td>
+						<td id="afterTaxDeductionYTD">{{ afterTaxDeductionYTDPaystub | currency }}</td>
 					</tr>
 				</tbody>
 			</table>
