@@ -68,13 +68,13 @@ angular.module('paycheckCalculator', [])
 				payFrequency: $scope.paycheck.payFrequency.id,
 				fedFilingStatus: $scope.paycheck.fedFilingStatus.id,
 				fedAllowances: strippedFedAllowances,			
-				additionalFederalWitholding: strippedAdditionalFederalWitholding,
+				additionalFederalWitholding: strippedAdditionalFederalWitholding || 0,
 				state: $scope.paycheck.state.id,
 				stateFilingStatus: $scope.paycheck.stateFilingStatus.id,
 				stateAllowances: strippedStateAllowances,
-				additionalStateWitholding: strippedAdditionalStateWitholding,
-				retirement: strippedRetirement,
-				afterTaxDeduction: strippedAfterTaxDeduction
+				additionalStateWitholding: strippedAdditionalStateWitholding || 0,
+				retirement: strippedRetirement || 0,
+				afterTaxDeduction: strippedAfterTaxDeduction || 0
 			 };
 			$http({method: 'GET', url: '/api/calcPaycheck', params: parameters}).
 				success(function(data, status, headers, config) {
