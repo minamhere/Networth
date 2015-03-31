@@ -7,7 +7,7 @@ angular.module('paycheckCalculator', [])
 				// this callback will be called asynchronously
 				// when the response is available
 				$scope.filingStatuses = data;
-				$scope.selectedItem = $scope.filingStatuses[0];
+				$scope.filingStatuses.selectedItem = $scope.data[0];
 
 			}).
 			error(function(data, status, headers, config) {
