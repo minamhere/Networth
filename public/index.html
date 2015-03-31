@@ -173,7 +173,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td> {{ paycheck.state || "Default" }} Witholding</span></td>
+						<td> {{ paycheck.state.name || "State" }} Witholding</span></td>
 						<td id="stateTax">{{ stateTaxPaystub | currency}}</td>
 						<td>x</td>
 					</tr>
