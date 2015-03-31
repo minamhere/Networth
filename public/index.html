@@ -81,27 +81,27 @@
 					</tr>
 					<tr> 
 						<td>Federal Filing Status</td>
-						<td id="fedFilingStatus" class="filledValue">x</td>
+						<td id="fedFilingStatus" ng-model="paycheck.fedFilingStatus">x</td>
 						<td></td>
 						<td></td>
 						<td>State Filing Status</td>
-						<td id="stateFilingStatus" class="filledValue">x</td>
+						<td id="stateFilingStatus"  ng-model="paycheck.stateFilingStatus">x</td>
 					</tr>
 					<tr>
 					<td>Federal Allowances</td>
-					<td id="fedAllowances" class="filledValue">x</td>
+					<td id="fedAllowances"  ng-model="paycheck.fedAllowances">x</td>
 					<td></td>
 					<td></td>
 					<td>State Allowances</td>
-					<td id="stateAllowances" class="filledValue">x</td>
+					<td id="stateAllowances"  ng-model="paycheck.stateAllowances">x</td>
 				</tr>
 				<tr>
 					<td>Federal Annual Additional Witholding</td>
-					<td id="fedAdditionalWitholding" class="filledValue">x</td>
+					<td id="fedAdditionalWitholding"  ng-model="paycheck.fedAdditionalWitholding">x</td>
 					<td></td>
 					<td></td>
 					<td>State Annual Additional Witholding</td>
-					<td id="stateAdditionalWitholding" class="filledValue">x</td>
+					<td id="stateAdditionalWitholding"  ng-model="paycheck.stateAdditionalWitholding">x</td>
 				</tr>
 					<tr>
 						<th colspan="6">Paycheck Summary</th>
@@ -116,11 +116,11 @@
 					</tr>
 					<tr>
 						<th>Current</th>
-						<td id="grossEarnings" class="filledValue">x</td>
-						<td id="fedGrossEarnings" class="filledValue">x</td>
-						<td id="totalTax" class="filledValue">x</td>
-						<td id="totalDeductions" class="filledValue">x</td>
-						<td id="takehomePay" class="filledValue">x</td>
+						<td id="grossEarnings"  ng-model="paycheck.grossEarnings">x</td>
+						<td id="fedGrossEarnings"  ng-model="paycheck.fedGrossEarnings">x</td>
+						<td id="totalTax"  ng-model="paycheck.totalTax">x</td>
+						<td id="totalDeductions"  ng-model="paycheck.totalDeductions">x</td>
+						<td id="takehomePay"  ng-model="paycheck.takehomePay">x</td>
 					</tr>
 					<tr>
 						<th>YTD</th>
@@ -140,17 +140,17 @@
 					<tr>
 						<th>Description</th>
 						<th>Amount</th>
-						<th>Yth Amount</th>
+						<th>YTD Amount</th>
 						<th>Description</th>
 						<th>Amount</th>
 						<th>YTD Amount</th>
 					</tr>
 					<tr>
 						<td>Regular Earnings</td>
-						<td id="regEarnings" class="filledValue">x</td>
+						<td id="regEarnings"  ng-model="paycheck.regEarnings">x</td>
 						<td>x</td>
 						<td>Fed Witholding</td>
-						<td id="fedTax" class="filledValue">x</td>
+						<td id="fedTax"  ng-model="paycheck.fedTax">x</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@
 						<td></td>
 						<td></td>
 						<td>Medicare Witholding</td>
-						<td id="medicareTax" class="filledValue">x</td>
+						<td id="medicareTax"  ng-model="paycheck.medicareTax">x</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -166,15 +166,15 @@
 						<td></td>
 						<td></td>
 						<td>Social Security Witholding</td>
-						<td id="ssTax" class="filledValue">x</td>
+						<td id="ssTax"  ng-model="paycheck.ssTax">x</td>
 						<td>x</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td></td>
 						<td></td>
-						<td> <span id="stateName">State</span><span> Witholding</span></td>
-						<td id="stateTax" class="filledValue">x</td>
+						<td> <span id="stateName" ng-model="paycheck.stateName">State</span><span> Witholding</span></td>
+						<td id="stateTax"  ng-model="paycheck.stateTax">x</td>
 						<td>x</td>
 					</tr>
 					<tr>
@@ -194,11 +194,11 @@
 					</tr>
 					<tr>
 						<td>401k</td>
-						<td id="retirementContributions" class="filledValue">x</td>
-						<td id="retirementContributionsYTD" class="filledValue">x</td>
+						<td id="retirementContributions"  ng-model="paycheck.retirementContributions">x</td>
+						<td id="retirementContributionsYTD"  ng-model="paycheck.retirementContributionsYTD">x</td>
 						<td>Disability</td>
-						<td id="afterTaxDeduction" class="filledValue">x</td>
-						<td id="afterTaxDeductionYTD" class="filledValue">x</td>
+						<td id="afterTaxDeduction"  ng-model="paycheck.afterTaxDeduction">x</td>
+						<td id="afterTaxDeductionYTD"  ng-model="paycheck.afterTaxDeductionYTD">x</td>
 					</tr>
 				</tbody>
 			</table>
