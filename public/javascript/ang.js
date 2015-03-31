@@ -76,35 +76,43 @@ angular.module('paycheckCalculator', [])
 				retirement: strippedRetirement,
 				afterTaxDeduction: strippedAfterTaxDeduction
 			 };
-			$.get( '/api/calcPaycheck',parameters, function(data) {
-				paycheckData = $.parseJSON(data);
-				var totalDeductions = paycheckData.retirement;
-				
-				$scope.fedFilingStatus = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
-				$scope.stateFilingStatus = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
-				$scope.fedAllowances = strippedFedAllowances;
-				$scope.stateAllowances = strippedStateAllowances;
-				$scope.fedAdditionalWitholding = strippedAdditionalFederalWitholding;
-				$scope.stateAdditionalWitholding = strippedAdditionalStateWitholding;
-				
-				$scope.grossEarnings = paycheckData.grossEarnings;
-				$scope.regEarnings = paycheckData.grossEarnings;
-				$scope.fedGrossEarnings = paycheckData.fedGrossEarnings;
-				$scope.totalTax = paycheckData.totalTax;
-				$scope.totalDeductions = totalDeductions;
-				$scope.takehomePay = paycheckData.takehomePay;
+			$http({method: 'GET', url: '/api/calcPaycheck', params: parameters}).
+				success(function(data, status, headers, config) {
+					// this callback will be called asynchronously
+					// when the response is available
+					paycheckData = $.parseJSON(data);
+					var totalDeductions = paycheckData.retirement;
+					
+					$scope.fedFilingStatus = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
+					$scope.stateFilingStatus = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
+					$scope.fedAllowances = strippedFedAllowances;
+					$scope.stateAllowances = strippedStateAllowances;
+					$scope.fedAdditionalWitholding = strippedAdditionalFederalWitholding;
+					$scope.stateAdditionalWitholding = strippedAdditionalStateWitholding;
+					
+					$scope.grossEarnings = paycheckData.grossEarnings;
+					$scope.regEarnings = paycheckData.grossEarnings;
+					$scope.fedGrossEarnings = paycheckData.fedGrossEarnings;
+					$scope.totalTax = paycheckData.totalTax;
+					$scope.totalDeductions = totalDeductions;
+					$scope.takehomePay = paycheckData.takehomePay;
 
-				$scope.fedTax = paycheckData.fedTax;
-				$scope.ssTax = paycheckData.ssTax;
-				$scope.medicareTax = paycheckData.medTax;
-				$scope.stateTax = paycheckData.stateTax;
-				$scope.stateName = paycheckData.stateName;
-				
-				$scope.retirementContributions = paycheckData.retirement;
-				$scope.afterTaxDeduction = paycheckData.afterTaxDeduction;
-				$scope.paySchedule = paycheckData.paySchedule;
-				
-			});
+					$scope.fedTax = paycheckData.fedTax;
+					$scope.ssTax = paycheckData.ssTax;
+					$scope.medicareTax = paycheckData.medTax;
+					$scope.stateTax = paycheckData.stateTax;
+					$scope.stateName = paycheckData.stateName;
+					
+					$scope.retirementContributions = paycheckData.retirement;
+					$scope.afterTaxDeduction = paycheckData.afterTaxDeduction;
+					$scope.paySchedule = paycheckData.paySchedule;
+
+				}).
+				error(function(data, status, headers, config) {
+					// called asynchronously if an error occurs
+					// or server returns response with an error status.
+				});
+			
 		};
 		
 
