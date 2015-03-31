@@ -80,7 +80,9 @@ angular.module('paycheckCalculator', [])
 				success(function(data, status, headers, config) {
 					// this callback will be called asynchronously
 					// when the response is available
-					paycheckData = $.parseJSON(data);
+					//paycheckData = $.parseJSON(data);
+					console.log(data);
+					paycheckData = data;
 					var totalDeductions = paycheckData.retirement;
 					
 					$scope.fedFilingStatus = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
