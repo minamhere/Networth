@@ -4,7 +4,6 @@ var path = require('path');
 var pg = require('pg');
 var async = require('async');
 var bodyParser = require('body-parser');
-var accounting = require('accounting');
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
