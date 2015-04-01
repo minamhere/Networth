@@ -46,7 +46,6 @@ angular.module('paycheckCalculator', [])
 		$scope.calculate = function () {
 			//if ($('#income').val() > 0){return false;}
 			// Check for valid inputs
-			console.log($scope);
 			var strippedIncome = $scope.income;
 			var strippedRetirement = $scope.retirementInput;
 			
@@ -80,8 +79,6 @@ angular.module('paycheckCalculator', [])
 				success(function(data, status, headers, config) {
 					// this callback will be called asynchronously
 					// when the response is available
-					//paycheckData = $.parseJSON(data);
-					console.log(data);
 					paycheckData = data;
 					var totalDeductions = paycheckData.retirement;
 					
