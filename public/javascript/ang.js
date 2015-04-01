@@ -47,31 +47,30 @@ angular.module('paycheckCalculator', [])
 			//if ($('#income').val() > 0){return false;}
 			// Check for valid inputs
 			console.log($scope);
-			console.log($scope.paycheck);
-			var strippedIncome = $scope.paycheck.income;
-			var strippedRetirement = $scope.paycheck.retirementInput;
+			var strippedIncome = $scope.income;
+			var strippedRetirement = $scope.retirementInput;
 			
 			if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
 				alert('Retirement savings must be less than Gross Income');
 				return false;
 			};
 			
-			var strippedFedAllowances = $scope.paycheck.fedAllowances;
-			var strippedStateAllowances = $scope.paycheck.stateAllowances;
+			var strippedFedAllowances = $scope.fedAllowances;
+			var strippedStateAllowances = $scope.stateAllowances;
 
-			var strippedAdditionalStateWitholding = $scope.paycheck.additionalStateWitholding;
-			var strippedAdditionalFederalWitholding = $scope.paycheck.additionalFederalWitholding;
+			var strippedAdditionalStateWitholding = $scope.additionalStateWitholding;
+			var strippedAdditionalFederalWitholding = $scope.additionalFederalWitholding;
 
-			var strippedAfterTaxDeduction = $scope.paycheck.afterTaxDeductionInput;
+			var strippedAfterTaxDeduction = $scope.afterTaxDeductionInput;
 
 			var parameters = { 
 				income: strippedIncome, 
-				payFrequency: $scope.paycheck.payFrequency.id,
-				fedFilingStatus: $scope.paycheck.fedFilingStatus.id,
+				payFrequency: $scope.payFrequency.id,
+				fedFilingStatus: $scope.fedFilingStatus.id,
 				fedAllowances: strippedFedAllowances,			
 				additionalFederalWitholding: strippedAdditionalFederalWitholding || 0,
-				state: $scope.paycheck.state.id,
-				stateFilingStatus: $scope.paycheck.stateFilingStatus.id,
+				state: $scope.state.id,
+				stateFilingStatus: $scope.stateFilingStatus.id,
 				stateAllowances: strippedStateAllowances,
 				additionalStateWitholding: strippedAdditionalStateWitholding || 0,
 				retirement: strippedRetirement || 0,
@@ -86,8 +85,8 @@ angular.module('paycheckCalculator', [])
 					paycheckData = data;
 					var totalDeductions = paycheckData.retirement;
 					
-					$scope.fedFilingStatusPaystub = $scope.paycheck.fedFilingStatus.id + ' - ' + $scope.paycheck.fedFilingStatus.statusname;
-					$scope.stateFilingStatusPaystub = $scope.paycheck.stateFilingStatus.id + ' - ' + $scope.paycheck.stateFilingStatus.statusname;
+					$scope.fedFilingStatusPaystub = $scope.fedFilingStatus.id + ' - ' + $scope.fedFilingStatus.statusname;
+					$scope.stateFilingStatusPaystub = $scope.stateFilingStatus.id + ' - ' + $scope.stateFilingStatus.statusname;
 					$scope.fedAllowancesPaystub = strippedFedAllowances;
 					$scope.stateAllowancesPaystub = strippedStateAllowances;
 					$scope.fedAdditionalWitholdingPaystub = strippedAdditionalFederalWitholding;
