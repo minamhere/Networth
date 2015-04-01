@@ -1,6 +1,6 @@
 angular.module('paycheckCalculator', [])
 	.controller('PaycheckController', function($scope, $http) {
-		var paycheck = this;
+		//var paycheck = this;
 
 	    $http.get('/api/getFilingStatuses').
 			success(function(data, status, headers, config) {
