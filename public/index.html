@@ -24,44 +24,44 @@
 
 	<div id="paycheckCalculator" ng-controller="PaycheckController as paycheck">
 		<div> Gross Annual Income: 
-			<input  id="income" type='number' name='income' placeholder='Income' ng-model="paycheck.income"></input>
+			<input  id="income" type='number' name='income' placeholder='Income' ng-model="income"></input>
 		</div>
 		<div> Pay Frequency:
-			<select id="payFrequency" ng-model="paycheck.payFrequency" ng-options="frequency.schedulename for frequency in payFrequencies"></select>
+			<select id="payFrequency" ng-model="payFrequency" ng-options="frequency.schedulename for frequency in payFrequencies"></select>
 		</div>
 		<div> Federal Filing Status: 
-			<select id="fedFilingStatusSelect" ng-model="paycheck.fedFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses"></select>
+			<select id="fedFilingStatusSelect" ng-model="fedFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses"></select>
 		</div>
 		<div> Federal Allowances:
-			<input id="fedAllowancesInput" type='number' name='fedAllowances' placeholder='Fed Allowances' ng-model="paycheck.fedAllowances">
+			<input id="fedAllowancesInput" type='number' name='fedAllowances' placeholder='Fed Allowances' ng-model="fedAllowances">
 		</div>
 		
 		<div> Additional Federal Witholding
-			<input id="additionalFederalWitholding" type='number' name='additionalFederalWitholding' placeholder='Additional Annual Federal Witholding' ng-model="paycheck.additionalFederalWitholding">
+			<input id="additionalFederalWitholding" type='number' name='additionalFederalWitholding' placeholder='Additional Annual Federal Witholding' ng-model="additionalFederalWitholding">
 		</div>
 
 		<div> State:
-			<select id="stateSelect" ng-model="paycheck.state" ng-options="state.name for state in states"></select>
+			<select id="stateSelect" ng-model="state" ng-options="state.name for state in states"></select>
 		</div>
-		<div> {{ paycheck.state.name || "State" }}  Filing Status: 
-			<select id="stateFilingStatusSelect" ng-model="paycheck.stateFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses"></select>
-		</div>
-
-		<div> {{ paycheck.state.name || "State" }}  Allowances:
-			<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='State Allowances' ng-model="paycheck.stateAllowances">
+		<div> {{ state.name || "State" }}  Filing Status: 
+			<select id="stateFilingStatusSelect" ng-model="stateFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses"></select>
 		</div>
 
-		<div> Additional {{ paycheck.state.name || "State" }}  Witholding: 
-			<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional Annual State Witholding' ng-model="paycheck.additionalStateWitholding">
+		<div> {{ state.name || "State" }}  Allowances:
+			<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='State Allowances' ng-model="stateAllowances">
+		</div>
+
+		<div> Additional {{ state.name || "State" }}  Witholding: 
+			<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional Annual State Witholding' ng-model="additionalStateWitholding">
 		</div>
 
 		<div> Retirement Contributions (401k, etc.):
-			<input id="retirementInput" type='number' name='retirement' placeholder='Retirement' ng-model="paycheck.retirementInput">
+			<input id="retirementInput" type='number' name='retirement' placeholder='Retirement' ng-model="retirementInput">
 			<span class="icon-plus-sign"></span>
 		</div>
 
 		<div> After Tax Deductions (Disability, etc.): 
-			<input id="afterTaxDeductionInput" type='number' name='afterTaxDeduction' placeholder='After Tax Deductions' ng-model="paycheck.afterTaxDeductionInput">
+			<input id="afterTaxDeductionInput" type='number' name='afterTaxDeduction' placeholder='After Tax Deductions' ng-model="afterTaxDeductionInput">
 			<span class="icon-plus-sign"></span>
 		</div>
 
@@ -84,7 +84,7 @@
 						<td id="fedFilingStatus">{{ fedFilingStatusPaystub }}</td>
 						<td></td>
 						<td></td>
-						<td>{{ paycheck.state.name || "State" }}  Filing Status</td>
+						<td>{{ state.name || "State" }}  Filing Status</td>
 						<td id="stateFilingStatus">{{ stateFilingStatusPaystub }}</td>
 					</tr>
 					<tr>
@@ -92,7 +92,7 @@
 					<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
 					<td></td>
 					<td></td>
-					<td>{{ paycheck.state.name || "State" }}  Allowances</td>
+					<td>{{ state.name || "State" }}  Allowances</td>
 					<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
 				</tr>
 				<tr>
@@ -100,7 +100,7 @@
 					<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
 					<td></td>
 					<td></td>
-					<td>{{ paycheck.state.name || "State" }}  Annual Additional Witholding</td>
+					<td>{{ state.name || "State" }}  Annual Additional Witholding</td>
 					<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
 				</tr>
 					<tr>
@@ -173,7 +173,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td> {{ paycheck.state.name || "State" }} Witholding</span></td>
+						<td> {{ state.name || "State" }} Witholding</span></td>
 						<td id="stateTax">{{ stateTaxPaystub | currency}}</td>
 						<td></td>
 					</tr>
