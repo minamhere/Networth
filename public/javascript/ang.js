@@ -1,5 +1,5 @@
 angular.module('paycheckCalculator', ["chart.js"])
-	.controller('PaycheckController', function($scope, $http) {
+	.controller('PaycheckController', function($scope, $http, $filter) {
 		//var paycheck = this;
 
 		$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", $scope.state+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
