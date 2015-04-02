@@ -1,4 +1,4 @@
-angular.module('paycheckCalculator', [])
+angular.module('paycheckCalculator', ["chart.js"])
 	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
 
@@ -105,6 +105,10 @@ angular.module('paycheckCalculator', [])
 					$scope.retirementContributionsPaystub = paycheckData.retirement;
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
+
+					$scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+					$scope.data = [300, 500, 100];
+
 
 				}).
 				error(function(data, status, headers, config) {
