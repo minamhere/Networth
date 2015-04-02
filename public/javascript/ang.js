@@ -2,6 +2,10 @@ angular.module('paycheckCalculator', ["chart.js"])
 	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
 
+		$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
+		$scope.data = [$scope.fedTaxPaystub, $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
+
+
 	    $http.get('/api/getFilingStatuses').
 			success(function(data, status, headers, config) {
 				// this callback will be called asynchronously
@@ -111,9 +115,7 @@ angular.module('paycheckCalculator', ["chart.js"])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
-					$scope.data = [$scope.fedTaxPaystub, $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
-
+					
 
 				}).
 				error(function(data, status, headers, config) {
