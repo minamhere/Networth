@@ -111,20 +111,27 @@ angular.module('paycheckCalculator', ["chart.js"])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
-					$scope.data = [$scope.fedTaxPaystub, $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
+					//$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
+					//$scope.data = [, , , , , , ];
 
 
 					var chart = c3.generate({
+					    bindto: '#piechart',
 						data: {
 						    columns: [
-						        ['Lulu', 50],
-						        ['Olaf', 50],
+						    	["Federal Income Tax", $scope.fedTaxPaystub],
+						    	["Social Security Tax", $scope.ssTaxPaystub],
+						    	["Medicare Tax", $scope.medicareTaxPaystub],
+						    	[paycheckData.stateName+" Tax", $scope.stateTaxPaystub],
+						    	["Retirement Deductions", $scope.retirementContributionsPaystub],
+						    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
+						    	["Take Home Pay", $scope.takehomePayPaystub],
+						       
 						    ],
-						    type : 'donut'
+						    type : 'pie'
 						},
-						donut: {
-						    title: "Dogs love:",
+						pie: {
+						    title: "Paycheck Breakdown:",
 						}
 					});
 
