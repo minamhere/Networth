@@ -42,10 +42,6 @@ angular.module('paycheckCalculator', ["chart.js"])
 				// or server returns response with an error status.
 			});
 
-		$scope.Nocalculate = function() {
-			//return false;
-			calculate();
-		}
 
 		$scope.calculate = function () {
 			
