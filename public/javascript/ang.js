@@ -122,7 +122,7 @@ angular.module('paycheckCalculator', [])
 						    type : 'pie'
 						},
 						size: {
-							width: 600px;
+							width: 600px
 						},
 						pie: {
 						    title: "Paycheck Breakdown:",
