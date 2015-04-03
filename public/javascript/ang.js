@@ -114,42 +114,55 @@ angular.module('paycheckCalculator', ["chart.js"])
 					//$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
 					$scope.pieValues = [
 						{
-							value:$scope.fedTaxPaystub,
-							label:"Fed",
-							color:"#F7464A"
+							value: $scope.fedTaxPaystub,
+							label: "Fed",
+					        highlight: "#FF5A5E",
+							color: "#F7464A"
 
 						}, 
 						{
-							value:$scope.ssTaxPaystub,
-							label:"SS",
-							color: "#46BFBD"
+							value: $scope.ssTaxPaystub,
+							label: "SS",
+					        highlight: "#FF5A5E",
+
+							color:  "#46BFBD"
 
 						}, 
 						{
-							value:$scope.medicareTaxPaystub,
-							label:"Med",
-							color: "#FDB45C"
+							value: $scope.medicareTaxPaystub,
+							label: "Med",
+					        highlight: "#FF5A5E",
+
+							color:  "#FDB45C"
 
 						}, 
 						{
-							value:$scope.stateTaxPaystub,
-							label:"State",
-							color: "#46BFBD"
+							value: $scope.stateTaxPaystub,
+							label: "State",
+					        highlight: "#FF5A5E",
+
+							color:  "#46BFBD"
 						}, 
 						{
-							value:$scope.retirementContributionsPaystub,
-							label:"Ret",
-							color: "#46BFBD"
+							value: $scope.retirementContributionsPaystub,
+							label: "Ret",
+					        highlight: "#FF5A5E",
+
+							color:  "#46BFBD"
 						}, 
 						{
-							value:$scope.afterTaxDeductionPaystub,
-							label:"after",
-							color: "#46BFBD"
+							value: $scope.afterTaxDeductionPaystub,
+							label: "after",
+					        highlight: "#FF5A5E",
+
+							color:  "#46BFBD"
 						}, 
 						{
-							value:$scope.takehomePayPaystub,
-							label:"takehomePay",
-							color: "#46BFBD"
+							value: $scope.takehomePayPaystub,
+							label: "takehomePay",
+					        highlight: "#FF5A5E",
+
+							color:  "#46BFBD"
 						}
 					];
 
