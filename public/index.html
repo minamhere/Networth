@@ -30,10 +30,10 @@
 			<input  id="income" type='number' name='income' placeholder='Income' ng-model="income" ng-blur="calculate()"></input>
 		</div>
 		<div> Pay Frequency:
-			<select id="payFrequency" ng-model="payFrequency" ng-options="frequency.schedulename for frequency in payFrequencies" ng-blur="calculate()"></select>
+			<select id="payFrequency" ng-model="payFrequency" ng-options="frequency.schedulename for frequency in payFrequencies" ng-change="calculate()"></select>
 		</div>
 		<div> Federal Filing Status: 
-			<select id="fedFilingStatusSelect" ng-model="fedFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses" ng-blur="calculate()"></select>
+			<select id="fedFilingStatusSelect" ng-model="fedFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses" ng-change="calculate()"></select>
 		</div>
 		<div> Federal Allowances:
 			<input id="fedAllowancesInput" type='number' name='fedAllowances' placeholder='Fed Allowances' ng-model="fedAllowances" ng-blur="calculate()">
@@ -44,10 +44,10 @@
 		</div>
 
 		<div> State:
-			<select id="stateSelect" ng-model="state" ng-options="state.name for state in states" ng-blur="calculate()"></select>
+			<select id="stateSelect" ng-model="state" ng-options="state.name for state in states" ng-change="calculate()"></select>
 		</div>
 		<div> {{ state.name || "State" }}  Filing Status: 
-			<select id="stateFilingStatusSelect" ng-model="stateFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses" ng-blur="calculate()"></select>
+			<select id="stateFilingStatusSelect" ng-model="stateFilingStatus" ng-options="filingStatus.statusname for filingStatus in filingStatuses" ng-change="calculate()"></select>
 		</div>
 
 		<div> {{ state.name || "State" }}  Allowances:
