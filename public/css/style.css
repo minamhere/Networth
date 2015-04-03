@@ -7,6 +7,15 @@ div#paycheckCalculator{
 div#input {
 	width: 1500px;
 }
+
+div#leftInput {
+	float: left;
+	width: 600px;
+}
+div#rightInput {
+	float: right;
+	width: 600px;
+}
 div#paystub {
 	float: left;
 	width: 600px;
@@ -14,4 +23,7 @@ div#paystub {
 div#pieChart {
 	float: right;
 	width: 600px;
+}
+table, th, td {
+   border: 1px solid black;
 }
