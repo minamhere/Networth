@@ -81,7 +81,6 @@ angular.module('paycheckCalculator', [])
 					// this callback will be called asynchronously
 					// when the response is available
 					paycheckData = data;
-					var totalDeductions = paycheckData.retirement;
 					
 					$scope.fedFilingStatusPaystub = $scope.fedFilingStatus.id + ' - ' + $scope.fedFilingStatus.statusname;
 					$scope.stateFilingStatusPaystub = $scope.stateFilingStatus.id + ' - ' + $scope.stateFilingStatus.statusname;
@@ -94,7 +93,7 @@ angular.module('paycheckCalculator', [])
 					$scope.regEarningsPaystub = paycheckData.grossEarnings;
 					$scope.fedGrossEarningsPaystub = paycheckData.fedGrossEarnings;
 					$scope.totalTaxPaystub = paycheckData.totalTax;
-					$scope.totalDeductionsPaystub = totalDeductions;
+					$scope.totalDeductionsPaystub = paycheckData.retirement + paycheckData.afterTaxDeduction;
 					$scope.takehomePayPaystub = paycheckData.takehomePay;
 
 					$scope.fedTaxPaystub = paycheckData.fedTax;
@@ -106,10 +105,6 @@ angular.module('paycheckCalculator', [])
 					$scope.retirementContributionsPaystub = paycheckData.retirement;
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
-
-					//$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
-					//$scope.data = [, , , , , , ];
-
 
 					var chart = c3.generate({
 					    bindto: '#piechart',
