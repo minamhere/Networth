@@ -1,5 +1,5 @@
 angular.module('paycheckCalculator', ["chart.js"])
-	.controller('PaycheckController', function($scope, $http, $filter) {
+	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
 
 	    $http.get('/api/getFilingStatuses').
@@ -111,60 +111,8 @@ angular.module('paycheckCalculator', ["chart.js"])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					//$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
-					$scope.pieValues = [
-						{
-							value: $scope.fedTaxPaystub,
-							label: "Fed",
-					        highlight: "#FF5A5E",
-							color: "#F7464A"
-
-						}, 
-						{
-							value: $scope.ssTaxPaystub,
-							label: "SS",
-					        highlight: "#FF5A5E",
-
-							color:  "#46BFBD"
-
-						}, 
-						{
-							value: $scope.medicareTaxPaystub,
-							label: "Med",
-					        highlight: "#FF5A5E",
-
-							color:  "#FDB45C"
-
-						}, 
-						{
-							value: $scope.stateTaxPaystub,
-							label: "State",
-					        highlight: "#FF5A5E",
-
-							color:  "#46BFBD"
-						}, 
-						{
-							value: $scope.retirementContributionsPaystub,
-							label: "Ret",
-					        highlight: "#FF5A5E",
-
-							color:  "#46BFBD"
-						}, 
-						{
-							value: $scope.afterTaxDeductionPaystub,
-							label: "after",
-					        highlight: "#FF5A5E",
-
-							color:  "#46BFBD"
-						}, 
-						{
-							value: $scope.takehomePayPaystub,
-							label: "takehomePay",
-					        highlight: "#FF5A5E",
-
-							color:  "#46BFBD"
-						}
-					];
+					$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
+					$scope.data = [$scope.fedTaxPaystub, $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
 
 
 				}).
