@@ -1,21 +1,17 @@
 h1 {text-align: center;}
 
 div#paycheckCalculator{
-	position: relative;
 	width: 1500px;
 }
 
 div#input {
 	width: 1500px;
-	position: relative;
 }
 div#paystub {
 	float: left;
-	width:600px;
-	position: relative;
+	width: 600px;
 }
 div#pieChart {
 	float: right;
 	width: 600px;
-	position: relative;
 }
