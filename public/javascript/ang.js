@@ -45,12 +45,7 @@ angular.module('paycheckCalculator', [])
 
 		$scope.calculate = function () {
 			
-			// Check for valid inputs
-			if (
-				$scope.income <= 0
 
-
-			){return false;}
 
 			var strippedIncome = $scope.income || 0;
 			var strippedRetirement = $scope.retirementInput || 0;
