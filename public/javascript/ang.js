@@ -1,4 +1,4 @@
-angular.module('paycheckCalculator', ["chart.js"])
+angular.module('paycheckCalculator', [])
 	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
 
