@@ -21,6 +21,14 @@ table, th, td {
 	text-align: center;
 }
 
+#input {
+	width: 1750px;
+}
+#paystub {
+	float: left;
+	width:750px;
+}
 #pieChart {
 	float: right;
+	width: 500px;
 }
