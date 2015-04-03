@@ -47,26 +47,26 @@ angular.module('paycheckCalculator', [])
 			
 			// Check for valid inputs
 			if (
-				$('#income').val() <= 0
+				$scope.income <= 0
 
 
 			){return false;}
 
-			var strippedIncome = $scope.income;
-			var strippedRetirement = $scope.retirementInput;
+			var strippedIncome = $scope.income || 0;
+			var strippedRetirement = $scope.retirementInput || 0;
 			
 			if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
 				alert('Retirement savings must be less than Gross Income');
 				return false;
 			};
 			
-			var strippedFedAllowances = $scope.fedAllowances;
-			var strippedStateAllowances = $scope.stateAllowances;
+			var strippedFedAllowances = $scope.fedAllowances || 0;
+			var strippedStateAllowances = $scope.stateAllowances || 0;
 
-			var strippedAdditionalStateWitholding = $scope.additionalStateWitholding;
-			var strippedAdditionalFederalWitholding = $scope.additionalFederalWitholding;
+			var strippedAdditionalStateWitholding = $scope.additionalStateWitholding || 0;
+			var strippedAdditionalFederalWitholding = $scope.additionalFederalWitholding || 0;
 
-			var strippedAfterTaxDeduction = $scope.afterTaxDeductionInput;
+			var strippedAfterTaxDeduction = $scope.afterTaxDeductionInput || 0;
 
 			var parameters = { 
 				income: strippedIncome, 
