@@ -133,19 +133,23 @@ angular.module('paycheckCalculator', ["chart.js"])
 						}, 
 						{
 							value:$scope.stateTaxPaystub,
-							label:"State"
+							label:"State",
+							color: "#46BFBD"
 						}, 
 						{
 							value:$scope.retirementContributionsPaystub,
-							label:"Ret"
+							label:"Ret",
+							color: "#46BFBD"
 						}, 
 						{
 							value:$scope.afterTaxDeductionPaystub,
-							label:"after"
+							label:"after",
+							color: "#46BFBD"
 						}, 
 						{
 							value:$scope.takehomePayPaystub,
-							label:"takehomePay"
+							label:"takehomePay",
+							color: "#46BFBD"
 						}
 					];
 
