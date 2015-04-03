@@ -112,7 +112,29 @@ angular.module('paycheckCalculator', ["chart.js"])
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
 					$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
-					$scope.data = [$filter('currency')($scope.fedTaxPaystub), $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
+					$scope.data = [
+						{
+							value:$scope.fedTaxPaystub
+						}, 
+						{
+							value:$scope.ssTaxPaystub
+						}, 
+						{
+							value:$scope.medicareTaxPaystub
+						}, 
+						{
+							value:$scope.stateTaxPaystub
+						}, 
+						{
+							value:$scope.retirementContributionsPaystub
+						}, 
+						{
+							value:$scope.afterTaxDeductionPaystub
+						}, 
+						{
+							value:$scope.takehomePayPaystub
+						}
+					];
 
 
 				}).
