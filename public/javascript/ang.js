@@ -115,6 +115,19 @@ angular.module('paycheckCalculator', ["chart.js"])
 					$scope.data = [$scope.fedTaxPaystub, $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
 
 
+					var chart = c3.generate({
+						data: {
+						    columns: [
+						        ['Lulu', 50],
+						        ['Olaf', 50],
+						    ],
+						    type : 'donut'
+						},
+						donut: {
+						    title: "Dogs love:",
+						}
+					});
+
 				}).
 				error(function(data, status, headers, config) {
 					// called asynchronously if an error occurs
