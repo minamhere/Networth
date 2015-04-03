@@ -1,5 +1,5 @@
 angular.module('paycheckCalculator', ["chart.js"])
-	.controller('PaycheckController', function($scope, $http) {
+	.controller('PaycheckController', function($scope, $http, $filter) {
 		//var paycheck = this;
 
 	    $http.get('/api/getFilingStatuses').
@@ -112,7 +112,7 @@ angular.module('paycheckCalculator', ["chart.js"])
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
 					$scope.labels = ["Federal Income Tax", "Social Security Tax", "Medicare Tax", paycheckData.stateName+" Tax", "Retirement Deductions", "After-Tax Deductions", "Take Home Pay"];
-					$scope.data = [$scope.fedTaxPaystub, $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
+					$scope.data = [$filter('currency')($scope.fedTaxPaystub), $scope.ssTaxPaystub, $scope.medicareTaxPaystub, $scope.stateTaxPaystub, $scope.retirementContributionsPaystub, $scope.afterTaxDeductionPaystub, $scope.takehomePayPaystub];
 
 
 				}).
