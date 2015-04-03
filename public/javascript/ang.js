@@ -43,13 +43,18 @@ angular.module('paycheckCalculator', ["chart.js"])
 			});
 
 		$scope.Nocalculate = function() {
-			return false;
+			//return false;
+			calculate();
 		}
 
 		$scope.calculate = function () {
 			
 			// Check for valid inputs
-			if (!$('#income').val() > 0){return false;}
+			if (
+				$('#income').val() <= 0
+
+
+			){return false;}
 
 			var strippedIncome = $scope.income;
 			var strippedRetirement = $scope.retirementInput;
