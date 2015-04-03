@@ -20,3 +20,7 @@ table, th, td {
 .filledValue {
 	text-align: center;
 }
+
+#pieChart {
+	float: right;
+}
