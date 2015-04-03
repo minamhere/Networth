@@ -7,9 +7,8 @@
 h1 {text-align: center;}
 
 div#paycheckCalculator{
-	margin: auto; 
-	text-align: left;
-	width: 17500px;
+	
+	position: relative;
 }
 
 table, th, td {
@@ -17,18 +16,17 @@ table, th, td {
 	border-width: 1px;
 }
 
-.filledValue {
-	text-align: center;
-}
-
 #input {
 	width: 1750px;
+	position: relative;
 }
 #paystub {
 	float: left;
 	width:750px;
+	position: relative;
 }
 #pieChart {
 	float: right;
-	width: 500px;
+	width: 750px;
+	position: relative;
 }
