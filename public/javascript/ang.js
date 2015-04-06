@@ -50,7 +50,7 @@ angular.module('paycheckCalculator', [])
 			    	["Federal Income Tax", $scope.fedTaxPaystub],
 			    	["Social Security Tax", $scope.ssTaxPaystub],
 			    	["Medicare Tax", $scope.medicareTaxPaystub],
-			    	[paycheckData.stateName+" Tax", $scope.stateTaxPaystub],
+			    	[$scope.state.name+" Tax", $scope.stateTaxPaystub],
 			    	["Retirement Deductions", $scope.retirementContributionsPaystub],
 			    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
 			    	["Take Home Pay", $scope.takehomePayPaystub],
@@ -65,7 +65,7 @@ angular.module('paycheckCalculator', [])
 			    title: "Paycheck Breakdown:",
 			}
 		});
-		
+
 		$scope.calculate = function () {
 			
 
