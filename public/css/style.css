@@ -1,5 +1,5 @@
 h1 {text-align: center;}
-
+/*
 div#paycheckCalculator{
 	width: 1500px;
 }
@@ -24,6 +24,7 @@ div#pieChart {
 	float: right;
 	width: 600px;
 }
+*/
 table, th, td {
    border: 1px solid black;
 }
