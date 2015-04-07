@@ -159,7 +159,7 @@ angular.module('paycheckCalculator', [])
 					    	["TakeHome", $scope.takehomePayPaystub]
 						]
 					});
-					chart.data.order('desc');
+					chart.data({order:'desc'});
 
 
 				}).
