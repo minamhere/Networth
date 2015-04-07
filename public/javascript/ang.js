@@ -9,7 +9,6 @@ angular.module('paycheckCalculator', [])
 		$scope.retirementContributionsPaystub = 0;
 		$scope.afterTaxDeductionPaystub = 0;
 		$scope.takehomePayPaystub = 0;
-		$scope.state.name = "State";
 
 	    $http.get('/api/getFilingStatuses').
 			success(function(data, status, headers, config) {
@@ -63,7 +62,7 @@ angular.module('paycheckCalculator', [])
 					["Federal Income Tax", $scope.fedTaxPaystub],
 			    	["Social Security Tax", $scope.ssTaxPaystub],
 			    	["Medicare Tax", $scope.medicareTaxPaystub],
-			    	[$scope.state.name+" Tax", $scope.stateTaxPaystub],
+			    	[$scope.state.name || "State"+" Tax", $scope.stateTaxPaystub],
 			    	["Retirement Deductions", $scope.retirementContributionsPaystub],
 			    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
 			    	["Take Home Pay", $scope.takehomePayPaystub]
