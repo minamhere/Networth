@@ -112,6 +112,7 @@ angular.module('paycheckCalculator', [])
 					var chart = c3.generate({
 					    bindto: '#piechart',
 					    size: {
+					    	height: 500,
 					    	width: 500
 					    },
 						data: {
