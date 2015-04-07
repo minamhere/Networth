@@ -111,6 +111,9 @@ angular.module('paycheckCalculator', [])
 
 					var chart = c3.generate({
 					    bindto: '#piechart',
+					    size: {
+					    	width: 500
+					    },
 						data: {
 							columns: [
 								["Federal Income Tax", $scope.fedTaxPaystub],
