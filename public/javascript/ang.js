@@ -148,7 +148,7 @@ angular.module('paycheckCalculator', [])
 					    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
 					    	["Take Home Pay", $scope.takehomePayPaystub]
 						],
-						unload: chart.columns,
+						unload: $scope.chart.columns,
 					});
 
 
