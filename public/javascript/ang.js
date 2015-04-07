@@ -43,7 +43,23 @@ angular.module('paycheckCalculator', [])
 				// or server returns response with an error status.
 			});
 
-		
+		var chart = c3.generate({
+		    bindto: '#piechart',
+		    size: {
+		    	height: 500,
+		    	width: 500
+		    },
+			data: {
+				columns: [
+					['data1', 300, 100, 250, 150, 300, 150, 500],
+					['data2', 100, 200, 150, 50, 100, 250]
+				],
+			    type : 'pie'
+			},
+			pie: {
+			    title: "Paycheck Breakdown:",
+			}
+		});
 		
 
 		$scope.calculate = function () {
@@ -109,13 +125,8 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					var chart = c3.generate({
-					    bindto: '#piechart',
-					    size: {
-					    	height: 500,
-					    	width: 500
-					    },
-						data: {
+					chart.load(
+						{
 							columns: [
 								["Federal Income Tax", $scope.fedTaxPaystub],
 						    	["Social Security Tax", $scope.ssTaxPaystub],
@@ -123,14 +134,9 @@ angular.module('paycheckCalculator', [])
 						    	[$scope.state.name+" Tax", $scope.stateTaxPaystub],
 						    	["Retirement Deductions", $scope.retirementContributionsPaystub],
 						    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
-						    	["Take Home Pay", $scope.takehomePayPaystub],
-							],
-						    type : 'pie'
-						},
-						pie: {
-						    title: "Paycheck Breakdown:",
-						}
-					});
+						    	["Take Home Pay", $scope.takehomePayPaystub]
+							]
+						});
 
 
 				}).
