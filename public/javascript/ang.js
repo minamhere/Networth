@@ -138,7 +138,7 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					/*chart.load({
+					chart.load({
 						columns: [
 							["Federal Income Tax", $scope.fedTaxPaystub],
 					    	["Social Security Tax", $scope.ssTaxPaystub],
@@ -148,10 +148,9 @@ angular.module('paycheckCalculator', [])
 					    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
 					    	["Take Home Pay", $scope.takehomePayPaystub]
 						],
-						unload: chart.columns,
+						//unload: chart.columns,
 					});
 
-*/
 
 				}).
 				error(function(data, status, headers, config) {
