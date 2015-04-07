@@ -158,7 +158,7 @@ angular.module('paycheckCalculator', [])
 					    	["Take Home", $scope.takehomePayPaystub]
 						],
 						names: {
-							State: "$scope.state.name"
+							State: $scope.state.name
 						}
 					});
 
