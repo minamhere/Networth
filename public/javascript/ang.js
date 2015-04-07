@@ -1,6 +1,7 @@
 angular.module('paycheckCalculator', [])
 	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
+		$scope.chart = null;
 
 	    $http.get('/api/getFilingStatuses').
 			success(function(data, status, headers, config) {
@@ -43,7 +44,7 @@ angular.module('paycheckCalculator', [])
 				// or server returns response with an error status.
 			});
 
-		var chart = c3.generate({
+		$scope.chart = c3.generate({
 		    bindto: '#piechart',
 		    size: {
 		    	height: 500,
@@ -125,7 +126,7 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					chart.load(
+					$scope.chart.load(
 						{
 							columns: [
 								["Federal Income Tax", $scope.fedTaxPaystub],
