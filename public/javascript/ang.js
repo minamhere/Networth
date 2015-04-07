@@ -147,6 +147,7 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
+					chart.data.names({State: $scope.state.name + " Tax"});
 					chart.load({
 						columns: [
 							["Federal", $scope.fedTaxPaystub],
@@ -156,10 +157,7 @@ angular.module('paycheckCalculator', [])
 					    	["Retirement", $scope.retirementContributionsPaystub],
 					    	["AfterTax", $scope.afterTaxDeductionPaystub],
 					    	["TakeHome", $scope.takehomePayPaystub]
-						],
-						names: {
-							State: $scope.state.name + " Tax",
-						}
+						]
 					});
 
 
