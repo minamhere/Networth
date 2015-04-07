@@ -76,7 +76,6 @@ angular.module('paycheckCalculator', [])
 					AfterTax: "After-Tax Deductions",
 					TakeHome: "Take Home Pay"
 				},
-				order:'desc',
 			    type : 'pie'
 			},
 			pie: {
@@ -148,7 +147,7 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					chart.data.names({State: $scope.state.name + " Tax"});
+					chart.data.names({State: paycheckData.stateName + " Tax"});
 					chart.load({
 						columns: [
 							["Federal", $scope.fedTaxPaystub],
@@ -160,6 +159,7 @@ angular.module('paycheckCalculator', [])
 					    	["TakeHome", $scope.takehomePayPaystub]
 						]
 					});
+					chart.data.order('desc');
 
 
 				}).
