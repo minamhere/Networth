@@ -1,7 +1,7 @@
 angular.module('paycheckCalculator', [])
 	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
-		$scope.chart = null;
+		//$scope.chart = null;
 		$scope.fedTaxPaystub = 0;
 		$scope.ssTaxPaystub = 0;
 		$scope.medicareTaxPaystub = 0;
@@ -138,7 +138,7 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					$scope.chart.load({
+					/*$scope.chart.load({
 						columns: [
 							["Federal Income Tax", $scope.fedTaxPaystub],
 					    	["Social Security Tax", $scope.ssTaxPaystub],
@@ -151,7 +151,7 @@ angular.module('paycheckCalculator', [])
 						unload: $scope.chart.columns,
 					});
 
-
+*/
 
 				}).
 				error(function(data, status, headers, config) {
