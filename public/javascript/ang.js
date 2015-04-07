@@ -150,7 +150,7 @@ angular.module('paycheckCalculator', [])
 					chart.load({
 						columns: [
 							["Federal", $scope.fedTaxPaystub],
-					    	["SocialSecurity", $scope.ssTaxPaystub],
+					    	["SS", $scope.ssTaxPaystub],
 					    	["Medicare", $scope.medicareTaxPaystub],
 					    	["State", $scope.stateTaxPaystub],
 					    	["Retirement", $scope.retirementContributionsPaystub],
