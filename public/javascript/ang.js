@@ -2,6 +2,14 @@ angular.module('paycheckCalculator', [])
 	.controller('PaycheckController', function($scope, $http) {
 		//var paycheck = this;
 		$scope.chart = null;
+		$scope.fedTaxPaystub = 0;
+		$scope.ssTaxPaystub = 0;
+		$scope.medicareTaxPaystub = 0;
+		$scope.stateTaxPaystub = 0;
+		$scope.retirementContributionsPaystub = 0;
+		$scope.afterTaxDeductionPaystub = 0;
+		$scope.takehomePayPaystub = 0;
+		$scope.state.name = "State";
 
 	    $http.get('/api/getFilingStatuses').
 			success(function(data, status, headers, config) {
@@ -52,8 +60,13 @@ angular.module('paycheckCalculator', [])
 		    },
 			data: {
 				columns: [
-					['data1', 300, 100, 250, 150, 300, 150, 500],
-					['data2', 100, 200, 150, 50, 100, 250]
+					["Federal Income Tax", $scope.fedTaxPaystub],
+			    	["Social Security Tax", $scope.ssTaxPaystub],
+			    	["Medicare Tax", $scope.medicareTaxPaystub],
+			    	[$scope.state.name+" Tax", $scope.stateTaxPaystub],
+			    	["Retirement Deductions", $scope.retirementContributionsPaystub],
+			    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
+			    	["Take Home Pay", $scope.takehomePayPaystub]
 				],
 			    type : 'pie'
 			},
@@ -126,18 +139,6 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					$scope.chart.load(
-						{
-							columns: [
-								["Federal Income Tax", $scope.fedTaxPaystub],
-						    	["Social Security Tax", $scope.ssTaxPaystub],
-						    	["Medicare Tax", $scope.medicareTaxPaystub],
-						    	[$scope.state.name+" Tax", $scope.stateTaxPaystub],
-						    	["Retirement Deductions", $scope.retirementContributionsPaystub],
-						    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
-						    	["Take Home Pay", $scope.takehomePayPaystub]
-							]
-						});
 
 
 				}).
