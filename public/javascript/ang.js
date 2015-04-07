@@ -48,7 +48,7 @@ angular.module('paycheckCalculator', [])
 			data: {
 				columns: [
 					["Take Home Pay", 100],
-				]
+				],
 			    type : 'pie'
 			},
 			pie: {
