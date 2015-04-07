@@ -62,7 +62,7 @@ angular.module('paycheckCalculator', [])
 					["Federal Income Tax", $scope.fedTaxPaystub],
 			    	["Social Security Tax", $scope.ssTaxPaystub],
 			    	["Medicare Tax", $scope.medicareTaxPaystub],
-			    	[$scope.state.name || "State"+" Tax", $scope.stateTaxPaystub],
+			    	["State Tax", $scope.stateTaxPaystub],
 			    	["Retirement Deductions", $scope.retirementContributionsPaystub],
 			    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
 			    	["Take Home Pay", $scope.takehomePayPaystub]
