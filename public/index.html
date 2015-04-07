@@ -87,15 +87,14 @@
 				<table>
 					<tbody>
 						<tr> 
-							<th colspan="6">General</th>
+							<th colspan="5">General</th>
 						</tr>
 						<tr> 
-							<th colspan="6">Tax Data</th>
+							<th colspan="5">Tax Data</th>
 						</tr>
 						<tr> 
 							<td>Federal Filing Status</td>
 							<td id="fedFilingStatus">{{ fedFilingStatusPaystub }}</td>
-							<td></td>
 							<td></td>
 							<td>{{ state.name || "State" }}  Filing Status</td>
 							<td id="stateFilingStatus">{{ stateFilingStatusPaystub }}</td>
@@ -104,7 +103,6 @@
 						<td>Federal Allowances</td>
 						<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
 						<td></td>
-						<td></td>
 						<td>{{ state.name || "State" }}  Allowances</td>
 						<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
 					</tr>
@@ -112,12 +110,11 @@
 						<td>Federal Annual Additional Witholding</td>
 						<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
 						<td></td>
-						<td></td>
 						<td>{{ state.name || "State" }}  Annual Additional Witholding</td>
 						<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
 					</tr>
 						<tr>
-							<th colspan="6">Paycheck Summary</th>
+							<th colspan="5">Paycheck Summary</th>
 						</tr>
 						<tr>
 							<th></th>
@@ -130,33 +127,19 @@
 						<tr>
 							<th>Current</th>
 							<td id="grossEarnings">{{ grossEarningsPaystub | currency }}</td>
-							<td id="fedGrossEarnings">{{ fedGrossEarningsPaystub | currency }}</td>
 							<td id="totalTax">{{ totalTaxPaystub | currency }}</td>
 							<td id="totalDeductions">{{ totalDeductionsPaystub | currency }}</td>
 							<td id="takehomePay">{{ takehomePayPaystub | currency }}</td>
 						</tr>
 						<tr>
-							<th>YTD</th>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<th colspan="6">Earnings and Taxes</th>
-						</tr>
-						<tr>
-							<th colspan="3">Earnings</th>
+							<th colspan="2">Earnings</th>
 							<th colspan="3">Taxes</th>
 						</tr>
 						<tr>
 							<th>Description</th>
 							<th>Amount</th>
-							<th>YTD Amount</th>
 							<th>Description</th>
 							<th>Amount</th>
-							<th>YTD Amount</th>
 						</tr>
 						<tr>
 							<td>Regular Earnings</td>
@@ -164,7 +147,6 @@
 							<td></td>
 							<td>Fed Witholding</td>
 							<td id="fedTax">{{ fedTaxPaystub | currency }}</td>
-							<td></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -172,7 +154,6 @@
 							<td></td>
 							<td>Medicare Witholding</td>
 							<td id="medicareTax">{{ medicareTaxPaystub | currency }}</td>
-							<td></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -180,7 +161,6 @@
 							<td></td>
 							<td>Social Security Witholding</td>
 							<td id="ssTax">{{ ssTaxPaystub | currency }}</td>
-							<td></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -188,30 +168,25 @@
 							<td></td>
 							<td> {{ state.name || "State" }} Witholding</span></td>
 							<td id="stateTax">{{ stateTaxPaystub | currency}}</td>
-							<td></td>
 						</tr>
 						<tr>
-							<th colspan="6">Deductions</th>
+							<th colspan="5">Deductions</th>
 						</tr>
 						<tr>
-							<th colspan="3">Before-Tax Deductions</th>
+							<th colspan="2">Before-Tax Deductions</th>
 							<th colspan="3">After-Tax Deductions</th>
 						</tr>
 						<tr>
 							<th>Description </th>
 							<th>Amount </th>
-							<th>YTD Amount</th>
 							<th>Description </th>
 							<th>Amount </th>
-							<th>YTD Amount</th>
 						</tr>
 						<tr>
 							<td>401k</td>
 							<td id="retirementContributions">{{ retirementContributionsPaystub | currency }}</td>
-							<td id="retirementContributionsYTD">{{ retirementContributionsYTDPaystub | currency }}</td>
 							<td>Disability</td>
 							<td id="afterTaxDeduction">{{ afterTaxDeductionPaystub | currency }}</td>
-							<td id="afterTaxDeductionYTD">{{ afterTaxDeductionYTDPaystub | currency }}</td>
 						</tr>
 					</tbody>
 				</table>
