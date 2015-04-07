@@ -76,6 +76,7 @@ angular.module('paycheckCalculator', [])
 					AfterTax: "After-Tax Deductions",
 					TakeHome: "Take Home Pay"
 				},
+				order:'desc',
 			    type : 'pie'
 			},
 			pie: {
