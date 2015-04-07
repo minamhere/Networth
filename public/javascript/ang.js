@@ -64,7 +64,7 @@ angular.module('paycheckCalculator', [])
 			    	["Medicare", $scope.medicareTaxPaystub],
 			    	["State", $scope.stateTaxPaystub],
 			    	["Retirement", $scope.retirementContributionsPaystub],
-			    	["After-Tax", $scope.afterTaxDeductionPaystub],
+			    	["AfterTax", $scope.afterTaxDeductionPaystub],
 			    	["TakeHome", $scope.takehomePayPaystub]
 				],
 				names: {
@@ -73,7 +73,7 @@ angular.module('paycheckCalculator', [])
 					Medicare: "Medicare Tax",
 					State: "State Tax",
 					Retirement: "Retirement Contributions",
-					After-Tax: "After-Tax Deductions",
+					AfterTax: "After-Tax Deductions",
 					TakeHome: "Take Home Pay"
 				},
 			    type : 'pie'
@@ -154,11 +154,11 @@ angular.module('paycheckCalculator', [])
 					    	["Medicare", $scope.medicareTaxPaystub],
 					    	["State", $scope.stateTaxPaystub],
 					    	["Retirement", $scope.retirementContributionsPaystub],
-					    	["After-Tax", $scope.afterTaxDeductionPaystub],
-					    	["Take Home", $scope.takehomePayPaystub]
+					    	["AfterTax", $scope.afterTaxDeductionPaystub],
+					    	["TakeHome", $scope.takehomePayPaystub]
 						],
 						names: {
-							State: $scope.state.name
+							State: $scope.state.name + " Tax",
 						}
 					});
 
