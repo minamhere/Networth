@@ -43,7 +43,7 @@ angular.module('paycheckCalculator', [])
 				// or server returns response with an error status.
 			});
 
-		$scope.chart = c3.generate({
+		$scope.chart = setTimeout(c3.generate({
 		    bindto: '#piechart',
 			data: {
 				columns: [
@@ -54,7 +54,7 @@ angular.module('paycheckCalculator', [])
 			pie: {
 			    title: "Paycheck Breakdown:",
 			}
-		});
+		}), 0);
 		
 
 		$scope.calculate = function () {
