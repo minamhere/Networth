@@ -101,29 +101,25 @@
 						<tr>
 						<td>Federal Allowances</td>
 						<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
-						<td></td>
 						<td>{{ state.name || "State" }}  Allowances</td>
 						<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
 					</tr>
 					<tr>
 						<td>Federal Annual Additional Witholding</td>
 						<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
-						<td></td>
 						<td>{{ state.name || "State" }}  Annual Additional Witholding</td>
 						<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
 					</tr>
 						<tr>
-							<th colspan="5">Paycheck Summary</th>
+							<th colspan="4">Paycheck Summary</th>
 						</tr>
 						<tr>
-							<th></th>
 							<th>Gross Earnings</th>
 							<th>Total Taxes</th>
 							<th>Total Deductions</th>
 							<th>Total Net Pay</th>
 						</tr>
 						<tr>
-							<th>Current</th>
 							<td id="grossEarnings">{{ grossEarningsPaystub | currency }}</td>
 							<td id="totalTax">{{ totalTaxPaystub | currency }}</td>
 							<td id="totalDeductions">{{ totalDeductionsPaystub | currency }}</td>
