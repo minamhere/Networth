@@ -59,14 +59,23 @@ angular.module('paycheckCalculator', [])
 		    },
 			data: {
 				columns: [
-					["Federal Income Tax", $scope.fedTaxPaystub],
-			    	["Social Security Tax", $scope.ssTaxPaystub],
-			    	["Medicare Tax", $scope.medicareTaxPaystub],
-			    	["State Tax", $scope.stateTaxPaystub],
-			    	["Retirement Deductions", $scope.retirementContributionsPaystub],
-			    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
-			    	["Take Home Pay", $scope.takehomePayPaystub]
+					["Federal", $scope.fedTaxPaystub],
+			    	["SS", $scope.ssTaxPaystub],
+			    	["Medicare", $scope.medicareTaxPaystub],
+			    	["State", $scope.stateTaxPaystub],
+			    	["Retirement", $scope.retirementContributionsPaystub],
+			    	["After-Tax", $scope.afterTaxDeductionPaystub],
+			    	["TakeHome", $scope.takehomePayPaystub]
 				],
+				names: {
+					Federal: "Federal Tax",
+					SS: "Social Security Tax",
+					Medicare: "Medicare Tax",
+					State: "State Tax",
+					Retirement: "Retirement Contributions",
+					After-Tax: "After-Tax Deductions",
+					TakeHome: "Take Home Pay"
+				},
 			    type : 'pie'
 			},
 			pie: {
@@ -140,15 +149,17 @@ angular.module('paycheckCalculator', [])
 
 					chart.load({
 						columns: [
-							["Federal Income Tax", $scope.fedTaxPaystub],
-					    	["Social Security Tax", $scope.ssTaxPaystub],
-					    	["Medicare Tax", $scope.medicareTaxPaystub],
-					    	[$scope.state.name+" Tax", $scope.stateTaxPaystub],
-					    	["Retirement Deductions", $scope.retirementContributionsPaystub],
-					    	["After-Tax Deductions", $scope.afterTaxDeductionPaystub],
-					    	["Take Home Pay", $scope.takehomePayPaystub]
+							["Federal", $scope.fedTaxPaystub],
+					    	["SocialSecurity", $scope.ssTaxPaystub],
+					    	["Medicare", $scope.medicareTaxPaystub],
+					    	["State", $scope.stateTaxPaystub],
+					    	["Retirement", $scope.retirementContributionsPaystub],
+					    	["After-Tax", $scope.afterTaxDeductionPaystub],
+					    	["Take Home", $scope.takehomePayPaystub]
 						],
-						unload: ["State Tax"],
+						names: {
+							State: "$scope.state.name"
+						}
 					});
 
 
