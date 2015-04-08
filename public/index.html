@@ -31,10 +31,9 @@
 <h1> Paycheck Calculator</h1>
 
 	<div id="paycheckCalculator" ng-controller="PaycheckController as paycheck" class="container">
-		<div id="row1" class="row">
-			<div id="input">
-
-				<div id="fedInput" class="col-lg-4">	
+		<div id="input">
+			<div id="row1" class="row">
+				<div id="fedInput" class="col-lg-6">	
 					<div> Gross Annual Income: 
 						<input  id="income" type='number' name='income' placeholder='Income' ng-model="income" ng-blur="calculate()"></input>
 					</div>
@@ -52,7 +51,7 @@
 					</div>
 				</div>
 
-				<div id="stateInput" class="col-lg-4">
+				<div id="stateInput" class="col-lg-6">
 					<div> State:
 						<select id="stateSelect" ng-model="state" ng-options="state.name for state in states" ng-change="calculate()"></select>
 					</div>
@@ -67,8 +66,9 @@
 						<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional State Witholding' ng-model="additionalStateWitholding" ng-blur="calculate()">
 					</div>
 				</div>
-
-				<div id="deductionInput" class="col-lg-4">
+			</div> 
+			<div id="row2" class="row">
+				<div id="deductionInput" class="col-lg-12">
 					<div> Deductions:
 						<input id="retirementInput" type='number' name='retirement' placeholder='Retirement' ng-model="retirementInput" ng-blur="calculate()">
     					Exempt From:
@@ -85,122 +85,119 @@
     						<input id="exemptFromStateInput" type="checkbox" value="exemptFromStateInput"> State 
     					</label>
     					<span class="glyphicon glyphicon-plus-sign"></span>
-
 					</div>
-
 					<div id="calc">
 						<button ng-click="calculate()">Calculate Paycheck</button>
 					</div>
 				</div>
+			</div>
+		
+			<div id="row3" class="row">
 
+				<div id="paystub" class="paystub col-lg-6">
+					<table>
+						<tbody>
+							<tr> 
+								<th colspan="4">General</th>
+							</tr>
+							<tr> 
+								<th colspan="4">Tax Data</th>
+							</tr>
+							<tr> 
+								<td>Federal Filing Status</td>
+								<td id="fedFilingStatus">{{ fedFilingStatusPaystub }}</td>
+								<td>{{ state.name || "State" }}  Filing Status</td>
+								<td id="stateFilingStatus">{{ stateFilingStatusPaystub }}</td>
+							</tr>
+							<tr>
+							<td>Federal Allowances</td>
+							<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
+							<td>{{ state.name || "State" }}  Allowances</td>
+							<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
+						</tr>
+						<tr>
+							<td>Federal Annual Additional Witholding</td>
+							<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
+							<td>{{ state.name || "State" }}  Annual Additional Witholding</td>
+							<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
+						</tr>
+							<tr>
+								<th colspan="4">Paycheck Summary</th>
+							</tr>
+							<tr>
+								<th>Gross Earnings</th>
+								<th>Total Taxes</th>
+								<th>Total Deductions</th>
+								<th>Total Net Pay</th>
+							</tr>
+							<tr>
+								<td id="grossEarnings">{{ grossEarningsPaystub | currency }}</td>
+								<td id="totalTax">{{ totalTaxPaystub | currency }}</td>
+								<td id="totalDeductions">{{ totalDeductionsPaystub | currency }}</td>
+								<td id="takehomePay">{{ takehomePayPaystub | currency }}</td>
+							</tr>
+							<tr>
+								<th colspan="2">Earnings</th>
+								<th colspan="2">Taxes</th>
+							</tr>
+							<tr>
+								<th>Description</th>
+								<th>Amount</th>
+								<th>Description</th>
+								<th>Amount</th>
+							</tr>
+							<tr>
+								<td>Regular Earnings</td>
+								<td id="regEarnings">{{ regEarningsPaystub | currency }}</td>
+								<td>Fed Witholding</td>
+								<td id="fedTax">{{ fedTaxPaystub | currency }}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Medicare Witholding</td>
+								<td id="medicareTax">{{ medicareTaxPaystub | currency }}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>Social Security Witholding</td>
+								<td id="ssTax">{{ ssTaxPaystub | currency }}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td> {{ state.name || "State" }} Witholding</span></td>
+								<td id="stateTax">{{ stateTaxPaystub | currency}}</td>
+							</tr>
+							<tr>
+								<th colspan="4">Deductions</th>
+							</tr>
+							<tr>
+								<th colspan="2">Before-Tax Deductions</th>
+								<th colspan="2">After-Tax Deductions</th>
+							</tr>
+							<tr>
+								<th>Description </th>
+								<th>Amount </th>
+								<th>Description </th>
+								<th>Amount </th>
+							</tr>
+							<tr>
+								<td>401k</td>
+								<td id="retirementContributions">{{ retirementContributionsPaystub | currency }}</td>
+								<td>Disability</td>
+								<td id="afterTaxDeduction">{{ afterTaxDeductionPaystub | currency }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="piechart" class="col-lg-6"></div>
+			</div>
+			<div id="row4" class="row">
 				
 			</div>
-		</div>
-		<div id="row2" class="row">
-
-			<div id="paystub" class="paystub col-lg-6">
-				<table>
-					<tbody>
-						<tr> 
-							<th colspan="4">General</th>
-						</tr>
-						<tr> 
-							<th colspan="4">Tax Data</th>
-						</tr>
-						<tr> 
-							<td>Federal Filing Status</td>
-							<td id="fedFilingStatus">{{ fedFilingStatusPaystub }}</td>
-							<td>{{ state.name || "State" }}  Filing Status</td>
-							<td id="stateFilingStatus">{{ stateFilingStatusPaystub }}</td>
-						</tr>
-						<tr>
-						<td>Federal Allowances</td>
-						<td id="fedAllowances">{{ fedAllowancesPaystub }}</td>
-						<td>{{ state.name || "State" }}  Allowances</td>
-						<td id="stateAllowances">{{ stateAllowancesPaystub }}</td>
-					</tr>
-					<tr>
-						<td>Federal Annual Additional Witholding</td>
-						<td id="fedAdditionalWitholding">{{ fedAdditionalWitholdingPaystub | currency }}</td>
-						<td>{{ state.name || "State" }}  Annual Additional Witholding</td>
-						<td id="stateAdditionalWitholding">{{ stateAdditionalWitholdingPaystub | currency }}</td>
-					</tr>
-						<tr>
-							<th colspan="4">Paycheck Summary</th>
-						</tr>
-						<tr>
-							<th>Gross Earnings</th>
-							<th>Total Taxes</th>
-							<th>Total Deductions</th>
-							<th>Total Net Pay</th>
-						</tr>
-						<tr>
-							<td id="grossEarnings">{{ grossEarningsPaystub | currency }}</td>
-							<td id="totalTax">{{ totalTaxPaystub | currency }}</td>
-							<td id="totalDeductions">{{ totalDeductionsPaystub | currency }}</td>
-							<td id="takehomePay">{{ takehomePayPaystub | currency }}</td>
-						</tr>
-						<tr>
-							<th colspan="2">Earnings</th>
-							<th colspan="2">Taxes</th>
-						</tr>
-						<tr>
-							<th>Description</th>
-							<th>Amount</th>
-							<th>Description</th>
-							<th>Amount</th>
-						</tr>
-						<tr>
-							<td>Regular Earnings</td>
-							<td id="regEarnings">{{ regEarningsPaystub | currency }}</td>
-							<td>Fed Witholding</td>
-							<td id="fedTax">{{ fedTaxPaystub | currency }}</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td>Medicare Witholding</td>
-							<td id="medicareTax">{{ medicareTaxPaystub | currency }}</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td>Social Security Witholding</td>
-							<td id="ssTax">{{ ssTaxPaystub | currency }}</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td> {{ state.name || "State" }} Witholding</span></td>
-							<td id="stateTax">{{ stateTaxPaystub | currency}}</td>
-						</tr>
-						<tr>
-							<th colspan="4">Deductions</th>
-						</tr>
-						<tr>
-							<th colspan="2">Before-Tax Deductions</th>
-							<th colspan="2">After-Tax Deductions</th>
-						</tr>
-						<tr>
-							<th>Description </th>
-							<th>Amount </th>
-							<th>Description </th>
-							<th>Amount </th>
-						</tr>
-						<tr>
-							<td>401k</td>
-							<td id="retirementContributions">{{ retirementContributionsPaystub | currency }}</td>
-							<td>Disability</td>
-							<td id="afterTaxDeduction">{{ afterTaxDeductionPaystub | currency }}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div id="piechart" class="col-lg-6"></div>
-		</div>
-		<div id="row3" class="row">
-			
-		</div>
+		</div>			
 	</div>
 
 	
