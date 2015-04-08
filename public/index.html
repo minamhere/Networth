@@ -60,10 +60,10 @@
 					</div>
 
 					<div> {{ state.name || "State" }}  Allowances:
-						<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='State Allowances' ng-model="stateAllowances" ng-blur="calculate()">
+						<input id="stateAllowancesInput" type='number' name='stateAllowances' placeholder='{{ state.name || "State" }} Allowances' ng-model="stateAllowances" ng-blur="calculate()">
 					</div>
 					<div> Additional {{ state.name || "State" }}  Witholding: 
-						<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional State Witholding' ng-model="additionalStateWitholding" ng-blur="calculate()">
+						<input id="additionalStateWitholding" type='number' name='additionalStateWitholding' placeholder='Additional {{ state.name || "State" }} Witholding' ng-model="additionalStateWitholding" ng-blur="calculate()">
 					</div>
 				</div>
 			</div> 
@@ -75,16 +75,16 @@
 						<input id="retirementInput" type='number' name='retirement' placeholder='Retirement' ng-model="retirementInput" ng-blur="calculate()">
     					Exempt From: 
     					<label class="checkbox-inline">
-    						<input id="exemptFromFedInput" type="checkbox" name="deductionsExempt" value="exemptFromFedInput">Federal 
+    						<input id="exemptFromFedInput" type="checkbox" name="deductionsExempt" value="exemptFromFedInput">Federal
     					</label>
     					<label class="checkbox-inline">
-    						<input id="exemptFromStateInput" type="checkbox" name="deductionsExempt" value="exemptFromStateInput">State 
+    						<input id="exemptFromStateInput" type="checkbox" name="deductionsExempt" value="exemptFromStateInput">{{ state.name || "State" }}
     					</label>
     					<label class="checkbox-inline">
-    						<input id="exemptFromSSInput" type="checkbox" name="deductionsExempt" value="exemptFromSSInput">Social Security 
+    						<input id="exemptFromSSInput" type="checkbox" name="deductionsExempt" value="exemptFromSSInput">Social Security
     					</label>
     					<label class="checkbox-inline">
-    						<input id="exemptFromMedInput" type="checkbox" name="deductionsExempt" value="exemptFromMedInput">Medicare  
+    						<input id="exemptFromMedInput" type="checkbox" name="deductionsExempt" value="exemptFromMedInput">Medicare
     					</label>
     					<span class="glyphicon glyphicon-plus-sign"> </span>
 					</div>
