@@ -33,7 +33,7 @@
 	<div id="paycheckCalculator" ng-controller="PaycheckController as paycheck" class="container">
 		<div id="row1" class="row">
 			<div id="input">
-			
+
 				<div id="fedInput" class="col-lg-4">	
 					<div> Gross Annual Income: 
 						<input  id="income" type='number' name='income' placeholder='Income' ng-model="income" ng-blur="calculate()"></input>
@@ -69,15 +69,25 @@
 				</div>
 
 				<div id="deductionInput" class="col-lg-4">
-					<div> Retirement Contributions (401k, etc.):
+					<div> Deductions:
 						<input id="retirementInput" type='number' name='retirement' placeholder='Retirement' ng-model="retirementInput" ng-blur="calculate()">
-						<span class="icon-plus-sign"></span>
+    					Exempt From:
+    					<label class="checkbox inline">
+    						<input id="exemptFromFedInput" type="checkbox" value="exemptFromFedInput"> Federal 
+    					</label>
+    					<label class="checkbox inline">
+    						<input id="exemptFromSSInput" type="checkbox" value="exemptFromSSInput"> Social Security 
+    					</label>
+    					<label class="checkbox inline">
+    						<input id="exemptFromMedInput" type="checkbox" value="exemptFromMedInput"> Medicare 
+    					</label>
+    					<label class="checkbox inline">
+    						<input id="exemptFromStateInput" type="checkbox" value="exemptFromStateInput"> State 
+    					</label>
+    					<a class="btn" href="#"><i class="icon-plus-sign"></i></a>
+
 					</div>
 
-					<div> After Tax Deductions (Disability, etc.): 
-						<input id="afterTaxDeductionInput" type='number' name='afterTaxDeduction' placeholder='After Tax Deductions' ng-model="afterTaxDeductionInput" ng-blur="calculate()">
-						<span class="icon-plus-sign"></span>
-					</div>
 					<div id="calc">
 						<button ng-click="calculate()">Calculate Paycheck</button>
 					</div>
