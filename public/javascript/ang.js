@@ -104,12 +104,12 @@ angular.module('paycheckCalculator', [])
 				additionalStateWitholding: strippedAdditionalStateWitholding || 0,
 				deductions: JSON.stringify([
 					{
-					deductionNameInput: $scope.deductionNameInput,
-					deductionAmountInput: $scope.deductionAmountInput,
-					exemptFromFedInput: $scope.exemptFromFedInput,
-					exemptFromStateInput: $scope.exemptFromStateInput,
-					exemptFromSSInput: $scope.exemptFromSSInput,
-					exemptFromMedInput: $scope.exemptFromMedInput
+					deductionNameInput: $scope.deductionNameInput || "Retirement",
+					deductionAmountInput: $scope.deductionAmountInput || 0,
+					exemptFromFedInput: $scope.exemptFromFedInput || false,
+					exemptFromStateInput: $scope.exemptFromStateInput || false,
+					exemptFromSSInput: $scope.exemptFromSSInput || false,
+					exemptFromMedInput: $scope.exemptFromMedInput || false
 					}
 				])
 			 };
