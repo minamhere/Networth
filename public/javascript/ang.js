@@ -102,7 +102,7 @@ angular.module('paycheckCalculator', [])
 				stateFilingStatus: $scope.stateFilingStatus.id,
 				stateAllowances: strippedStateAllowances,
 				additionalStateWitholding: strippedAdditionalStateWitholding || 0,
-				deductions: [
+				deductions: JSON.stringify([
 					{
 					deductionNameInput: $scope.deductionNameInput,
 					deductionAmountInput: $scope.deductionAmountInput,
@@ -111,7 +111,7 @@ angular.module('paycheckCalculator', [])
 					exemptFromSSInput: $scope.exemptFromSSInput,
 					exemptFromMedInput: $scope.exemptFromMedInput
 					}
-				]
+				])
 			 };
 			$http({method: 'GET', url: '/api/calcPaycheck', params: parameters}).
 				success(function(paycheckData, status, headers, config) {
