@@ -130,7 +130,7 @@ angular.module('paycheckCalculator', [])
 					$scope.regEarningsPaystub = paycheckData.grossEarnings;
 					$scope.fedGrossEarningsPaystub = paycheckData.fedGrossEarnings;
 					$scope.totalTaxPaystub = paycheckData.totalTax;
-					$scope.totalDeductionsPaystub = paycheckData.retirement + paycheckData.afterTaxDeduction;
+					$scope.totalDeductionsPaystub = $scope.retirementContributionsPaystub;
 					$scope.takehomePayPaystub = paycheckData.takehomePay;
 
 					$scope.fedTaxPaystub = paycheckData.fedTax;
