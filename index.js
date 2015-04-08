@@ -415,7 +415,7 @@ function handleState(stateInfo, callback){
 					stateWithholdingDeductions = (stateInfo.stateAllowances)*statePersonalExemption+stateStandardDeduction;
 					// end handling allowances
 					stateAGI = stateInfo.income-stateWithholdingDeductions;
-					if (deductions[0].exemptFromStateInput) stateAGI -= deductions[0].deductionAmountInput;
+					if (stateInfo.deductions[0].exemptFromStateInput) stateAGI -= stateInfo.deductions[0].deductionAmountInput;
 					if (stateAGI<0) stateAGI = 0;
 
 					callback(null, stateAGI);
