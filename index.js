@@ -186,6 +186,8 @@ app.get('/api/calcPaycheck', function (request,response){
 				// end handling allowances
 
 				fedAGI = income-fedWithholdingDeductions;
+				ssAGI = income-fedWithholdingDeductions;
+				medicareAGI = income-fedWithholdingDeductions;
 				if (deductions[0].exemptFromFedInput) fedAGI -= deductions[0].deductionAmountInput;
 				if (fedAGI <0) fedAGI = 0;
 
