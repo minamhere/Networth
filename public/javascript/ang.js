@@ -7,7 +7,6 @@ angular.module('paycheckCalculator', [])
 		$scope.medicareTaxPaystub = 0;
 		$scope.stateTaxPaystub = 0;
 		$scope.retirementContributionsPaystub = 0;
-		$scope.afterTaxDeductionPaystub = 0;
 		$scope.takehomePayPaystub = 0;
 
 	    $http.get('/api/getFilingStatuses').
