@@ -156,6 +156,8 @@ app.get('/api/calcPaycheck', function (request,response){
 	var fedStandardDeduction = 0;
 	var fedPersonalExemption = 0;
 	var fedAGI = 0;
+	var ssAGI = 0;
+	var medicareAGI = 0;
 	var stateAGI =0;
 
 	var fedWithholdingDeductions = 0;
