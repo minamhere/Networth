@@ -152,7 +152,7 @@ angular.module('paycheckCalculator', [])
 					    	["SS", $scope.ssTaxPaystub],
 					    	["Medicare", $scope.medicareTaxPaystub],
 					    	["State", $scope.stateTaxPaystub],
-					    	["Retirement", $scope.deductionAmountPaystub],
+					    	["Retirement", $scope.retirementContributionsPaystub],
 					    	["TakeHome", $scope.takehomePayPaystub]
 						]
 					});
