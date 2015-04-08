@@ -141,7 +141,6 @@ angular.module('paycheckCalculator', [])
 					$scope.stateNamePaystub = paycheckData.stateName;
 					
 					$scope.retirementContributionsPaystub = paycheckData.retirement;
-					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
 					$scope.deductionNamePaystub =  $scope.deductionNameInput,
