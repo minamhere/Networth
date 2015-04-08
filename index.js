@@ -136,7 +136,6 @@ app.post('/api/createNewBracket', function (request, response){
 });
 
 app.get('/api/calcPaycheck', function (request,response){
-	console.log(JSON.stringify(request.query.deductions));
 	var income = request.query.income;
 	var payFrequencyID = request.query.payFrequency;
 	
@@ -149,7 +148,7 @@ app.get('/api/calcPaycheck', function (request,response){
 	var stateAllowances = request.query.stateAllowances;
 	var additionalStateWitholding = request.query.additionalStateWitholding;
 	
-	var retirement = request.query.retirement;
+	var deductions = JSON.parse(request.query.deductions);
 
 	var taxyear = 2015;
 
@@ -183,7 +182,7 @@ app.get('/api/calcPaycheck', function (request,response){
 				// Need to find a way to handle that.
 				// end handling allowances
 
-				fedAGI = income-retirement-fedWithholdingDeductions;
+				fedAGI = income-deductions.deductionAmountInput-fedWithholdingDeductions;
 				if (fedAGI <0) fedAGI = 0;
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
@@ -192,7 +191,7 @@ app.get('/api/calcPaycheck', function (request,response){
 			var stateInfo = {
 				jurisdiction_id:stateID, 
 				income:income, 
-				retirement:retirement, 
+				deductions:deductions, 
 				taxyear: taxyear, 
 				stateFilingStatus: stateFilingStatus,
 				stateAllowances: stateAllowances
@@ -228,10 +227,9 @@ app.get('/api/calcPaycheck', function (request,response){
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
 			stateTax += additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
-			var retirementContribution = retirement/payPeriods;
-			var afterTaxDeductionPerPaycheck = afterTaxDeduction/payPeriods;
+			var retirementContribution = deductions.deductionAmountInput/payPeriods;
 
-			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax-afterTaxDeductionPerPaycheck;
+			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
 
 			responseText = {
 				grossEarnings: grossEarnings,
@@ -245,7 +243,6 @@ app.get('/api/calcPaycheck', function (request,response){
 				retirement: retirementContribution,
 				paySchedule: results.getPayPeriods.name,
 				takehomePay: takehomePay,
-				afterTaxDeduction: afterTaxDeductionPerPaycheck
 			};
 
 			response.send(JSON.stringify(responseText));
@@ -404,7 +401,7 @@ function handleState(stateInfo, callback){
 					// start handling allowances
 					stateWithholdingDeductions = (stateInfo.stateAllowances)*statePersonalExemption+stateStandardDeduction;
 					// end handling allowances
-					stateAGI = stateInfo.income-stateInfo.retirement-stateWithholdingDeductions;
+					stateAGI = stateInfo.income-stateInfo.deductions.deductionAmountInput-stateWithholdingDeductions;
 					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
