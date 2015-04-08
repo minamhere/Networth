@@ -136,6 +136,7 @@ app.post('/api/createNewBracket', function (request, response){
 });
 
 app.get('/api/calcPaycheck', function (request,response){
+	console.log(JSON.stringify(request.query.deductions));
 	var income = request.query.income;
 	var payFrequencyID = request.query.payFrequency;
 	
@@ -149,7 +150,6 @@ app.get('/api/calcPaycheck', function (request,response){
 	var additionalStateWitholding = request.query.additionalStateWitholding;
 	
 	var retirement = request.query.retirement;
-	var afterTaxDeduction = request.query.afterTaxDeduction;
 
 	var taxyear = 2015;
 

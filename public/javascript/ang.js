@@ -43,8 +43,6 @@ angular.module('paycheckCalculator', [])
 				// when the response is available
 				$scope.states = data;
 				$scope.state = data[0];
-
-
 			}).
 			error(function(data, status, headers, config) {
 				// called asynchronously if an error occurs
@@ -64,7 +62,6 @@ angular.module('paycheckCalculator', [])
 			    	["Medicare", $scope.medicareTaxPaystub],
 			    	["State", $scope.stateTaxPaystub],
 			    	["Retirement", $scope.retirementContributionsPaystub],
-			    	["AfterTax", $scope.afterTaxDeductionPaystub],
 			    	["TakeHome", $scope.takehomePayPaystub]
 				],
 				names: {
@@ -73,7 +70,6 @@ angular.module('paycheckCalculator', [])
 					Medicare: "Medicare Tax",
 					State: "State Tax",
 					Retirement: "Retirement Contributions",
-					AfterTax: "After-Tax Deductions",
 					TakeHome: "Take Home Pay"
 				},
 			    type : 'pie'
@@ -87,22 +83,14 @@ angular.module('paycheckCalculator', [])
 		$scope.calculate = function () {
 			
 
-
 			var strippedIncome = $scope.income || 0;
-			var strippedRetirement = $scope.retirementInput || 0;
-			
-			if (parseInt(strippedIncome) < parseInt(strippedRetirement)) {
-				alert('Retirement savings must be less than Gross Income');
-				return false;
-			};
+			var strippedDeduction = $scope.deductionAmountInput || 0;
 			
 			var strippedFedAllowances = $scope.fedAllowances || 0;
 			var strippedStateAllowances = $scope.stateAllowances || 0;
 
 			var strippedAdditionalStateWitholding = $scope.additionalStateWitholding || 0;
 			var strippedAdditionalFederalWitholding = $scope.additionalFederalWitholding || 0;
-
-			var strippedAfterTaxDeduction = $scope.afterTaxDeductionInput || 0;
 
 			var parameters = { 
 				income: strippedIncome, 
@@ -114,14 +102,21 @@ angular.module('paycheckCalculator', [])
 				stateFilingStatus: $scope.stateFilingStatus.id,
 				stateAllowances: strippedStateAllowances,
 				additionalStateWitholding: strippedAdditionalStateWitholding || 0,
-				retirement: strippedRetirement || 0,
-				afterTaxDeduction: strippedAfterTaxDeduction || 0
+				deductions: [
+					{
+					deductionNameInput: $scope.deductionNameInput,
+					deductionAmountInput: $scope.deductionAmountInput,
+					exemptFromFedInput: $scope.exemptFromFedInput,
+					exemptFromStateInput: $scope.exemptFromStateInput,
+					exemptFromSSInput: $scope.exemptFromSSInput,
+					exemptFromMedInput: $scope.exemptFromMedInput
+					}
+				]
 			 };
 			$http({method: 'GET', url: '/api/calcPaycheck', params: parameters}).
-				success(function(data, status, headers, config) {
+				success(function(paycheckData, status, headers, config) {
 					// this callback will be called asynchronously
 					// when the response is available
-					paycheckData = data;
 					
 					$scope.fedFilingStatusPaystub = $scope.fedFilingStatus.id + ' - ' + $scope.fedFilingStatus.statusname;
 					$scope.stateFilingStatusPaystub = $scope.stateFilingStatus.id + ' - ' + $scope.stateFilingStatus.statusname;
@@ -147,20 +142,20 @@ angular.module('paycheckCalculator', [])
 					$scope.afterTaxDeductionPaystub = paycheckData.afterTaxDeduction;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					chart.data.names({State: paycheckData.stateName + " Tax"});
+					$scope.deductionNamePaystub =  $scope.deductionNameInput,
+					$scope.deductionAmountPaystub =  $scope.deductionAmountInput,
+
+					chart.data.names({State: paycheckData.stateName + " Tax", Retirement: paycheckData.deductionName});
 					chart.load({
 						columns: [
 							["Federal", $scope.fedTaxPaystub],
 					    	["SS", $scope.ssTaxPaystub],
 					    	["Medicare", $scope.medicareTaxPaystub],
 					    	["State", $scope.stateTaxPaystub],
-					    	["Retirement", $scope.retirementContributionsPaystub],
-					    	["AfterTax", $scope.afterTaxDeductionPaystub],
+					    	["Retirement", $scope.deductionAmountPaystub],
 					    	["TakeHome", $scope.takehomePayPaystub]
 						]
 					});
-					chart.data({order:'asc'});
-
 
 				}).
 				error(function(data, status, headers, config) {
