@@ -183,7 +183,7 @@ app.get('/api/calcPaycheck', function (request,response){
 				// Need to find a way to handle that.
 				// end handling allowances
 
-				fedAGI = income-deductions.deductionAmountInput-fedWithholdingDeductions;
+				fedAGI = income-deductions[0].deductionAmountInput-fedWithholdingDeductions;
 				if (fedAGI <0) fedAGI = 0;
 				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
 			});
@@ -228,7 +228,7 @@ app.get('/api/calcPaycheck', function (request,response){
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
 			stateTax += additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
-			var retirementContribution = deductions.deductionAmountInput/payPeriods;
+			var retirementContribution = deductions[0].deductionAmountInput/payPeriods;
 
 			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
 
@@ -402,7 +402,7 @@ function handleState(stateInfo, callback){
 					// start handling allowances
 					stateWithholdingDeductions = (stateInfo.stateAllowances)*statePersonalExemption+stateStandardDeduction;
 					// end handling allowances
-					stateAGI = stateInfo.income-stateInfo.deductions.deductionAmountInput-stateWithholdingDeductions;
+					stateAGI = stateInfo.income-stateInfo.deductions[0].deductionAmountInput-stateWithholdingDeductions;
 					if (stateAGI<0) stateAGI = 0;
 					callback(null, stateAGI);
 				}
