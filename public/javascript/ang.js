@@ -57,10 +57,10 @@ angular.module('paycheckCalculator', [])
 		    },
 			data: {
 				columns: [
-					["Federal", $scope.fedTaxPaystub],
-			    	["SS", $scope.ssTaxPaystub],
-			    	["Medicare", $scope.medicareTaxPaystub],
+					["Medicare", $scope.medicareTaxPaystub],
+					["SS", $scope.ssTaxPaystub],
 			    	["State", $scope.stateTaxPaystub],
+			    	["Federal", $scope.fedTaxPaystub],
 			    	["Retirement", $scope.retirementContributionsPaystub],
 			    	["TakeHome", $scope.takehomePayPaystub]
 				],
@@ -72,6 +72,7 @@ angular.module('paycheckCalculator', [])
 					Retirement: "Retirement Contributions",
 					TakeHome: "Take Home Pay"
 				},
+				order: null,
 			    type : 'pie'
 			},
 			pie: {
@@ -148,10 +149,10 @@ angular.module('paycheckCalculator', [])
 					chart.data.names({State: paycheckData.stateName + " Tax", Retirement: $scope.deductionNamePaystub});
 					chart.load({
 						columns: [
-							["Federal", $scope.fedTaxPaystub],
-					    	["SS", $scope.ssTaxPaystub],
-					    	["Medicare", $scope.medicareTaxPaystub],
-					    	["State", $scope.stateTaxPaystub],
+							["Medicare", $scope.medicareTaxPaystub],
+							["SS", $scope.ssTaxPaystub],
+							["State", $scope.stateTaxPaystub],
+					    	["Federal", $scope.fedTaxPaystub],
 					    	["Retirement", $scope.retirementContributionsPaystub],
 					    	["TakeHome", $scope.takehomePayPaystub]
 						]
