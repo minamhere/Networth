@@ -149,6 +149,7 @@ app.get('/api/calcPaycheck', function (request,response){
 	var additionalStateWitholding = request.query.additionalStateWitholding;
 	
 	var deductions = JSON.parse(request.query.deductions);
+	console.log("Deductions: " + JSON.stringify(deductions));
 
 	var taxyear = 2015;
 
