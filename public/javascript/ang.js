@@ -145,7 +145,7 @@ angular.module('paycheckCalculator', [])
 					$scope.deductionNamePaystub =  $scope.deductionNameInput,
 					$scope.deductionAmountPaystub =  $scope.deductionAmountInput,
 
-					chart.data.names({State: paycheckData.stateName + " Tax", Retirement: paycheckData.deductionName});
+					chart.data.names({State: paycheckData.stateName + " Tax", Retirement: $scope.deductionNamePaystub});
 					chart.load({
 						columns: [
 							["Federal", $scope.fedTaxPaystub],

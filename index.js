@@ -183,9 +183,17 @@ app.get('/api/calcPaycheck', function (request,response){
 				// Need to find a way to handle that.
 				// end handling allowances
 
-				fedAGI = income-deductions[0].deductionAmountInput-fedWithholdingDeductions;
+				fedAGI = income-fedWithholdingDeductions;
+				if (deductions[0].exemptFromFedInput) fedAGI -= deductions[0].deductionAmountInput;
 				if (fedAGI <0) fedAGI = 0;
-				callback(null,{fedAGI:fedAGI,ssAGI:income,medicareAGI:income});
+
+				if (deductions[0].exemptFromSSInput) ssAGI -= deductions[0].deductionAmountInput;
+				if (ssAGI <0) ssAGI = 0;
+
+				if (deductions[0].exemptFromMedInput) medicareAGI -= deductions[0].deductionAmountInput;
+				if (medicareAGI <0) medicareAGI = 0;
+
+				callback(null,{fedAGI:fedAGI,ssAGI:ssAGI,medicareAGI:medicareAGI});
 			});
 		},
 		getStateTax:function (callback, results){
@@ -402,8 +410,10 @@ function handleState(stateInfo, callback){
 					// start handling allowances
 					stateWithholdingDeductions = (stateInfo.stateAllowances)*statePersonalExemption+stateStandardDeduction;
 					// end handling allowances
-					stateAGI = stateInfo.income-stateInfo.deductions[0].deductionAmountInput-stateWithholdingDeductions;
+					stateAGI = stateInfo.income-stateWithholdingDeductions;
+					if (deductions[0].exemptFromStateInput) stateAGI -= deductions[0].deductionAmountInput;
 					if (stateAGI<0) stateAGI = 0;
+
 					callback(null, stateAGI);
 				}
 				],
