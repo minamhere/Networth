@@ -1,0 +1,19 @@
+<div> Deduction Name:
+	<input id="deductionNameInput" type='textbox' name='deductionNameInput' placeholder='Deduction name' ng-model="deductionNameInput" ng-blur="calculate()">
+	<span> Deduction Amount: </span>					
+	<input id="deductionAmountInput" type='number' name='deductionAmountInput' placeholder='Deduction Amount' ng-model="deductionAmountInput" ng-blur="calculate()">
+	Exempt From: 
+	<label class="checkbox-inline">
+		<input id="exemptFromFedInput" type="checkbox" name="deductionsExempt" value="exemptFromFedInput" ng-model="exemptFromFedInput" ng-change="calculate()">Federal
+	</label>
+	<label class="checkbox-inline">
+		<input id="exemptFromStateInput" type="checkbox" name="deductionsExempt" value="exemptFromStateInput" ng-model="exemptFromStateInput" ng-change="calculate()">{{ state.name || "State" }}
+	</label>
+	<label class="checkbox-inline">
+		<input id="exemptFromSSInput" type="checkbox" name="deductionsExempt" value="exemptFromSSInput" ng-model="exemptFromSSInput" ng-change="calculate()">Social Security
+	</label>
+	<label class="checkbox-inline">
+		<input id="exemptFromMedInput" type="checkbox" name="deductionsExempt" value="exemptFromMedInput" ng-model="exemptFromMedInput" ng-change="calculate()">Medicare
+	</label>
+	<span class="glyphicon glyphicon-plus-sign"> </span>
+</div>
