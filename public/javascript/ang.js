@@ -17,6 +17,8 @@ angular.module('paycheckCalculator', [])
 				$scope.filingStatuses = data;
 				$scope.fedFilingStatus = data[0];
 				$scope.stateFilingStatus = data[0];
+				$scope.fedAllowances = 2;
+				$scope.stateAllowances = 1;
 
 			}).
 			error(function(data, status, headers, config) {
