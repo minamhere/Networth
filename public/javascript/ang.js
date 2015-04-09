@@ -9,6 +9,25 @@ angular.module('paycheckCalculator', [])
 		$scope.retirementContributionsPaystub = 0;
 		$scope.takehomePayPaystub = 0;
 
+		$scope.deductions = [
+			{
+			deductionNameInput: "401k",
+			deductionAmountInput: 18000,
+			exemptFromFedInput: true,
+			exemptFromStateInput: true,
+			exemptFromSSInput: false,
+			exemptFromMedInput: false
+			},
+			{
+			deductionNameInput: "Disability",
+			deductionAmountInput: 830,
+			exemptFromFedInput: false,
+			exemptFromStateInput: false,
+			exemptFromSSInput: false,
+			exemptFromMedInput: false
+			}
+		];
+
 	    $http.get('/api/getFilingStatuses').
 			success(function(data, status, headers, config) {
 				// this callback will be called asynchronously
@@ -104,16 +123,7 @@ angular.module('paycheckCalculator', [])
 				stateFilingStatus: $scope.stateFilingStatus.id,
 				stateAllowances: strippedStateAllowances,
 				additionalStateWitholding: strippedAdditionalStateWitholding || 0,
-				deductions: JSON.stringify([
-					{
-					deductionNameInput: $scope.deductionNameInput || "Retirement",
-					deductionAmountInput: $scope.deductionAmountInput || 0,
-					exemptFromFedInput: $scope.exemptFromFedInput || false,
-					exemptFromStateInput: $scope.exemptFromStateInput || false,
-					exemptFromSSInput: $scope.exemptFromSSInput || false,
-					exemptFromMedInput: $scope.exemptFromMedInput || false
-					}
-				])
+				deductions: JSON.stringify($scope.deductions)
 			 };
 			$http({method: 'GET', url: '/api/calcPaycheck', params: parameters}).
 				success(function(paycheckData, status, headers, config) {

@@ -68,13 +68,14 @@
 				</div>
 			</div> 
 			<div id="row2" class="row">
-				<div id="deductionInput" class="col-lg-12">
+				<div id="deductionInput" class="col-lg-12" ng-repeat="deduction in deductions">
 					<div ng-deduction></div>
-
-					<div id="calc">
-						<button ng-click="calculate()">Calculate Paycheck</button>
-					</div>
 				</div>
+
+				<div id="calc">
+					<button ng-click="calculate()">Calculate Paycheck</button>
+				</div>
+				
 			</div>
 		
 			<div id="row3" class="row">
