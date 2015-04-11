@@ -130,7 +130,6 @@ angular.module('paycheckCalculator', [])
 					
 					$scope.grossEarningsPaystub = paycheckData.grossEarnings;
 					$scope.regEarningsPaystub = paycheckData.grossEarnings;
-					$scope.fedGrossEarningsPaystub = paycheckData.fedGrossEarnings;
 					$scope.totalTaxPaystub = paycheckData.totalTax;
 					$scope.totalDeductionsPaystub = paycheckData.retirement;
 					$scope.takehomePayPaystub = paycheckData.takehomePay;
@@ -141,7 +140,7 @@ angular.module('paycheckCalculator', [])
 					$scope.stateTaxPaystub = paycheckData.stateTax;
 					$scope.stateNamePaystub = paycheckData.stateName;
 					
-					$scope.deductionsPaystub = paycheckData.deductions;
+					//$scope.deductionsPaystub = paycheckData.deductions;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
 					var pieChartSlices = [
@@ -154,7 +153,7 @@ angular.module('paycheckCalculator', [])
 
 					for (var i = 0; i < paycheckData.deductions.length; i++){
 						if ( paycheckData.deductions[i].deductionNameInput != "" && paycheckData.deductions[i].deductionAmountInput > 0)
-							pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
+							pieChartSlices.push([$scope.deductionsPaystub[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
 					}
 
 					chart.data.names({State: paycheckData.stateName + " Tax"});
@@ -183,6 +182,7 @@ angular.module('paycheckCalculator', [])
 		};
 
 		$scope.delDeduction = function (deductionIndex) {
+			chart.unload({columns: $scope.deductionList[deductionIndex].deductionNameInput});
 			$scope.deductionList.deductions.splice(deductionIndex,1);
 		};
 	})
