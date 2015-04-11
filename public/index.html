@@ -70,6 +70,8 @@
 			<div id="row2" class="row">
 				<div id="deductionInput" class="col-lg-12" ng-repeat="deduction in deductionList.deductions">
 					<div my-deduction></div>
+				   <span ng-if="$last" class="glyphicon glyphicon-plus-sign"> </span>
+
 				</div>
 
 				<div id="calc">
