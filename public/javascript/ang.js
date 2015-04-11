@@ -81,6 +81,7 @@ angular.module('paycheckCalculator', [])
 				columns: [
 					["Medicare", $scope.medicareTaxPaystub],
 					["SS", $scope.ssTaxPaystub],
+			    	["State", $scope.stateTaxPaystub],
 			    	["Federal", $scope.fedTaxPaystub],
 			    	["TakeHome", $scope.takehomePayPaystub]
 				],
@@ -88,6 +89,7 @@ angular.module('paycheckCalculator', [])
 					Federal: "Federal Tax",
 					SS: "Social Security Tax",
 					Medicare: "Medicare Tax",
+					State: "State Tax",
 					TakeHome: "Take Home Pay"
 				},
 				order: null,
@@ -154,7 +156,7 @@ angular.module('paycheckCalculator', [])
 					var pieChartSlices = [
 							["Medicare", $scope.medicareTaxPaystub],
 							["SS", $scope.ssTaxPaystub],
-							[paycheckData.stateName + " Tax", $scope.stateTaxPaystub],
+							["State", $scope.stateTaxPaystub],
 					    	["Federal", $scope.fedTaxPaystub],
 						];
 
@@ -163,7 +165,7 @@ angular.module('paycheckCalculator', [])
 					}
 					pieChartSlices.push(["TakeHome", $scope.takehomePayPaystub]);
 
-					//chart.data.names({State: paycheckData.stateName + " Tax"});
+					chart.data.names({State: paycheckData.stateName + " Tax"});
 					chart.load({
 						columns: pieChartSlices
 					});
