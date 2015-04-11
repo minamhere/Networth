@@ -188,13 +188,15 @@ app.get('/api/calcPaycheck', function (request,response){
 				fedAGI = income-fedWithholdingDeductions;
 				ssAGI = income;
 				medicareAGI = income;
-				if (deductions[0].exemptFromFedInput) fedAGI -= deductions[0].deductionAmountInput;
+				
+				for (var i = 0; i < deductions.length; i++){
+					if (deductions[i].exemptFromFedInput) fedAGI -= deductions[i].deductionAmountInput;
+					if (deductions[i].exemptFromSSInput) ssAGI -= deductions[i].deductionAmountInput;
+					if (deductions[i].exemptFromMedInput) medicareAGI -= deductions[i].deductionAmountInput;
+				}
+
 				if (fedAGI <0) fedAGI = 0;
-
-				if (deductions[0].exemptFromSSInput) ssAGI -= deductions[0].deductionAmountInput;
 				if (ssAGI <0) ssAGI = 0;
-
-				if (deductions[0].exemptFromMedInput) medicareAGI -= deductions[0].deductionAmountInput;
 				if (medicareAGI <0) medicareAGI = 0;
 
 				callback(null,{fedAGI:fedAGI,ssAGI:ssAGI,medicareAGI:medicareAGI});
@@ -415,7 +417,11 @@ function handleState(stateInfo, callback){
 					stateWithholdingDeductions = (stateInfo.stateAllowances)*statePersonalExemption+stateStandardDeduction;
 					// end handling allowances
 					stateAGI = stateInfo.income-stateWithholdingDeductions;
-					if (stateInfo.deductions[0].exemptFromStateInput) stateAGI -= stateInfo.deductions[0].deductionAmountInput;
+
+					for (var i = 0; i < stateInfo.deductions.length; i++){
+						if (stateInfo.deductions[i].exemptFromStateInput) stateAGI -= stateInfo.deductions[i].deductionAmountInput;
+					}
+
 					if (stateAGI<0) stateAGI = 0;
 
 					callback(null, stateAGI);
