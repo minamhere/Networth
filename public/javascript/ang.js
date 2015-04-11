@@ -179,14 +179,15 @@ angular.module('paycheckCalculator', [])
 		};
 
 		$scope.addDeduction = function () {
-			$scope.deductionList.push({
+			var emptyDeduction = {
 				deductionNameInput: "",
-				deductionAmountInput: null,
+				deductionAmountInput: 0,
 				exemptFromFedInput: false,
 				exemptFromStateInput: false,
 				exemptFromSSInput: false,
 				exemptFromMedInput: false
-				})
+			};
+			$scope.deductionList.push(emptyDeduction);
 		};
 	})
 	.directive('myDeduction', function(){
