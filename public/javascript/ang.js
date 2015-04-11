@@ -92,7 +92,6 @@ angular.module('paycheckCalculator', [])
 					State: "State Tax",
 					TakeHome: "Take Home Pay"
 				},
-				order: null,
 			    type : 'pie'
 			},
 			pie: {
@@ -153,17 +152,11 @@ angular.module('paycheckCalculator', [])
 					$scope.deductionsPaystub = paycheckData.deductions;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					var pieChartSlices = [
-							["Medicare", $scope.medicareTaxPaystub],
-							["SS", $scope.ssTaxPaystub],
-							["State", $scope.stateTaxPaystub],
-					    	["Federal", $scope.fedTaxPaystub],
-						];
+					var pieChartSlices = [];
 
 					for (var i = 0; i < paycheckData.deductions.length; i++){
 						pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
 					}
-					pieChartSlices.push(["TakeHome", $scope.takehomePayPaystub]);
 
 					chart.data.names({State: paycheckData.stateName + " Tax"});
 					chart.load({
