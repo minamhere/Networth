@@ -242,6 +242,11 @@ app.get('/api/calcPaycheck', function (request,response){
 			var medTax = results.getFedTax[2]/payPeriods;
 			var stateTax = results.getStateTax/payPeriods;
 			stateTax += additionalStateWitholding/payPeriods; // Add additional witholding to stateTax owed. 
+
+			for (var i = 0; i < deductions.length; i++){
+				deductions[i].deductionAmountInput = deductions[i].deductionAmountInput/payPeriods;
+			}
+
 			var retirementContribution = deductions[0].deductionAmountInput/payPeriods;
 
 			takehomePay = grossEarnings - retirementContribution-fedTax-ssTax-medTax-stateTax;
@@ -255,7 +260,7 @@ app.get('/api/calcPaycheck', function (request,response){
 				stateTax: stateTax,
 				stateName: results.getStateName,
 				totalTax: fedTax+ssTax+medTax+stateTax,
-				retirement: retirementContribution,
+				deductions: deductions,
 				paySchedule: results.getPayPeriods.name,
 				takehomePay: takehomePay,
 			};

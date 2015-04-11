@@ -152,22 +152,24 @@ angular.module('paycheckCalculator', [])
 					$scope.stateTaxPaystub = paycheckData.stateTax;
 					$scope.stateNamePaystub = paycheckData.stateName;
 					
-					$scope.retirementContributionsPaystub = paycheckData.retirement;
+					$scope.deductionsPaystub = paycheckData.deductions;
 					$scope.paySchedulePaystub = paycheckData.paySchedule;
 
-					$scope.deductionNamePaystub =  $scope.deductionNameInput,
-					$scope.deductionAmountPaystub =  $scope.deductionAmountInput,
-
-					chart.data.names({State: paycheckData.stateName + " Tax", Retirement: $scope.deductionNamePaystub});
-					chart.load({
-						columns: [
+					var pieChartSlices = [
 							["Medicare", $scope.medicareTaxPaystub],
 							["SS", $scope.ssTaxPaystub],
-							["State", $scope.stateTaxPaystub],
+							[paycheckData.stateName + " Tax", $scope.stateTaxPaystub],
 					    	["Federal", $scope.fedTaxPaystub],
-					    	["Retirement", $scope.retirementContributionsPaystub],
-					    	["TakeHome", $scope.takehomePayPaystub]
-						]
+						];
+
+					for (var i = 0; i < paycheckData.deductions.length; i++){
+						pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
+					}
+					pieChartSlices.push(["TakeHome", $scope.takehomePayPaystub]);
+
+					//chart.data.names({State: paycheckData.stateName + " Tax"});
+					chart.load({
+						columns: pieChartSlices
 					});
 
 				}).
