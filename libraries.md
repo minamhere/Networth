@@ -8,3 +8,6 @@
 
 ## Graphs:
 [Rickshaw](http://code.shutterstock.com/rickshaw/)
+
+## Angular Resources
+[Scope Issues](http://stackoverflow.com/a/14049482/133760)
