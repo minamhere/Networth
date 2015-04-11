@@ -15,4 +15,5 @@
 	<label class="checkbox-inline">
 		<input id="exemptFromMedInput" type="checkbox" name="deductionsExempt" ng-model="deduction.exemptFromMedInput" ng-change="calculate()">Medicare
 	</label>
+    <span ng-if="$last" class="glyphicon glyphicon-plus-sign" ng-click="addDeduction()"> </span>
 </div>
