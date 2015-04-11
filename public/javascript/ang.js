@@ -184,6 +184,7 @@ angular.module('paycheckCalculator', [])
 		$scope.delDeduction = function (deductionIndex) {
 			chart.unload({columns: $scope.deductionList.deductions[deductionIndex].deductionNameInput});
 			$scope.deductionList.deductions.splice(deductionIndex,1);
+			if ( $scope.deductionList.deductions.length == 0) $scope.addDeduction();
 			$scope.calculate();
 		};
 	})
