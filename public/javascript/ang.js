@@ -12,16 +12,8 @@ angular.module('paycheckCalculator', [])
 		$scope.deductionList = {
 			deductions: [
 				{
-				deductionNameInput: "401k",
-				deductionAmountInput: 18000,
-				exemptFromFedInput: true,
-				exemptFromStateInput: true,
-				exemptFromSSInput: false,
-				exemptFromMedInput: false
-				},
-				{
-				deductionNameInput: "Disability",
-				deductionAmountInput: 830,
+				deductionNameInput: "",
+				deductionAmountInput: 0,
 				exemptFromFedInput: false,
 				exemptFromStateInput: false,
 				exemptFromSSInput: false,

@@ -231,7 +231,7 @@ app.get('/api/calcPaycheck', function (request,response){
 		},
 		function calcTakehome (err, results){
 			if (err) { console.log('calcPaycheck error: '+err); return callback(err); }
-			var responseText = '';//<div id=\'AGI\'>Federal Annual AGI: '+results.getDedExempt.fedAGI+'</div>\n';
+			var responseText = '';
 			var takehomePay = 0;
 			var payPeriods = results.getPayPeriods.payperiods;
 			var grossEarnings = income/payPeriods;
@@ -248,7 +248,6 @@ app.get('/api/calcPaycheck', function (request,response){
 				deductions[i].deductionAmountInput = deductions[i].deductionAmountInput/payPeriods;
 				takehomePay -= deductions[i].deductionAmountInput;
 			}
-
 
 			responseText = {
 				grossEarnings: grossEarnings,
