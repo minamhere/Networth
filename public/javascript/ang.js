@@ -181,6 +181,10 @@ angular.module('paycheckCalculator', [])
 			};
 			$scope.deductionList.deductions.push(emptyDeduction);
 		};
+
+		$scope.delDeduction = function (deductionIndex) {
+			$scope.deductionList.deductions.splice(deductionIndex,1);
+		};
 	})
 	.directive('myDeduction', function(){
 		return {
