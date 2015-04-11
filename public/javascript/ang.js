@@ -78,22 +78,6 @@ angular.module('paycheckCalculator', [])
 		    	width: 500
 		    },
 			data: {
-				columns: [
-					["Medicare", $scope.medicareTaxPaystub],
-					["SS", $scope.ssTaxPaystub],
-			    	["State", $scope.stateTaxPaystub],
-			    	["Federal", $scope.fedTaxPaystub],
-			    	["Retirement", $scope.retirementContributionsPaystub],
-			    	["TakeHome", $scope.takehomePayPaystub]
-				],
-				names: {
-					Federal: "Federal Tax",
-					SS: "Social Security Tax",
-					Medicare: "Medicare Tax",
-					State: "State Tax",
-					Retirement: "Retirement Contributions",
-					TakeHome: "Take Home Pay"
-				},
 				order: null,
 			    type : 'pie'
 			},
