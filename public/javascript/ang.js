@@ -177,6 +177,17 @@ angular.module('paycheckCalculator', [])
 				});
 			
 		};
+
+		$scope.addDeduction = function () {
+			$scope.deductionList.push({
+				deductionNameInput: "",
+				deductionAmountInput: null,
+				exemptFromFedInput: false,
+				exemptFromStateInput: false,
+				exemptFromSSInput: false,
+				exemptFromMedInput: false
+				})
+		};
 	})
 	.directive('myDeduction', function(){
 		return {
