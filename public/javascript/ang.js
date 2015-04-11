@@ -153,7 +153,8 @@ angular.module('paycheckCalculator', [])
 			    	];
 
 					for (var i = 0; i < paycheckData.deductions.length; i++){
-						pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
+						pieChartSlices.push(["Deduction"+i,paycheckData.deductions[i].deductionAmountInput]);
+						chart.data.names({Deduction+i: paycheckData.deductions[i].deductionNameInput});
 					}
 
 					chart.data.names({State: paycheckData.stateName + " Tax"});
