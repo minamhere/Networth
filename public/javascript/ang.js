@@ -65,10 +65,10 @@ angular.module('paycheckCalculator', [])
 
 		var chart = c3.generate({
 		    bindto: '#piechart',
-		    size: {
+		    /*size: {
 		    	height: 500,
 		    	width: 500
-		    },
+		    },*/
 			data: {
 				columns: [
 					["Medicare", $scope.medicareTaxPaystub],
