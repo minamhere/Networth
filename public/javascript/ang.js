@@ -176,10 +176,10 @@ angular.module('paycheckCalculator', [])
 			
 		};
 	})
-	.directive('ngDeduction', function(){
+	.directive('myDeduction', function(){
 		return {
 			restrict: 'A',
-			templateUrl: '../directives/ngDeduction.html'
+			templateUrl: '../directives/myDeduction.html'
 		};
 	})
 
