@@ -153,7 +153,7 @@ angular.module('paycheckCalculator', [])
 
 					for (var i = 0; i < paycheckData.deductions.length; i++){
 						if ( paycheckData.deductions[i].deductionNameInput != "" && paycheckData.deductions[i].deductionAmountInput > 0)
-							pieChartSlices.push([$scope.deductionsPaystub[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
+							pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountInput]);
 					}
 
 					chart.data.names({State: paycheckData.stateName + " Tax"});
