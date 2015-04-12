@@ -331,14 +331,14 @@ function handleState(stateInfo, callback){
 		// This new function should be added below the VA function, so that "unknown" states will
 		// continue to "fall through" to the VA handling.
 		/*
-		case "8": // Alaska
-		case "9": // Arizona 
-		case "10": // Arkansas
-		case "11": // California
+		
+		
 		case "12": // Connecticut
-		case "13": // Delaware
-		case "14": // Florida
-		case "15": // Georgia
+			// Page 47: http://www.ct.gov/drs/lib/drs/forms/2014forms/incometax/ct-1040_booklet.pdf
+			// Deduction/Exemption phases out.
+			// 3% tax rate phase out add back. 
+			// Tax Recpature
+		
 		case "16": // Hawaii
 		case "17": // Idaho
 		case "18": // Illinois
@@ -390,6 +390,20 @@ function handleState(stateInfo, callback){
 		*/
 		// These states all handle taxes similarly. They do not require special handling.
 		case "7": // Alabama
+			// Alabama Personal Exemptions phase out. 
+		case "8": // Alaska
+		case "9": // Arizona 
+			// Arizona provides a married couple with 1 extra exemption if there is at least 1 dependant. Not 1 exemption per dependent
+		case "10": // Arkansas
+			// Arkansas Personal Exemptions are actually credits, not deductions. They directly reduce tax owed, not income.
+		case "11": // California
+			// California Personal Exemptions are actually credits, not deductions. They directly reduce tax owed, not income.
+			// Deductions and Exemptions phase out: https://www.ftb.ca.gov/forms/2014_California_Tax_Rates_and_Exemptions.shtml
+			// Dependents have an Exemption of $333. 
+		case "13": // Delaware
+			// Delaware Personal Exemptions are actually credits, not deductions. They directly reduce tax owed, not income.
+		case "14": // Florida
+		case "15": // Georgia
 		case "6": // Colorado. Listed before 3, so that it will fall through to case 3. Once VA code is correct, I will copy/paste expand to other states, but want CO to work while testing.
 		case "3": // Virginia
 		// Virginia Witholding Formulas: http://www.tax.virginia.gov/withholding-calculator
