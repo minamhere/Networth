@@ -129,8 +129,8 @@ angular.module('paycheckCalculator', [])
 					$scope.grossEarningsPaystub = paycheckData.grossEarnings;
 					$scope.regEarningsPaystub = paycheckData.grossEarnings;
 					$scope.totalTaxPaystub = paycheckData.totalTax;
-					$scope.totalDeductionsPaystub = paycheckData.retirement;
-					$scope.takehomePayPaystub = 0;
+					$scope.totalDeductionsPaystub = 0;
+					$scope.takehomePayPaystub = paycheckData.takehomePay;
 
 					$scope.fedTaxPaystub = paycheckData.fedTax;
 					$scope.ssTaxPaystub = paycheckData.ssTax;
@@ -157,7 +157,7 @@ angular.module('paycheckCalculator', [])
 							// add deduction slice to the graphs
 							pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountPayPeriod]);
 
-							// add deduction amount to total deduction count.
+							// add deduction amount to total deduction 
 							$scope.totalDeductionsPaystub += paycheckData.deductions[i].deductionAmountPayPeriod;
 						}
 						
