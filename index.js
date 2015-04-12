@@ -246,7 +246,7 @@ app.get('/api/calcPaycheck', function (request,response){
 
 			for (var i = 0; i < deductions.length; i++){
 				deductions[i].deductionAmountPayPeriod = deductions[i].deductionAmountInput/payPeriods;
-				takehomePay -= deductions[i].deductionAmountInput;
+				takehomePay -= deductions[i].deductionAmountPayPeriod;
 			}
 
 			responseText = {
