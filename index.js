@@ -245,7 +245,7 @@ app.get('/api/calcPaycheck', function (request,response){
 			takehomePay = grossEarnings-fedTax-ssTax-medTax-stateTax;
 
 			for (var i = 0; i < deductions.length; i++){
-				deductions[i].deductionAmountInput = deductions[i].deductionAmountInput/payPeriods;
+				deductions[i].deductionAmountPayPeriod = deductions[i].deductionAmountInput/payPeriods;
 				takehomePay -= deductions[i].deductionAmountInput;
 			}
 
