@@ -6,7 +6,6 @@ angular.module('paycheckCalculator', [])
 		$scope.ssTaxPaystub = 0;
 		$scope.medicareTaxPaystub = 0;
 		$scope.stateTaxPaystub = 0;
-		$scope.retirementContributionsPaystub = 0;
 		$scope.takehomePayPaystub = 0;
 
 		$scope.deductionList = {
@@ -96,7 +95,6 @@ angular.module('paycheckCalculator', [])
 			
 
 			var strippedIncome = $scope.income || 0;
-			var strippedDeduction = $scope.deductionAmountInput || 0;
 			
 			var strippedFedAllowances = $scope.fedAllowances || 0;
 			var strippedStateAllowances = $scope.stateAllowances || 0;
@@ -132,7 +130,7 @@ angular.module('paycheckCalculator', [])
 					$scope.regEarningsPaystub = paycheckData.grossEarnings;
 					$scope.totalTaxPaystub = paycheckData.totalTax;
 					$scope.totalDeductionsPaystub = paycheckData.retirement;
-					$scope.takehomePayPaystub = paycheckData.takehomePay;
+					$scope.takehomePayPaystub = 0;
 
 					$scope.fedTaxPaystub = paycheckData.fedTax;
 					$scope.ssTaxPaystub = paycheckData.ssTax;
@@ -154,8 +152,15 @@ angular.module('paycheckCalculator', [])
 			    	];
 
 					for (var i = 0; i < paycheckData.deductions.length; i++){
-						if ( paycheckData.deductions[i].deductionNameInput != "" && paycheckData.deductions[i].deductionAmountInput > 0)
+						// if deduction has a name and a value, we will consider it for calculations.
+						if ( paycheckData.deductions[i].deductionNameInput != "" && paycheckData.deductions[i].deductionAmountInput > 0) {
+							// add deduction slice to the graphs
 							pieChartSlices.push([paycheckData.deductions[i].deductionNameInput,paycheckData.deductions[i].deductionAmountPayPeriod]);
+
+							// add deduction amount to total deduction count.
+							$scope.totalDeductionsPaystub += paycheckData.deductions[i].deductionAmountPayPeriod;
+						}
+						
 					}
 
 					chart.data.names({State: paycheckData.stateName + " Tax"});

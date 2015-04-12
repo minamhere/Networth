@@ -35,7 +35,6 @@ function getTaxBrackets(callback){
 }
 
 function getFilingStatusFromID(filing_status_id, callback){
-	console.log('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id);
 	queryDatabase('SELECT StatusName FROM Filing_Status WHERE id = '+filing_status_id,callback);
 }
 
@@ -76,14 +75,12 @@ function getStateNameFromID(stateID, callback){
 }
 
 function getPayPeriodsFromFrequencyID(payFrequencyID, callback){
-	console.log('SELECT schedulename, pay_periods_per_year from pay_schedule where id ='+payFrequencyID);
 	queryDatabase('SELECT schedulename, pay_periods_per_year from pay_schedule where id = '+payFrequencyID, function (err, results){
 		callback(null, {name:results[0].schedulename, payperiods:results[0].pay_periods_per_year});
 	})
 }
 
 function getDeductionsExemptions(jurisdiction_id, taxyear, filing_status_id, callback){
-	console.log('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id ='+jurisdiction_id+' and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id);
 	queryDatabase('SELECT jurisdiction_id, amount, deduction_exemption_type FROM deductions_exemptions WHERE jurisdiction_id ='+jurisdiction_id+' and taxyear ='+taxyear+' and filing_status_id ='+filing_status_id,callback);
 }
 
