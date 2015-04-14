@@ -339,11 +339,7 @@ function handleState(stateInfo, callback){
 			// 3% tax rate phase out add back. 
 			// Tax Recpature
 		
-		case "16": // Hawaii
-		case "17": // Idaho
-		case "18": // Illinois
-		case "19": // Indiana
-		case "20": // Iowa
+		
 		case "21": // Kansas
 		case "22": // Kentucky
 		case "23": // Louisiana
@@ -404,6 +400,11 @@ function handleState(stateInfo, callback){
 			// Delaware Personal Exemptions are actually credits, not deductions. They directly reduce tax owed, not income.
 		case "14": // Florida
 		case "15": // Georgia
+		case "16": // Hawaii
+		case "17": // Idaho
+		case "18": // Illinois
+		case "19": // Indiana
+		case "20": // Iowa
 		case "6": // Colorado. Listed before 3, so that it will fall through to case 3. Once VA code is correct, I will copy/paste expand to other states, but want CO to work while testing.
 		case "3": // Virginia
 		// Virginia Witholding Formulas: http://www.tax.virginia.gov/withholding-calculator
